@@ -61,8 +61,8 @@ const JournalPage = () => {
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
-    setCreateJournal({ ...createJournal, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setCreateJournal((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -71,6 +71,7 @@ const JournalPage = () => {
     closeModal();
   };
 
+  console.log("journals: ", journals);
   // console.log("journals: createdJournal: ", journals, createJournal);
 
   if (journalLoading) {
