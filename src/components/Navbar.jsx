@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
-  BsFillMoonStarsFill,
   BsFillArrowRightSquareFill,
   BsFillArrowDownSquareFill,
 } from "react-icons/bs";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
 
 // Assuming `UserContext` is defined and provides `isAuthenticated` and `setIsAuthenticated`.
 import { UserContext } from "../context/UserContext";
 import NavComponents from "./NavComponents";
 
-const Siderbar = () => {
+const Navbar = () => {
   const { isAuthenticated, setIsAuthenticated, user, getUser } =
     useContext(UserContext);
   const navigate = useNavigate();
@@ -35,7 +33,7 @@ const Siderbar = () => {
     <div className="flex flex-col md:flex-row justify-between p-0 md:p-6 shadow-lg shadow-slate-900 bg-transparent h-fit rounded-3xl md:rounded-none items-center">
       {/* Header Section */}
       <div className="flex flex-row items-center text-yellow-400 text-center text-3xl p-2">
-        <span className="rounded-full px-2 shadow-lg shadow-yellow-300 font-serif">
+        <span className="rounded-full  shadow-sm shadow-yellow-100 p-2 font-serif">
           Vritti
         </span>
         {/* <BsFillMoonStarsFill /> */}
@@ -106,4 +104,4 @@ const Siderbar = () => {
   );
 };
 
-export default Siderbar;
+export default Navbar;

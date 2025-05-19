@@ -9,7 +9,7 @@ const WeekDayCard = (props) => {
   const navigate = useNavigate();
 
   if (body.length > 100) {
-    body = body.slice(0, 50) + "...";
+    body = body.slice(0, 20) + "...";
   }
   const handleClick = () => {
     navigate(`/journals/week/${id}/day`, { state: { weekdayJournal: day } });
@@ -56,15 +56,19 @@ const WeekDayCard = (props) => {
 
   return (
     <>
-      <div className="p-4 rounded-3xl shadow-lg shadow-black bg-cyan-950 text-yellow-500 yusei-magic-regular hover:bg-cyan-900 hover:cursor-pointer">
-        <div className="justify-between flex">
-          <h1 className="border-b-2 border-yellow-500">{day.title}</h1>
-          <h1 className=" border-yellow-300">{formattedDate}</h1>
+      <div className="p-4 rounded-3xl shadow-lg shadow-black bg-cyan-950 text-yellow-500 yusei-magic-regular hover:bg-cyan-900 hover:cursor-pointer w-full">
+        <div className="justify-between flex flex-col">
+          <h1 className="border-b-2 border-yellow-500 font-bold">
+            {day.title.toUpperCase()}
+          </h1>
+          <div className="flex flex-row justify-between my-2">
+            <h1 className=" border-yellow-300">{formattedDate}</h1>
 
-          <BiSolidTrashAlt
-            className="text-xl hover:text-white"
-            onClick={handleDelete}
-          />
+            <BiSolidTrashAlt
+              className="text-xl hover:text-white text-red-800"
+              onClick={handleDelete}
+            />
+          </div>
         </div>
 
         <p

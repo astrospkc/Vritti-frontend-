@@ -10,12 +10,17 @@ import community from "../images/crushedpaper3.jpg"
 import "./styles.css"
 import { Link } from 'react-router-dom'
 
-const Mispage = () => {
+const Homepage = () => {
     return (
         <>
             <div className='flex flex-col '>
                 <div className='h-screen flex flex-col justify-center items-center font-serif text-yellow-100 w-full'>
                     <div className=' flex flex-col w-full  text-center '>
+                        <Link to="/journals">
+                            <div className='text-xl p-2 bg-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+                                Start Journaling
+                            </div>
+                        </Link>
 
                         <div >
                             <ul className='text-white text-xl md:text-3xl gap-4 font-serif  '>
@@ -123,4 +128,4 @@ const FeatureCard = ({ image, title, desc }) => (
 
 )
 
-export default Mispage
+export default Homepage

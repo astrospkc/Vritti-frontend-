@@ -94,9 +94,9 @@ const JournalPage = () => {
   return (
     <>
       {/* <div className="flex flex-col "> */}
-      <div className="flex flex-col p-4 justify-center m-auto w-full items-center ">
+      <div className="flex flex-col p-4 justify-center m-auto w-full items-center  ">
         {/* <div className="h-[90vh] w-[90vh]  absolute  shadow-lg shadow-stone-800  left-0 opacity-25 rounded-3xl rotate-45  bg-orange-300 "></div> */}
-        <div className="flex flex-row items-center gap-4 z-10 ">
+        <div className="flex flex-row items-center gap-4 z-10  ">
           <BsArrowLeftCircleFill
             onClick={handleBack}
             className="text-xl md:text-3xl hover:text-yellow-50 hover:cursor-pointer"
@@ -109,9 +109,9 @@ const JournalPage = () => {
         {/* open a modal */}
         <button
           onClick={openModal}
-          className="p-4 bg-yellow-400 hover:bg-stone-400 rounded z-50 my-4 "
+          className="p-4 bg-yellow-400 hover:bg-stone-400 rounded z-50 my-4 hover:shadow-sm hover:shadow-yellow-400 "
         >
-          Open Modal
+          Create Journal Page
         </button>
 
         {isOpen && (
@@ -148,20 +148,43 @@ const JournalPage = () => {
           </div>
         )}
 
-        <div className="w-full max-w-4xl space-y-4 z-10 grid grid-cols-1 gap-4 md:grid-cols-3 justify-center items-center h-full font-serif">
-          {journals && journals.length > 0 ? (
-            journals.map((journal) => (
-              <JournalCard
-                key={journal._id}
-                journal={journal}
-                className="hover:cursor-pointer"
+        <div className="w-full overflow-y-scroll overflow-x-hidden flex  px-[5%]  flex-row   space-y-4 z-10  gap-4  h-full font-serif thin-scrollbar">
+          <div className="w-3/4 flex flex-row justify-between border-r-2 border-black ">
+            <div className="w-full flex flex-col   px-4 bg-black py-4 rounded-2xl">
+              <img
+                src="/images/crushedpaper4.jpg"
+                className="w-full h-[50%] object-cover rounded-2xl "
               />
-            ))
-          ) : (
-            <div className="flex text-center py-8 text-yellow-500">
-              No journals found. Start writing your first journal entry!
+              <div>
+                {journals && journals.length > 0 && (
+                  <div className="text-yellow-100 my-5">
+                    <h1 className="text-5xl ">
+                      {journals[0].title.toUpperCase()}
+                    </h1>
+                    <h2 className="font-sans">{journals[0].date}</h2>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          </div>
+          <div className="w-1/4  ">
+            <div className="text-2xl border-b-2 border-black">
+              All the journals
+            </div>
+            {journals && journals.length > 0 ? (
+              journals.map((journal, index) => (
+                <JournalCard
+                  key={index}
+                  journal={journal}
+                  className="hover:cursor-pointer"
+                />
+              ))
+            ) : (
+              <div className="flex text-center py-8 text-yellow-500">
+                No journals found. Start writing your first journal entry!
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {/* </div> */}

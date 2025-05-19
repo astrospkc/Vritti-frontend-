@@ -14,7 +14,7 @@ const WeekPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const { journal } = location.state || {}; // Accessing the passed journal
-  const { clickedJournal, setClickedJournal } = useContext(journalContext);
+  const { setClickedJournal } = useContext(journalContext);
   setClickedJournal(journal);
 
   // console.log("clicked journal that is passed: ", clickedJournal);
@@ -51,7 +51,7 @@ const WeekPage = () => {
 
   useEffect(() => {
     allWeekJournal();
-  }, [id]);
+  }, []);
 
   const handleSummarize = async () => {
     setAi_Summary(null);
@@ -93,7 +93,7 @@ const WeekPage = () => {
 
   return (
     <>
-      <div className="flex flex-col font-serif   ">
+      <div className="flex flex-col font-serif w-full   ">
         <div className="flex flex-col p-4 justify-center m-auto w-full items-center ">
           <div className="flex flex-row-reverse items-center mb-4">
             <div className="flex flex-row items-center gap-4">
@@ -102,18 +102,25 @@ const WeekPage = () => {
                 className="text-xl md:text-3xl text-white hover:text-yellow-50 cursor-pointer"
               />
               <h1 className=" text-4xl md:text-6xl text-orange-300">
-                Daily Journaling
+                DAILY JOURNALING
               </h1>
             </div>
           </div>
+          <div className="w-full flex flex-row ">
+            <div className="w-3/5 flex flex-col  rounded-3xl border-r-2 border-black px-2">
+              {weekJournal_Arr && weekJournal_Arr.length > 0 && (
+                <div className="flex flex-col text-center w-full bg-black p-3 rounded-3xl  ">
+                  <div className="bg-gradient-to-tr from-yellow-200 to-transparent p-10 text-8xl rounded-3xl text-black mx-4">
+                    {weekJournal_Arr[0].title}
+                  </div>
+                  <br />
+                  <h1 className="text-white">Journal entry</h1>
+                  <div className="m-4 text-yellow-400 text-xl border-t-2 border-gray-500 p-4">
+                    {weekJournal_Arr[0].body}
+                  </div>
+                </div>
+              )}
 
-          {weekJournal_Arr && weekJournal_Arr.length > 0 ? (
-            <div className="m-4 p-4 w-full">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
-                {weekJournal_Arr.map((day) => (
-                  <WeekDayCard key={day._id} day={day} id={id} />
-                ))}
-              </div>
               <div className="flex flex-row gap-4 yusei-magic-regular">
                 <button
                   onClick={handleAnotherDay}
@@ -129,7 +136,6 @@ const WeekPage = () => {
                   Summarize
                 </button>
               </div>
-
               {ai_summary && parsed_summary && (
                 <div className="flex flex-col md:flex-row gap-2 justify-center items-center mt-2 p-3 rounded-3xl  w-full yusei-magic-regular">
                   <div className="md:w-[20%] mx-3 bg-red-300 rounded-3xl p-3 w-[70%] justify-center items-center m-auto overflow-x-auto">
@@ -167,16 +173,30 @@ const WeekPage = () => {
                 </div>
               )}
             </div>
-          ) : (
-            <div>
-              <div
-                onClick={handleAnotherDay}
-                className="flex rounded-3xl p-4 bg-white hover:bg-stone-500 hover:cursor-pointer"
-              >
-                Day 1
+            <div className="w-2/5 flex flex-col justify-center text-center px-2  ">
+              <div>All the week journals</div>
+              <div>
+                {weekJournal_Arr && weekJournal_Arr.length > 0 ? (
+                  <div className="m-4 p-4 w-full">
+                    <div className=" gap-4 ">
+                      {weekJournal_Arr.map((day) => (
+                        <WeekDayCard key={day._id} day={day} id={id} />
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div
+                      onClick={handleAnotherDay}
+                      className="flex rounded-3xl p-4 bg-white hover:bg-stone-500 hover:cursor-pointer"
+                    >
+                      Day 1
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          )}
+          </div>
           <div>
             <h1 className="text-white">See the graph ...</h1>
             <Link to="/weeklyAnalysis">

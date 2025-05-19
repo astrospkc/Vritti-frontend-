@@ -11,9 +11,8 @@ import Signin from "./components/Signin";
 import WeekAnalysis from "./components/WeekAnalysis";
 
 import { UserContext } from "./context/UserContext";
-
-import Mispage from "./components/Mispage";
-import Siderbar from "./components/Siderbar";
+import Homepage from "./components/Homepage";
+import Navbar from "./components/Navbar";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
@@ -45,13 +44,13 @@ function App() {
 
           <div className="flex flex-col w-full h-screen">
             {/* <div className="flex justify-start fixed md:static  bg-black md:bg-transparent z-10  "></div> */}
-            <Siderbar />
+            <Navbar />
 
             {/* Main Content */}
             <div className="flex">
               <Routes>
                 {/* Public Routes */}
-                <Route path="/" element={<Mispage />} />
+                <Route path="/" element={<Homepage />} />
                 {!isAuthenticated ? (
                   <>
                     <Route path="/signup" element={<SignUp />} />
