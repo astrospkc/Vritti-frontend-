@@ -40,7 +40,7 @@ const CommunityPage = () => {
                     <div className="bg-black shadow-md shadow-violet-950/80 p-4 rounded-xl">
                         <h1 className='border-b-2 p-2 w-fit'>Navigate to :</h1>
                         <ul className='text-sm font-semibold p-2 gap-2 flex flex-col'>
-                            <Link to="/">
+                            <Link to="/dashboard">
                                 <li className=' hover:text-violet-500 hover:cursor-pointer'>Dashboard</li>
 
                             </Link>

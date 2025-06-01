@@ -11,100 +11,183 @@ import "./styles.css"
 import { Link } from 'react-router-dom'
 
 const Homepage = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+
+
     return (
         <>
-            <div className='flex flex-col '>
-                <div className='h-screen flex flex-col justify-center items-center font-serif text-yellow-100 w-full'>
-                    <div className=' flex flex-col w-full  text-center '>
-                        <Link to="/journals">
-                            <div className='text-xl p-2 bg-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
-                                Start Journaling
-                            </div>
-                        </Link>
+            <div
+                style={{
+                    background: 'radial-gradient(circle at center, #1a0c2b, #1E293B, #0F172A)',
+                }}
+                className='flex flex-col w-full overflow-x-hidden '>
+                <div className='relative w-full h-screen flex flex-col'>
+                    <div
+                        style={{
+                            backgroundImage: `url("/images/forest.jpg")`,
+                            height: 500,
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat, repeat",
+                            backgroundBlendMode: "luminosity",
+                            opacity: 0.5,
+                            clipPath: "polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%, 0% 38%)",
+                            zIndex: 0,
 
-                        <div >
-                            <ul className='text-white text-xl md:text-3xl gap-4 font-serif  '>
-                                <li>Capture Feelings.</li>
-                                <li>Discover Patterns.</li>
-                                <li>Share Support.</li>
-                            </ul>
+                        }}
+                        className='absolute inset-0 shadow-lg shadow-black'
+                    ></div>
+                    <div
+                        className='relative z-10  p-2 shadow-lg shadow-black flex flex-row justify-between '>
+
+                        <div className='font-bold text-violet-300 text-xl '>
+                            VRiTTi
                         </div>
-                        <h1 className='text-2xl text-yellow-100 tangerine-regular my-10'>
-                            Journaling that leads to insight, not isolation.
-                        </h1>
-
-
-                        <span className='text-yellow-400 text-4xl md:text-7xl font-serif border-b '>Vritti </span>
-                        <span className='text-white'>is here for you.</span>
-
-                        <p className=' text-xl mt-4 px-4 md:px-20'>
-                            A personal, anonymous journaling app that lets you reflect, grow, and connect. Let AI help you understand yourself better — and let community support you ethically.
-                        </p>
+                        <ul className='flex flex-row-reverse gap-4'>
+                            <li className='bg-violet-400 rounded-xl p-2'>Login</li>
+                            <li className='bg-violet-400 rounded-xl p-2'>SignUp</li>
+                        </ul>
                     </div>
+                    <div className=' w-3/4 m-auto  relative z-10 h-screen flex flex-col justify-center items-center font-serif text-yellow-100 '>
+                        <div className=' flex flex-col w-full  text-center '>
+
+
+                            <div className='flex flex-col items-center justify-center ' >
+                                <ul className='text-orange-100  md:text-3xl gap-4 font-serif text-start  '>
+                                    <li className='  text-5xl text-bold '><span className='text-7xl'>C</span>APTURE FEELINGS.</li>
+                                    <li className='  text-4xl text-bold'><span className='text-7xl'>D</span>ISCOVER PATTERNS.</li>
+                                    <li className='  text-4xl text-bold'><span className='text-7xl'>S</span>HARE SUPPORT.</li>
+
+
+                                </ul>
+                                <h1 className='text-2xl text-violet-100 font-sans my-10 text-start'>
+                                    Journaling that leads to insight, not isolation.
+                                </h1>
+
+                            </div>
+                            <div className='flex flex-row gap-6 justify-center items-center'>
+                                <Link to="/journals">
+                                    <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+                                        Start Journaling
+                                    </div>
+                                </Link>
+                                <Link to="/dashboard">
+                                    <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+                                        Dashboard
+                                    </div>
+                                </Link>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                    <div className='flex flex-row justify-center items-center w-3/4 m-auto '>
+                        <div className='flex w-1/2  flex-col border-r-2 border-gray-600 mr-2 pr-4'>
+                            <h1
+                                className="text-image-fill text-9xl font-extrabold"
+                                style={{ backgroundImage: 'url("/images/forest.jpg")' }}
+                            >
+                                VRiTTi
+                            </h1>
+                            <span className='text-white/30'>is here for you.</span>
+                        </div>
+
+                        <div className='flex w-1/2 text-md text-center mt-4 px-4 md:px-20 font-serif text-violet-400  '>
+                            A personal, anonymous journaling app that lets you reflect, grow, and connect. Let AI help you understand yourself better — and let community support you ethically.
+                        </div>
+
+                    </div>
+
                 </div>
+
 
                 <div className='flex flex-col min-h-screen w-full p-4 justify-center items-center mt-10  '>
 
                     {/* Hero Section */}
-                    <h1 className='items-start font-serif text-7xl mb-10 p-2 flex '>Features</h1>
+                    <h1 className='block items-start font-serif text-7xl mb-10 p-2 md:hidden  text-yellow-50 '>FEATURES</h1>
 
                     {/* Feature Cards */}
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:w-4/5'>
-                        <FeatureCard
-                            image={writeJournal}
-                            title="Daily Journaling"
-                            // to="/journals"
-                            desc="Capture your thoughts and moods every day in a safe, private space."
-                        />
-                        <FeatureCard
-                            image={readJournal}
-                            title="AI-Powered Summaries"
-                            // to="/journals"
-                            desc="Generate meaningful summaries and highlights from your journal entries."
-                        />
-                        <FeatureCard
-                            image={graph}
-                            title="Mood Analytics"
-                            // to="/weeklyAnalysis"
-                            desc="Track your emotions and growth visually over time with charts."
-                        />
-                        <FeatureCard
-                            image={anonymous}
-                            title="Anonymous Sharing"
-                            // to="/share"
-                            desc="Share your insights anonymously and discover others' journeys."
-                        />
-                        <FeatureCard
-                            image={reply}
-                            title="Community Feedback"
-                            // to="/replies"
-                            desc="Receive kind, constructive advice and support from like-minded individuals."
-                        />
-                        <FeatureCard
-                            image={community}
-                            title="Uplifting Stories"
-                            // to="/community"
-                            desc="Get inspired by trending experiences and emotional breakthroughs."
-                        />
+                    {/* <div className='grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:w-4/5'> */}
+                    <div className='flex flex-col md:flex-row gap-2 w-full md:w-4/5'>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-3 border-t-2 border-yellow-400 '>
+                            <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>FE</h1>
+                            <FeatureCard
+                                image={writeJournal}
+                                title="Daily Journaling"
+                                // to="/journals"
+                                desc="Capture your thoughts and moods every day in a safe, private space."
+                            /></div>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-10 border-t-2 border-yellow-400 '>
+                            <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>A</h1>
+                            <FeatureCard
+                                image={readJournal}
+                                title="AI-Powered Summaries"
+                                // to="/journals"
+                                desc="Generate meaningful summaries and highlights from your journal entries."
+                            /></div>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-16 border-t-2 border-yellow-400 '>
+
+                            <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>T</h1>
+                            <FeatureCard
+                                image={graph}
+                                title="Mood Analytics"
+                                // to="/weeklyAnalysis"
+                                desc="Track your emotions and growth visually over time with charts."
+                            />
+                        </div>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-16 border-t-2 border-yellow-400 '>
+
+                            <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>UR</h1>
+                            <FeatureCard
+                                image={anonymous}
+                                title="Anonymous Sharing"
+                                // to="/share"
+                                desc="Share your insights anonymously and discover others' journeys."
+                            />
+                        </div>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-10 border-t-2 border-yellow-400 '>
+
+                            <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>E</h1>
+                            <FeatureCard
+                                image={reply}
+                                title="Community Feedback"
+                                // to="/replies"
+                                desc="Receive kind, constructive advice and support from like-minded individuals."
+                            />
+                        </div>
+                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-black my-3 border-t-2 border-yellow-400 '>
+
+                            <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>S</h1><FeatureCard
+                                image={community}
+                                title="Uplifting Stories"
+                                // to="/community"
+                                desc="Get inspired by trending experiences and emotional breakthroughs."
+                            /></div>
+
                     </div>
 
-                    {/* CTA Section */}
-                    <div className='mt-20 text-center max-w-3xl'>
-                        <h2 className='text-white text-4xl mb-4'>Start Your  Journey Today</h2>
-                        <p className='text-stone-300 mb-6 px-6'>
-                            Whether you’re seeking clarity, growth, or connection — LightMind provides powerful tools to guide your mental and emotional wellness. Unlock voice journaling, personalized analytics, and AI-guided prompts with our premium plan.
-                        </p>
-                        <Link to="/journals">
-                            <button className='bg-yellow-400 px-8 py-3 rounded-xl text-black font-bold hover:bg-yellow-500 transition-all'>
-                                ✨ Begin Now
-                            </button>
-                        </Link>
-                    </div>
 
-                    {/* Footer */}
-                    <div className='mt-20 text-stone-900 text-sm text-center'>
-                        © 2025 Vritti · Empowering Growth Through Reflection
-                    </div>
+                </div>
+                {/* CTA Section */}
+                <div className='mt-20 text-center  m-auto justify-center items-center w-3/4'>
+                    <h2 className='text-white text-4xl mb-4'>Start Your  Journey Today</h2>
+                    <p className='text-stone-300 mb-6 px-6'>
+                        Whether you’re seeking clarity, growth, or connection — LightMind provides powerful tools to guide your mental and emotional wellness. Unlock voice journaling, personalized analytics, and AI-guided prompts with our premium plan.
+                    </p>
+                    <Link to="/journals">
+                        <button className='bg-yellow-400 px-8 py-3 rounded-xl text-black font-bold hover:bg-yellow-500 transition-all'>
+                            ✨ Begin Now
+                        </button>
+                    </Link>
+                </div>
+
+                {/* Footer */}
+                <div className='mt-20 text-stone-600 text-sm text-center'>
+                    © <span>{year}</span> Vritti · Empowering Growth Through Reflection
                 </div>
 
 

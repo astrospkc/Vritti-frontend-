@@ -14,14 +14,21 @@ import { UserContext } from "./context/UserContext";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 import CommunityPage from "./components/CommunityPage";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
 
   return (
     <BrowserRouter>
-      <div className="relative w-full h-screen flex flex-col">
-        <div
+      <div
+        style={{
+          background:
+            "radial-gradient(circle at center, #1a0c2b, #1E293B, #0F172A)",
+        }}
+        className=" w-full h-screen flex flex-col overflow-x-hidden"
+      >
+        {/* <div
           style={{
             backgroundImage: 'url("/images/crushedpaper4.jpg")',
             backgroundSize: "cover",
@@ -35,7 +42,7 @@ function App() {
             zIndex: 0,
           }}
           className="absolute inset-0"
-        ></div>
+        ></div> */}
         <div className="w-full relative z-10 flex-col min-h-screen overflow-y-scroll flex bg-gradient-to-r  from-black ">
           {/* Persistent Sidebar */}
 
@@ -68,6 +75,7 @@ function App() {
                     />
                     <Route path="/weeklyAnalysis" element={<WeekAnalysis />} />
                     <Route path="/community" element={<CommunityPage />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                   </>
                 )}
               </Routes>

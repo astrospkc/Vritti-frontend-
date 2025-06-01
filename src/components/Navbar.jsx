@@ -30,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between p-0 md:p-6 shadow-lg shadow-slate-900 bg-transparent h-fit rounded-3xl md:rounded-none items-center">
+    <div className="flex bg-black flex-col md:flex-row justify-between p-0 md:px-6 shadow-lg shadow-slate-900  h-fit rounded-3xl md:rounded-none items-center">
       {/* Header Section */}
       <div className="flex flex-row items-center text-yellow-400 text-center text-3xl p-2">
         <span className="rounded-full  shadow-sm shadow-yellow-100 p-2 font-serif">
