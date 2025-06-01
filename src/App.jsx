@@ -13,6 +13,7 @@ import WeekAnalysis from "./components/WeekAnalysis";
 import { UserContext } from "./context/UserContext";
 import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
+import CommunityPage from "./components/CommunityPage";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
@@ -44,7 +45,7 @@ function App() {
 
           <div className="flex flex-col w-full h-screen">
             {/* <div className="flex justify-start fixed md:static  bg-black md:bg-transparent z-10  "></div> */}
-            <Navbar />
+            {/* <Navbar /> */}
 
             {/* Main Content */}
             <div className="flex">
@@ -66,6 +67,7 @@ function App() {
                       element={<WeekDay />}
                     />
                     <Route path="/weeklyAnalysis" element={<WeekAnalysis />} />
+                    <Route path="/community" element={<CommunityPage />} />
                   </>
                 )}
               </Routes>

@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useContext, useEffect, useState } from 'react'
 import Button from '../UIComponent/Button'
 import axios from 'axios'
