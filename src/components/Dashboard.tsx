@@ -1,10 +1,121 @@
 import React from 'react'
 import Sidebar from './Sidebar'
+import { useState } from 'react'
+import MonthlyJournals from './MonthlyJournals'
+
+const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December', 'None'
+]
 
 const Dashboard = () => {
+    const date = new Date()
+    const month = date.toDateString().split(" ")[1]
+    const year = date.getFullYear()
+    console.log("date: ", date.toDateString().split(" ")[1])
+    const [selectedMonth, setSelectedMonth] = useState('None')
     return (
-        <div>
+        <div className='flex flex-row w-full h-screen  '>
+
             <Sidebar currentPage="community" />
+
+
+            <div className=' w-[80%]  overflow-y-auto no-scrollbar m-4'>
+                <div className='m-4 flex flex-col  w-full'>
+                    <div
+                        style={{ backgroundImage: 'url("/images/forest.jpg")' }}
+                        className=' text-5xl md:text-7xl lg:text-9xl my-5 text-emerald-800 font-serif text-image-fill shadow-lg shadow-black rounded-3xl p-2'>Journal Entries</div>
+                    <div className='relative w-full   flex flex-col '>
+                        <div style={{
+                            backgroundImage:
+                                `url("/images/forest.jpg")`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: 'black',
+                            backgroundBlendMode: '', // optional: helps blend gradient & image
+                            // opacity: 0.4,
+                            zIndex: 0,
+                            // height: 500
+                        }}
+                            className='absolute rounded-b-xl shadow-lg shadow-black inset-0  w-full opacity-20 hover:opacity-45'
+                        >
+                        </div>
+
+                        <div
+                            className='relative z-10 p-2 flex flex-row w-full  '>
+
+                            <div className='flex flex-col text-6xl text-emerald-600 justify-center items-center'>
+                                <h1>{month}</h1>
+                                <h1>{year}</h1>
+
+                            </div>
+
+
+                        </div>
+                        <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-4xl my-5'>
+                            In June's warm light, we rise like vines — stretching skyward, rooted in hope, blossoming in time.
+                        </div>
+
+
+
+
+                    </div>
+                    <div className="w-full px-10 ">
+                        <div className="flex flex-row  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
+
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 1</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 2</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 3</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 4</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="m-4 w-full border-t-2 border-gray-800 ">
+                    <div className='flex flex-row justify-between items-center  my-3 p-3 shadow-lg shadow-black'>
+                        <div className="text-2xl text-violet-400 yusei-magic-regular my-10 p-2 rounded-xl shadow-sm shadow-orange-600 w-fit">
+                            Month-wise Journals
+                        </div>
+
+                        <div className="w-full flex flex-row gap-3  h-fit  p-4 justify-center items-center">
+                            <label className="block text-lg font-medium text-gray-300 mb-2">
+                                Select a Month
+                            </label>
+
+                            <select
+                                value={selectedMonth}
+                                onChange={(e) => setSelectedMonth(e.target.value)}
+                                className="w-1/2 p-3 rounded-xl bg-black text-white border border-emerald-500 shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+                            >
+                                {months.map((month) => (
+                                    <option key={month} value={month}>
+                                        {month}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <div className=" text-center text-emerald-500 text-xl">
+                                Selected: <span className="font-bold">{selectedMonth}</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/* Wrapper with fixed height */}
+                    {/* TODO : get all the journals monthly wise , and separate them according to the month, arrange the journals. when month is selected , the selected month journal reaches the top and rest below the one selected */}
+                    {
+                        selectedMonth && selectedMonth == 'None' ?
+                            <MonthlyJournals /> :
+                            <MonthlyJournals />
+                    }
+
+
+                </div>
+
+
+            </div>
+
         </div>
     )
 }

@@ -80,7 +80,15 @@
   color: transparent;
   background-size: cover;
   background-position: center;
-  -webkit-text-stroke: 1px rgb(206, 206, 223);
+  -webkit-text-stroke: 1px rgb(34, 125, 73);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 
 @media screen and (max-width: 768px) {

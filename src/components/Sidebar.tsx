@@ -17,7 +17,7 @@ const Sidebar = ({ currentPage }) => {
     ];
 
     return (
-        <aside className="w-64 min-h-screen bg-violet-950/20 text-white p-6 shadow-lg">
+        <aside className="w-[20%] min-h-screen bg-violet-950/20 text-white p-6 shadow-lg  ">
             <div className="text-2xl font-bold mb-8 font-serif text-violet-300  ">VRiTTi</div>
             <nav className="flex flex-col gap-4">
 
