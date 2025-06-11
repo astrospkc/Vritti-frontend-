@@ -53,7 +53,7 @@ const Dashboard = () => {
 
 
                         </div>
-                        <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-4xl my-5'>
+                        <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-3xl my-5'>
                             In June's warm light, we rise like vines — stretching skyward, rooted in hope, blossoming in time.
                         </div>
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
 
                     </div>
                     <div className="w-full px-10 ">
-                        <div className="flex flex-row  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
+                        <div className="flex flex-row   justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
 
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 1</div>
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 2</div>

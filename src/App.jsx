@@ -15,6 +15,8 @@ import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 import CommunityPage from "./components/CommunityPage";
 import Dashboard from "./components/Dashboard";
+import NewJournalEntry from "./components/NewJournalEntry";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
@@ -52,7 +54,7 @@ function App() {
 
           <div className="flex flex-col w-full h-screen">
             {/* <div className="flex justify-start fixed md:static  bg-black md:bg-transparent z-10  "></div> */}
-            {/* <Navbar /> */}
+            {/* <Sidebar /> */}
 
             {/* Main Content */}
             <div className="flex">
@@ -76,6 +78,7 @@ function App() {
                     <Route path="/weeklyAnalysis" element={<WeekAnalysis />} />
                     <Route path="/community" element={<CommunityPage />} />
                     <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/new-journals" element={<NewJournalEntry />} />
                   </>
                 )}
               </Routes>

@@ -76,10 +76,7 @@ const Homepage = () => {
                                         Dashboard
                                     </div>
                                 </Link>
-
                             </div>
-
-
                         </div>
 
 
@@ -174,14 +171,14 @@ const Homepage = () => {
                 </div>
                 {/* CTA Section */}
                 <div className='mt-20 text-center  m-auto justify-center items-center w-3/4'>
-                    <h2 className='text-white text-4xl mb-4'>Start Your  Journey Today</h2>
+                    <h2 className='text-yellow-400 text-4xl mb-4'>Start Your  Journey Today</h2>
                     <p className='text-stone-300 mb-6 px-6'>
                         Whether you’re seeking clarity, growth, or connection — LightMind provides powerful tools to guide your mental and emotional wellness. Unlock voice journaling, personalized analytics, and AI-guided prompts with our premium plan.
                     </p>
                     <Link to="/journals">
-                        <button className='bg-yellow-400 px-8 py-3 rounded-xl text-black font-bold hover:bg-yellow-500 transition-all'>
+                        <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg text-yellow-400 hover:shadow-yellow-300 hover:scale-95'>
                             ✨ Begin Now
-                        </button>
+                        </div>
                     </Link>
                 </div>
 
