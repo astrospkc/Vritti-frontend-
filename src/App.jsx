@@ -12,11 +12,13 @@ import WeekAnalysis from "./components/WeekAnalysis";
 
 import { UserContext } from "./context/UserContext";
 import Homepage from "./components/Homepage";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import CommunityPage from "./components/CommunityPage";
 import Dashboard from "./components/Dashboard";
 import NewJournalEntry from "./components/NewJournalEntry";
-import Sidebar from "./components/Sidebar";
+// import Sidebar from "./components/Sidebar";
+// import MonthlyJournals from "./components/MonthlyJournals";
+import MonthlyJournalPage from "./components/MonthlyJournalPage";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
@@ -54,7 +56,6 @@ function App() {
 
           <div className="flex flex-col w-full h-screen">
             {/* <div className="flex justify-start fixed md:static  bg-black md:bg-transparent z-10  "></div> */}
-            {/* <Sidebar /> */}
 
             {/* Main Content */}
             <div className="flex">
@@ -69,6 +70,7 @@ function App() {
                 ) : (
                   <>
                     {/* Authenticated Routes */}
+
                     <Route path="/journals" element={<JournalPage />} />
                     <Route path="/journals/week/:id" element={<WeekPage />} />
                     <Route
@@ -79,6 +81,10 @@ function App() {
                     <Route path="/community" element={<CommunityPage />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/new-journals" element={<NewJournalEntry />} />
+                    <Route
+                      path="/dashboard/monthlypage"
+                      element={<MonthlyJournalPage />}
+                    />
                   </>
                 )}
               </Routes>

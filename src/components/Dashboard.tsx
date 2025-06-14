@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import { useState } from 'react'
 import MonthlyJournals from './MonthlyJournals'
+import { Link } from 'react-router-dom'
 
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -25,42 +26,36 @@ const Dashboard = () => {
                     <div
                         style={{ backgroundImage: 'url("/images/forest.jpg")' }}
                         className=' text-5xl md:text-7xl lg:text-9xl my-5 text-emerald-800 font-serif text-image-fill shadow-lg shadow-black rounded-3xl p-2'>Journal Entries</div>
-                    <div className='relative w-full   flex flex-col '>
-                        <div style={{
-                            backgroundImage:
-                                `url("/images/forest.jpg")`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundColor: 'black',
-                            backgroundBlendMode: '', // optional: helps blend gradient & image
-                            // opacity: 0.4,
-                            zIndex: 0,
-                            // height: 500
-                        }}
-                            className='absolute rounded-b-xl shadow-lg shadow-black inset-0  w-full opacity-20 hover:opacity-45'
-                        >
-                        </div>
+                    <Link to="/dashboard/monthlypage">
 
-                        <div
-                            className='relative z-10 p-2 flex flex-row w-full  '>
-
-                            <div className='flex flex-col text-6xl text-emerald-600 justify-center items-center'>
-                                <h1>{month}</h1>
-                                <h1>{year}</h1>
-
+                        <div className='relative w-full   flex flex-col '>
+                            <div style={{
+                                backgroundImage:
+                                    `url("/images/forest.jpg")`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundColor: 'black',
+                                backgroundBlendMode: '', // optional: helps blend gradient & image
+                                // opacity: 0.4,
+                                zIndex: 0,
+                                // height: 500
+                            }}
+                                className='absolute rounded-b-xl shadow-lg shadow-black inset-0  w-full opacity-20 hover:opacity-45'
+                            >
                             </div>
-
-
+                            <div
+                                className='relative z-10 p-2 flex flex-row w-full  '>
+                                <div className='flex flex-col text-6xl text-emerald-600 justify-center items-center'>
+                                    <h1>{month}</h1>
+                                    <h1>{year}</h1>
+                                </div>
+                            </div>
+                            <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-3xl my-5'>
+                                In June's warm light, we rise like vines — stretching skyward, rooted in hope, blossoming in time.
+                            </div>
                         </div>
-                        <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-3xl my-5'>
-                            In June's warm light, we rise like vines — stretching skyward, rooted in hope, blossoming in time.
-                        </div>
-
-
-
-
-                    </div>
+                    </Link>
                     <div className="w-full px-10 ">
                         <div className="flex flex-row   justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
 

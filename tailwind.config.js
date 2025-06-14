@@ -14,6 +14,15 @@ export default {
           muted: "#94A3B8",
         },
       },
+      keyframes: {
+        "fade-in": {
+          "50%": { opacity: 0.5, transform: "translateY(10px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.6s ease-out forwards",
+      },
     },
   },
   plugins: [tailwindScrollbar],
