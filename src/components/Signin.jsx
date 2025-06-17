@@ -70,7 +70,7 @@ const Signin = () => {
         <div className=" ">
           {/* {loading ? <div>....loading</div> : <div></div>} */}
           <div className="flex flex-col justify-center items-center">
-            <div className="font-semibold rounded-xl yusei-magic-tab text-3xl my-4">
+            <div className="font-semibold rounded-xl yusei-magic-tab text-3xl my-4 text-yellow-500">
               Login
             </div>
             <form

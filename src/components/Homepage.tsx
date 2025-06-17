@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import writeJournal from "../images/writeJournal.jpg"
 import readJournal from "../images/readJournal.jpg"
@@ -8,12 +8,31 @@ import reply from "../images/crushedpaper4.jpg"
 import community from "../images/crushedpaper3.jpg"
 
 import "./styles.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
 const Homepage = () => {
     const date = new Date()
     const year = date.getFullYear()
+    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext)
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        setIsAuthenticated(prev => !prev)
 
+    }
+    const navigate = useNavigate()
+
+    const handleButtons = (type) => {
+        if (!isAuthenticated) {
+            navigate("/error")
+        } else {
+            if (type == 'journaling') {
+                navigate("/new-journals")
+            } else if (type == 'dashboard' || type == 'begin') {
+                navigate("/dashboard")
+            }
+        }
+    }
 
     return (
         <>
@@ -43,9 +62,22 @@ const Homepage = () => {
                         <div className='font-bold text-violet-300 text-xl '>
                             VRiTTi
                         </div>
-                        <ul className='flex flex-row-reverse gap-4'>
-                            <li className='bg-violet-400 rounded-xl p-2'>Login</li>
-                            <li className='bg-violet-400 rounded-xl p-2'>SignUp</li>
+                        <ul className='flex flex-row-reverse gap-4 '>
+                            {isAuthenticated ?
+                                <li
+                                    onClick={handleLogout}
+                                    className='bg-violet-400 rounded-xl p-2 hover:cursor-pointer'>Logout</li>
+                                :
+                                <>
+                                    <Link to="/signin">
+                                        <li className='bg-violet-400 rounded-xl p-2 hover:cursor-pointer'>Login</li>
+                                    </Link>
+                                    <Link to="/signup">
+                                        <li className='bg-violet-400 rounded-xl p-2 hover:cursor-pointer'>SignUp</li>
+                                    </Link>
+                                </>
+                            }
+
                         </ul>
                     </div>
                     <div className=' w-3/4 m-auto  relative z-10 h-screen flex flex-col justify-center items-center font-serif text-yellow-100 '>
@@ -65,17 +97,20 @@ const Homepage = () => {
                                 </h1>
 
                             </div>
-                            <div className='flex flex-row gap-6 justify-center items-center'>
-                                <Link to="/journals">
-                                    <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
-                                        Start Journaling
-                                    </div>
-                                </Link>
-                                <Link to="/dashboard">
-                                    <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
-                                        Dashboard
-                                    </div>
-                                </Link>
+                            <div className=' flex flex-row gap-6 '>
+
+                                <div
+                                    onClick={() => handleButtons('journaling')}
+                                    className='buttons text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+                                    Start Journaling
+                                </div>
+
+                                <div
+                                    onClick={() => handleButtons('dashboard')}
+                                    className=' buttons text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+                                    Dashboard
+                                </div>
+
                             </div>
                         </div>
 
@@ -175,11 +210,13 @@ const Homepage = () => {
                     <p className='text-stone-300 mb-6 px-6'>
                         Whether you’re seeking clarity, growth, or connection — LightMind provides powerful tools to guide your mental and emotional wellness. Unlock voice journaling, personalized analytics, and AI-guided prompts with our premium plan.
                     </p>
-                    <Link to="/journals">
-                        <div className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg text-yellow-400 hover:shadow-yellow-300 hover:scale-95'>
-                            ✨ Begin Now
-                        </div>
-                    </Link>
+
+                    <div
+                        onClick={() => handleButtons('begin')}
+                        className='text-xl my-4 p-2 bg-gradient-to-l from-violet-400 to-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg text-yellow-400 hover:shadow-yellow-300 hover:scale-95'>
+                        ✨ Begin Now
+                    </div>
+
                 </div>
 
                 {/* Footer */}

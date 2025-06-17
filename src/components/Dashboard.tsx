@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Sidebar from './Sidebar'
 import { useState } from 'react'
 import MonthlyJournals from './MonthlyJournals'
 import { Link } from 'react-router-dom'
+
 
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -15,6 +16,7 @@ const Dashboard = () => {
     const year = date.getFullYear()
     console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
+
     return (
         <div className='flex flex-row w-full h-screen  '>
 

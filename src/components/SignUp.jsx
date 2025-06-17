@@ -1,9 +1,9 @@
 import { useToast } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
+
 const SignUp = () => {
   const navigate = useNavigate();
   const toast = useToast();
@@ -17,11 +17,11 @@ const SignUp = () => {
   });
 
   // loader
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const signup = async () => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/api/auth/createuser`,
         {
@@ -44,7 +44,7 @@ const SignUp = () => {
         localStorage.setItem("token", data.authtoken);
         setIsAuthenticated(true);
         setTimeout(() => {
-          navigate("/");
+          navigate("/dashboard");
         }, 3000);
       } else {
         alert("fill up all the spaces");
@@ -58,7 +58,7 @@ const SignUp = () => {
       });
       console.error("error: ", error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -68,17 +68,17 @@ const SignUp = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-slate-700">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-300"></div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen bg-slate-700">
+  //       <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-300"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center m-auto w-full h-full p-4 font-serif ">
+      <div className="flex flex-col justify-center items-center m-auto w-full h-full p-4 font-serif  ">
         <div className="font-semibold rounded-xl  text-yellow-400 text-3xl my-4">
           Sign Up
         </div>
@@ -98,7 +98,7 @@ const SignUp = () => {
                 value={user.username}
                 onChange={handleSignUp}
                 placeholder="xyz"
-                className="p-4 rounded-3xl"
+                className="p-4 rounded-3xl text-violet-950"
               />
             </div>
             <div className="flex flex-col">
@@ -111,7 +111,7 @@ const SignUp = () => {
                 value={user.email}
                 onChange={handleSignUp}
                 placeholder="em@gmail.com"
-                className="p-4 rounded-3xl"
+                className="p-4 rounded-3xl text-violet-950"
               />
             </div>
 
@@ -125,7 +125,7 @@ const SignUp = () => {
                 value={user.password}
                 onChange={handleSignUp}
                 placeholder="****"
-                className="p-4 rounded-3xl"
+                className="p-4 rounded-3xl text-violet-950"
               />
             </div>
           </div>

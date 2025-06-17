@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useContext } from "react";
+// import { useContext } from "react";
 
 import "./App.css";
 
-import JournalPage from "./components/JournalPage";
+// import JournalPage from "./components/JournalPage";
 import WeekPage from "./components/WeekPage";
 import WeekDay from "./components/WeekDay";
 import SignUp from "./components/SignUp";
 import Signin from "./components/Signin";
 import WeekAnalysis from "./components/WeekAnalysis";
 
-import { UserContext } from "./context/UserContext";
+// import { UserContext } from "./context/UserContext";
 import Homepage from "./components/Homepage";
 // import Navbar from "./components/Navbar";
 import CommunityPage from "./components/CommunityPage";
@@ -19,6 +19,11 @@ import NewJournalEntry from "./components/NewJournalEntry";
 // import Sidebar from "./components/Sidebar";
 // import MonthlyJournals from "./components/MonthlyJournals";
 import MonthlyJournalPage from "./components/MonthlyJournalPage";
+import PageEdit from "./components/PageEdit";
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
+import ErrorPage from "./components/ErrorPage";
+// import MonthlyJournals from "./components/MonthlyJournals";
 
 function App() {
   const { isAuthenticated } = useContext(UserContext);
@@ -62,16 +67,17 @@ function App() {
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Homepage />} />
-                {!isAuthenticated ? (
-                  <>
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/signin" element={<Signin />} />
-                  </>
-                ) : (
-                  <>
-                    {/* Authenticated Routes */}
 
-                    <Route path="/journals" element={<JournalPage />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/error" element={<ErrorPage />} />
+
+                {/* Authenticated Routes */}
+                {isAuthenticated && (
+                  <>
+                    <Route path="/" element={<Homepage />} />
+
+                    <Route path="/journals" element={<MonthlyJournalPage />} />
                     <Route path="/journals/week/:id" element={<WeekPage />} />
                     <Route
                       path="/journals/week/:id/day"
@@ -85,6 +91,7 @@ function App() {
                       path="/dashboard/monthlypage"
                       element={<MonthlyJournalPage />}
                     />
+                    <Route path="/pageedit" element={<PageEdit />} />
                   </>
                 )}
               </Routes>
