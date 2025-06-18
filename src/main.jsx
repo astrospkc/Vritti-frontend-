@@ -5,9 +5,10 @@ import { ModalProvider } from "./context/ModalProvider";
 import { UserProvider } from "./context/UserProvider.jsx";
 import App from "./App.jsx";
 import "./index.css";
-import { JournalProvider } from "./context/JournalContext.jsx";
+
 import { RefProvider } from "./context/RefProvider.jsx";
 import CardClickedProvider from "./context/CardClickedProvider.jsx";
+import { JournalProvider } from "./context/JournalProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

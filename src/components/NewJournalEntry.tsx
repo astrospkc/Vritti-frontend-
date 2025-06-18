@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Sidebar from './Sidebar'
 import Button from '../UIComponent/Button'
 import axios from 'axios'
+import { journalContext } from '../context/JournalContext'
 
 const NewJournalEntry = () => {
+    const { journals, setJournals } = useContext(journalContext)
     const [title, setTitle] = useState("")
     const [subtitle, setSubtitle] = useState("")
     const [body, setBody] = useState("")
@@ -12,13 +14,28 @@ const NewJournalEntry = () => {
 
     const handleAddJournal = async () => {
         const token = localStorage.getItem('token')
+        console.log("title, subtitle, body : ", title, " ", subtitle, " ", body)
         const res = await axios.post(`${import.meta.env.VITE_URL}/weekJournals/create`, {
+            title: title,
+            subtitle: subtitle,
+            body: body
+        }, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
-            }
+            },
+
         })
+        console.log("res: ", res)
+
+        const data = res.data
+        setJournals([...journals, data])
+
+
+
+
     }
+    console.log("journals: ", journals)
     return (
         <div className='flex flex-row w-full h-screen'>
             <Sidebar currentPage="community" />

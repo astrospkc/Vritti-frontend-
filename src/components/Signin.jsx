@@ -88,7 +88,7 @@ const Signin = () => {
                     value={user.email}
                     onChange={handleChange}
                     placeholder="em@gmail.com"
-                    className="p-4 rounded-3xl"
+                    className="p-4 rounded-3xl text-violet-950"
                   />
                 </div>
 
@@ -102,7 +102,7 @@ const Signin = () => {
                     value={user.password}
                     onChange={handleChange}
                     placeholder="****"
-                    className="p-4 rounded-3xl"
+                    className="p-4 rounded-3xl text-violet-950"
                   />
                 </div>
               </div>

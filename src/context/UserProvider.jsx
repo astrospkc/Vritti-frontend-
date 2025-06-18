@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { UserContext } from "./UserContext";
 import axios from "axios";

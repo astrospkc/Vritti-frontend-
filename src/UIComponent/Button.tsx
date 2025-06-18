@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Button = ({ children }: any) => {
+const Button = ({ children, onclick }: any) => {
 
 
     return (
-        <div className='text-md text-yellow-100 my-4 p-2 bg-gradient-to-l from-violet-400 to-gray-800 shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+        <div
+            onClick={onclick}
+            className='text-md text-yellow-100 my-4 p-2 bg-gradient-to-l from-violet-400 to-gray-800 shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
             {children}
         </div>
 
