@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import back from "../images/thebackground.jpg";
+
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 import "./styles.css";
@@ -21,31 +21,34 @@ const Signin = () => {
   // aigning in to the journal
   const signin = async () => {
     setLoading(true);
-    const res = await axios.post(
-      `${import.meta.env.VITE_URL}/api/auth/login`,
-      {
-        email: user.email,
-        password: user.password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_URL}/api/auth/login`,
+        {
+          email: user.email,
+          password: user.password,
         },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = res.data;
+      // console.log("user signin data: ", data);
+      // console.log("authtoken generated when signed in : ", data.authtoken);
+      setUser(data);
+      setLoading(false);
+      if (data.authtoken) {
+        setIsAuthenticated(true);
+        localStorage.setItem("token", data.authtoken);
+
+        navigate("/");
+      } else {
+        alert("Invalid credentials");
       }
-    );
-
-    const data = res.data;
-    // console.log("user signin data: ", data);
-    // console.log("authtoken generated when signed in : ", data.authtoken);
-    setUser(data);
-    setLoading(false);
-    if (data.authtoken) {
-      setIsAuthenticated(true);
-      localStorage.setItem("token", data.authtoken);
-
-      navigate("/");
-    } else {
-      alert("Invalid credentials");
+    } catch (error) {
+      console.log(error.response);
     }
   };
 

@@ -6,10 +6,14 @@ const PageEdit = () => {
   const [content, setContent] = useState(null);
   useEffect(() => {
     const fetchContent = async () => {
-      const response = await axios.get(
-        "http://localhost:9000/content/getcontent"
-      );
-      setContent(response.data?.content);
+      try {
+        const response = await axios.get(
+          "http://localhost:9000/content/getcontent"
+        );
+        setContent(response.data?.content);
+      } catch (error) {
+        console.log(error.response);
+      }
     };
     fetchContent();
   }, []);

@@ -9,17 +9,21 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   const getUser = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_URL}/api/auth/getuser`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    console.log("response: ", response);
-    setUser(response.data);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_URL}/api/auth/getuser`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log("response: ", response);
+      setUser(response.data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   useLayoutEffect(() => {

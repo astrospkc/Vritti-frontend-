@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useLayoutEffect } from 'react'
 import Sidebar from './Sidebar'
 import { useState } from 'react'
 import MonthlyJournals from './MonthlyJournals'
 import { Link } from 'react-router-dom'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 
 const months = [
@@ -16,13 +17,36 @@ const Dashboard = () => {
     const year = date.getFullYear()
     console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
+    const [content, setContent] = useState("")
+
+    const query = useQuery({
+        queryKey: ['quote'],
+        queryFn: async () => {
+            const res = await fetch(`${import.meta.env.VITE_URL}/openai/getQuote`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            const data = await res.json()
+            console.log("data in query: ", data)
+
+            return data["quote"]
+        }
+    })
+
+    useEffect(() => {
+        if (query.data) {
+            setContent(prev => prev = query.data)
+            console.log("data: ", query.data)
+        }
+    }, [query.data])
+
+
 
     return (
         <div className='flex flex-row w-full h-screen  '>
-
             <Sidebar currentPage="community" />
-
-
             <div className=' w-[80%]  overflow-y-auto no-scrollbar m-4'>
                 <div className='m-4 flex flex-col  w-full'>
                     <div
@@ -53,18 +77,19 @@ const Dashboard = () => {
                                     <h1>{year}</h1>
                                 </div>
                             </div>
-                            <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-3xl my-5'>
-                                In June's warm light, we rise like vines — stretching skyward, rooted in hope, blossoming in time.
+                            <div className='text-center yusei-magic-regular justify-center items-center m-auto  text-white text-xl my-5'>
+                                {content}
                             </div>
                         </div>
                     </Link>
                     <div className="w-full px-10 ">
-                        <div className="flex flex-row   justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
-
+                        <div className="flex flex-row px-8  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 1</div>
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 2</div>
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 3</div>
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 4</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 5</div>
+
                         </div>
                     </div>
 
