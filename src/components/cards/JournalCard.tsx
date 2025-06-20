@@ -1,28 +1,40 @@
-import React from 'react'
 
-const JournalCard = ({ title, subtitle, date }) => {
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+const JournalCard = ({ title, subtitle, body, date }) => {
+    const dataToPass = {
+        title: title,
+        subtitle: subtitle,
+        body: body,
+        date: date
+    }
+    console.log("data to pass: ", dataToPass)
     return (
         //   picture, title , subtitle, date
-        <div
-            className="relative w-full max-w-md h-64 rounded-2xl overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 group animate-fade-in"
-        >
-            {/* Background Image with Zoom on Hover */}
-            <img
-                src="../images/forest.jpg"
-                alt="card background"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
+        <Link to={{ pathname: "/readJournalPage" }} state={dataToPass}>
+            <div
+                className="relative w-full max-w-md h-64 rounded-2xl overflow-hidden  transform transition duration-500 hover:scale-105 group animate-fade-in shadow-md shadow-orange-500 hover:cursor-pointer"
+            >
+                {/* Background Image with Zoom on Hover */}
+                <img
+                    src="../images/forest.jpg"
+                    alt="card background"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-all duration-500 group-hover:bg-black/60" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-all duration-500 group-hover:bg-black/60 " />
 
-            {/* Content */}
-            <div className="absolute bottom-0 p-6 text-white z-10 transition-all duration-500">
-                <h2 className="text-2xl font-bold">{title}</h2>
-                <p className="text-sm text-gray-200">{subtitle}</p>
-                <span className="text-xs text-gray-300">{date}</span>
+                {/* Content */}
+                <div className="absolute bottom-0 p-6 text-white z-10 transition-all duration-500 ">
+                    <h2 className="text-2xl font-bold mb-4">{title.toUpperCase()}</h2>
+                    <p className="text-sm text-gray-200 border-b-2 pb-2">{subtitle}</p>
+                    <span className="text-xs text-gray-300">{date}</span>
+                </div>
             </div>
-        </div>
+        </Link>
+
     )
 }
 

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { journalContext } from "./JournalContext";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { groupJournalsByMonthAndWeek } from "../components/miscellaneous/GetJournalsMonthWeek";
 
 export const JournalProvider = ({ children }) => {
   // all the journals of the user
@@ -42,6 +43,17 @@ export const JournalProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchJournals();
+  }, []);
+
+  const journalObject = groupJournalsByMonthAndWeek(journals);
+
+  let monthYear;
+  if (journalObject != null) {
+    monthYear = Object.keys(journalObject);
+  }
+
   return (
     <>
       <journalContext.Provider
@@ -53,6 +65,8 @@ export const JournalProvider = ({ children }) => {
           journalLoading,
           setJournalLoading,
           fetchJournals,
+          monthYear,
+          journalObject,
         }}
       >
         {children}

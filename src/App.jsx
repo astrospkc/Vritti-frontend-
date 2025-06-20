@@ -23,6 +23,7 @@ import PageEdit from "./components/PageEdit";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import ErrorPage from "./components/ErrorPage";
+import ReadJournalPage from "./components/ReadJournalPage";
 // import MonthlyJournals from "./components/MonthlyJournals";
 
 function App() {
@@ -92,6 +93,10 @@ function App() {
                       element={<MonthlyJournalPage />}
                     />
                     <Route path="/pageedit" element={<PageEdit />} />
+                    <Route
+                      path="/readJournalPage"
+                      element={<ReadJournalPage />}
+                    />
                   </>
                 )}
               </Routes>

@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Sidebar from './Sidebar'
 
 import { useState } from 'react'
 import JournalCard from './cards/JournalCard'
+import { groupJournalsByMonthAndWeek } from "./miscellaneous/GetJournalsMonthWeek.js"
+import { journalContext } from '../context/JournalContext.jsx'
+import WeeklyJournalSection from './WeeklyJournalSection.js'
 
 
 const MonthlyPage = () => {
-
+    const { journals, monthYear, journalObject } = useContext(journalContext)
     const [selectedMonth, setSelectedMonth] = useState("")
     const [selectedYear, setSelectedYear] = useState("")
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
-
     const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
+    console.log("months")
+
+
+    const weeks = Object.keys(journalObject[monthYear])
+
+
     return (
         <div className='flex flex-row w-full h-screen  '>
 
@@ -65,7 +73,13 @@ const MonthlyPage = () => {
                         </select>
                     </div>
                 </div>
-                <div>
+                {/* according to the data , weekly dividing journals */}
+                {
+                    weeks && weeks.map((week, i) => (
+                        <WeeklyJournalSection key={i} week={week} />
+                    ))
+                }
+                {/* <div>
                     <h1 className='text-3xl text-yellow-100  mb-10 border-b-2 border-gray-600 p-2'>
                         Week 1
                     </h1>
@@ -120,7 +134,7 @@ const MonthlyPage = () => {
                             />
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

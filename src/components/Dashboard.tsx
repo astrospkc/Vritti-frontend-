@@ -4,6 +4,8 @@ import { useState } from 'react'
 import MonthlyJournals from './MonthlyJournals'
 import { Link } from 'react-router-dom'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+// import { groupJournalsByMonthAndWeek } from './miscellaneous/GetJournalsMonthWeek'
+// import { journalContext } from '../context/JournalContext'
 
 
 const months = [
@@ -18,6 +20,7 @@ const Dashboard = () => {
     console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
+    // const { journals } = useContext(journalContext)
 
     const query = useQuery({
         queryKey: ['quote'],
@@ -38,9 +41,11 @@ const Dashboard = () => {
     useEffect(() => {
         if (query.data) {
             setContent(prev => prev = query.data)
-            console.log("data: ", query.data)
+
         }
     }, [query.data])
+
+
 
 
 

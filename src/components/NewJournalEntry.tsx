@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import Button from '../UIComponent/Button'
 import axios from 'axios'
 import { journalContext } from '../context/JournalContext'
-import { groupJournalsByMonthAndWeek } from './miscellaneous/GetJournalsMonthWeek'
+
 
 const NewJournalEntry = () => {
     const { journals, setJournals, fetchJournals } = useContext(journalContext)
@@ -44,8 +44,7 @@ const NewJournalEntry = () => {
     console.log("journals: ", journals)
 
 
-    const data = groupJournalsByMonthAndWeek(journals)
-    console.log("data: ", data)
+
 
     return (
         <div className='flex flex-row w-full h-screen'>
