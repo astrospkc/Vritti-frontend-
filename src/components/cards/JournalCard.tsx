@@ -2,8 +2,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const JournalCard = ({ title, subtitle, body, date }) => {
+const JournalCard = ({ id, title, subtitle, body, date }) => {
     const dataToPass = {
+        id: id,
         title: title,
         subtitle: subtitle,
         body: body,

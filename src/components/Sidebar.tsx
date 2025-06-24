@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import { BsArrowRightCircleFill } from "react-icons/bs";
+import { BsArrowLeftCircleFill } from "react-icons/bs";
 
 const Sidebar = ({ currentPage }) => {
     const isCommunityPage = currentPage === 'community';
+    const { openSidebar, setOpenSidebar } = useContext(UserContext)
 
     const navItems = [
         { name: 'Home', path: '/' },
@@ -16,70 +20,91 @@ const Sidebar = ({ currentPage }) => {
         { name: 'Billing', path: '/billing' },
     ];
 
+    const handleOpenSidebar = () => {
+        setOpenSidebar(prev => !prev)
+
+    }
+
     return (
-        <aside className="w-[20%] min-h-screen bg-violet-950/20 text-white p-6 shadow-lg  ">
-            <div className="text-2xl font-bold mb-8 font-serif text-violet-300  ">VRiTTi</div>
-            <nav className="flex flex-col gap-4">
+        <>
+            {
+                !openSidebar ? <div className='bg-violet-950/20  text-yellow-50 h-fit p-6 '>
+                    <div className="text-2xl font-bold mb-8 font-serif text-violet-300  ">VRiTTi</div>
 
-                <Link to={"/"}
+                    <BsArrowRightCircleFill
+                        onClick={handleOpenSidebar}
+                        className='hover:cursor-pointer text-2xl' /></div>
+                    :
+                    <div className="w-[20%] min-h-screen bg-violet-950/20 text-white p-6 shadow-lg z-10 ">
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Home
-                </Link>
-                <Link to={"/community"}
+                        <div className="text-2xl font-bold mb-8 font-serif text-violet-300  ">VRiTTi</div>
+                        <BsArrowLeftCircleFill
+                            onClick={handleOpenSidebar}
+                            className='hover:cursor-pointer text-2xl' />
+                        <nav className="flex flex-col gap-4">
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Community
-                </Link>
-                <Link to={"/journals"}
+                            <Link to={"/"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Home
+                            </Link>
+                            <Link to={"/community"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Journals
-                </Link>
-                <Link to={"/analytics"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Community
+                            </Link>
+                            <Link to={"/journals"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Analytics
-                </Link>
-                <Link to={"/new-journals"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Journals
+                            </Link>
+                            <Link to={"/analytics"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition bg-violet-400/50"
-                >
-                    New Journal Entry
-                </Link>
-                <div className='border-2 border-violet-700/40'></div>
-                <Link to={"/api"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Analytics
+                            </Link>
+                            <Link to={"/new-journals"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    API
-                </Link>
-                <Link to={"/settings"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition bg-violet-400/50"
+                            >
+                                New Journal Entry
+                            </Link>
+                            <div className='border-2 border-violet-700/40'></div>
+                            <Link to={"/api"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    User settings
-                </Link>
-                <Link to={"/usage"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                API
+                            </Link>
+                            <Link to={"/settings"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Usage
-                </Link>
-                <Link to={"/billing"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                User settings
+                            </Link>
+                            <Link to={"/usage"}
 
-                    className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                >
-                    Billing
-                </Link>
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Usage
+                            </Link>
+                            <Link to={"/billing"}
+
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Billing
+                            </Link>
 
 
-            </nav>
-        </aside>
+                        </nav>
+                    </div>
+            }
+
+        </>
+
     );
 };
 

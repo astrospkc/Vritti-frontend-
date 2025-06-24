@@ -24,6 +24,7 @@ import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import ErrorPage from "./components/ErrorPage";
 import ReadJournalPage from "./components/ReadJournalPage";
+import Analytics from "./components/Analytics";
 // import MonthlyJournals from "./components/MonthlyJournals";
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
                       path="/readJournalPage"
                       element={<ReadJournalPage />}
                     />
+                    <Route path="/analytics" element={<Analytics />} />
                   </>
                 )}
               </Routes>

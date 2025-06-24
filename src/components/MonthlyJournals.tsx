@@ -48,9 +48,6 @@ const MonthlyJournals = () => {
 
                                 </div>
                             </div>
-
-
-
                         </div>
                     )
                 }

@@ -52,7 +52,7 @@ const Dashboard = () => {
     return (
         <div className='flex flex-row w-full h-screen  '>
             <Sidebar currentPage="community" />
-            <div className=' w-[80%]  overflow-y-auto no-scrollbar m-4'>
+            <div className='   overflow-y-auto overflow-x-hidden no-scrollbar m-4 p-4'>
                 <div className='m-4 flex flex-col  w-full'>
                     <div
                         style={{ backgroundImage: 'url("/images/forest.jpg")' }}
@@ -72,11 +72,11 @@ const Dashboard = () => {
                                 zIndex: 0,
                                 // height: 500
                             }}
-                                className='absolute rounded-b-xl shadow-lg shadow-black inset-0  w-full opacity-20 hover:opacity-45'
+                                className='absolute rounded-b-xl shadow-lg shadow-black inset-0   opacity-20 hover:opacity-45'
                             >
                             </div>
                             <div
-                                className='relative z-10 p-2 flex flex-row w-full  '>
+                                className='relative z-10 p-2 flex flex-row  '>
                                 <div className='flex flex-col text-6xl text-emerald-600 justify-center items-center'>
                                     <h1>{month}</h1>
                                     <h1>{year}</h1>
@@ -87,7 +87,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </Link>
-                    <div className="w-full px-10 ">
+                    <div className="w-full px-10 no-scrollbar ">
                         <div className="flex flex-row px-8  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 1</div>
                             <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 2</div>

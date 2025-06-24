@@ -29,6 +29,7 @@ const WeeklyJournalSection = ({ week }) => {
           return (
             <JournalCard
               key={index}
+              id={item[1]._id}
               title={item[1].title}
               subtitle={item[1].subtitle}
               body={item[1].body}

@@ -5,8 +5,8 @@ import axios from "axios";
 
 export const UserProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const [user, setUser] = useState();
+  const [openSidebar, setOpenSidebar] = useState(false);
 
   const getUser = async () => {
     try {
@@ -38,7 +38,14 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ getUser, isAuthenticated, setIsAuthenticated, user }}
+      value={{
+        getUser,
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        openSidebar,
+        setOpenSidebar,
+      }}
     >
       {children}
     </UserContext.Provider>
