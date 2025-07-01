@@ -10,7 +10,23 @@ const JournalCard = ({ id, title, subtitle, body, date }) => {
         body: body,
         date: date
     }
-    console.log("data to pass: ", dataToPass)
+    // console.log("data to pass: ", dataToPass)
+    let short_title;
+    let short_subtitle;
+
+    if (title.length > 20) {
+        short_title = title.slice(0, 20) + "..."
+    } else {
+        short_title = title
+    }
+
+    if (subtitle.length > 20) {
+        short_subtitle = subtitle.slice(0, 20) + "..."
+    } else {
+        short_subtitle = subtitle
+    }
+
+    // console.log("short_title and subtitle: ", short_title, short_subtitle)
     return (
         //   picture, title , subtitle, date
         <Link to={{ pathname: "/readJournalPage" }} state={dataToPass}>
@@ -29,8 +45,8 @@ const JournalCard = ({ id, title, subtitle, body, date }) => {
 
                 {/* Content */}
                 <div className="absolute bottom-0 p-6 text-white z-10 transition-all duration-500 ">
-                    <h2 className="text-2xl font-bold mb-4">{title.toUpperCase()}</h2>
-                    <p className="text-sm text-gray-200 border-b-2 pb-2">{subtitle}</p>
+                    <h2 className="text-2xl font-bold mb-4">{short_title.toUpperCase()}</h2>
+                    <p className="text-sm text-gray-200 border-b-2 pb-2">{short_subtitle}</p>
                     <span className="text-xs text-gray-300">{date}</span>
                 </div>
             </div>

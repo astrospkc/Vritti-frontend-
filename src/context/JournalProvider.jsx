@@ -48,7 +48,6 @@ export const JournalProvider = ({ children }) => {
   }, []);
 
   const journalObject = groupJournalsByMonthAndWeek(journals);
-
   let monthYear;
   if (journalObject != null) {
     monthYear = Object.keys(journalObject);
@@ -66,6 +65,7 @@ export const JournalProvider = ({ children }) => {
           setJournalLoading,
           fetchJournals,
           monthYear,
+
           journalObject,
         }}
       >

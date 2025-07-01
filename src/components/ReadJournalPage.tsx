@@ -84,6 +84,9 @@ const ReadJournalPage = () => {
 
             const updatedData = await res.json();
             console.log("Updated journal:", updatedData);
+            setTitle(title)
+            setSubtitle(subtitle)
+            setBody(body)
             setClicked(""); // exit edit mode
 
         } catch (error) {
@@ -91,6 +94,10 @@ const ReadJournalPage = () => {
             // You can also add error UI feedback here
         }
     };
+
+    console.log("after updating title, subtitle, body: ", title, subtitle, body)
+
+
 
 
 
@@ -134,7 +141,7 @@ const ReadJournalPage = () => {
 
                                             onChange={handleBodyChange}
                                             rows={20}
-                                            cols={100}
+                                            cols={cols}
                                             className='text-lg text-white py-4 mb-10  rounded-xl p-2 border-2 border-gray-500 bg-transparent'
                                         >{data?.body} </textarea>
                                     </>

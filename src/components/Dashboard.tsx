@@ -17,7 +17,7 @@ const Dashboard = () => {
     const date = new Date()
     const month = date.toDateString().split(" ")[1]
     const year = date.getFullYear()
-    console.log("date: ", date.toDateString().split(" ")[1])
+    // console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
     // const { journals } = useContext(journalContext)
@@ -44,6 +44,22 @@ const Dashboard = () => {
 
         }
     }, [query.data])
+
+    const handleWeek = async (week) => {
+        const token = localStorage.getItem('token')
+        const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchWeekJournal?year=${year}&month=${month}&week=${week}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+
+        })
+        const data = await res.json()
+
+
+        console.log("week clicked: ", week, data)
+    }
 
 
 
@@ -89,11 +105,11 @@ const Dashboard = () => {
                     </Link>
                     <div className="w-full px-10 no-scrollbar ">
                         <div className="flex flex-row px-8  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
-                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 1</div>
-                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 2</div>
-                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 3</div>
-                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 4</div>
-                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white">Week 5</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(1)}>Week 1</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(2)} >Week 2</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(3)} >Week 3</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(4)}>Week 4</div>
+                            <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-black shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(5)}>Week 5</div>
 
                         </div>
                     </div>
@@ -101,7 +117,7 @@ const Dashboard = () => {
                 </div>
                 <div className="m-4 w-full border-t-2 border-gray-800 ">
                     <div className='flex flex-row justify-between items-center  my-3 p-3 shadow-lg shadow-black'>
-                        <div className="text-2xl text-violet-400 yusei-magic-regular my-10 p-2 rounded-xl shadow-sm shadow-orange-600 w-fit">
+                        <div className="text-xl text-violet-400 yusei-magic-regular my-10 p-2 rounded-xl shadow-sm shadow-orange-600 w-fit">
                             Month-wise Journals
                         </div>
 
@@ -132,9 +148,8 @@ const Dashboard = () => {
                     {/* Wrapper with fixed height */}
                     {/* TODO : get all the journals monthly wise , and separate them according to the month, arrange the journals. when month is selected , the selected month journal reaches the top and rest below the one selected */}
                     {
-                        selectedMonth && selectedMonth == 'None' ?
-                            <MonthlyJournals /> :
-                            <MonthlyJournals />
+                        selectedMonth &&
+                        <MonthlyJournals month={selectedMonth} />
                     }
 
 

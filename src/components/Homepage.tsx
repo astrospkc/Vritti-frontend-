@@ -125,7 +125,7 @@ const Homepage = () => {
                             >
                                 VRiTTi
                             </h1>
-                            <span className='text-white/30'>is here for you.</span>
+                            <span className='text-white/30'> A Sanskrit term that captures the essence of conscious thought, fluctuations of the mind, and emotional tides..</span>
                         </div>
 
                         <div className='flex w-1/2 text-md text-center mt-4 px-4 md:px-20 font-serif text-violet-400  '>

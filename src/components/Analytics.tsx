@@ -1,11 +1,33 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import Button from '../UIComponent/Button'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
+import { journalContext } from '../context/JournalContext';
+import JournalCard from './cards/JournalCard';
 
 const Analytics = () => {
     const [date, setDate] = useState(new Date());
+    const { journals, monthYear, journalObject } = useContext(journalContext)
+    // console.log("journals, monthYear, journalObject: ", journals, monthYear, journalObject)
+    const [selectedMonth, setSelectedMonth] = useState("")
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    // console.log(journals, monthYear, journalObject)
+    let month
+    if (monthYear.length > 0) {
+        month = monthYear[0].split(" "[0])
+        console.log("month: ", month[0])
+    }
+
+    useEffect(() => {
+        setSelectedMonth(month[0])
+    }, [])
+
+
+
     return (
         <div className="flex h-screen w-full">
             {/* Sidebar */}
@@ -18,12 +40,79 @@ const Analytics = () => {
                     Analytics
                 </div>
 
+                <div className='flex flex-row gap-4 w-full'>
+                    <div className='w-full'>
+                        <h1 className=' p-2 rounded-lg shadow-sm shadow-emerald-500 w-fit text-2xl text-emerald-500 my-4'>Recent journals</h1>
+
+                        <div className='grid grid-cols-4 gap-4'>
+                            {
+                                journals && journals.map((item, i) => {
+                                    if (i >= 4) return null
+                                    const date = new Date(item.date)
+                                    console.log(date.toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric"
+                                    }))
+                                    const formattedDate = date.toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric"
+                                    });
+                                    return (
+                                        <div className='' >
+                                            <JournalCard
+                                                key={i}
+                                                id={item._id}
+                                                title={item.title}
+                                                subtitle={item.subtitle}
+                                                body={item.body}
+                                                date={formattedDate}
+
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div className="text-xl font-bold text-gray-100">
+                        <Calendar
+                            onChange={setDate}
+                            value={date}
+                            className="bg-black text-sm rounded-xl p-3" />
+                    </div>
+
+
+                </div>
+
                 {/* Content Area */}
-                <div className="flex flex-col lg:flex-row gap-6 w-full h-full">
+                <div className="flex flex-col lg:flex-row gap-6 w-full h-full border-t-2 border-gray-500 py-4 my-2">
                     {/* Left: Weekly Overview */}
                     <div className="flex-1  rounded-xl p-4 shadow-md">
-                        <div className="mb-4">
-                            <Button>Recent</Button>
+                        <div className="mb-4 flex flex-row gap-4 justify-start items-center">
+
+                            <div>
+                                <label className='text-white mx-2' >Month</label>
+                                <select
+                                    name=""
+                                    id=""
+                                    value={selectedMonth}
+                                    onChange={(e) => setSelectedMonth(e.target.value)}
+                                    className='rounded-xl bg-gray-300'
+                                >
+                                    <option value="" disabled >Search with month</option>
+                                    {months.map((month, index) => (
+                                        <option value={index + 1} key={index}>
+                                            {month}
+                                        </option>
+                                    ))}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className='text-8xl text-yellow-100 my-2'>
+                            {selectedMonth}
                         </div>
 
                         <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-lg">
@@ -57,11 +146,7 @@ const Analytics = () => {
 
                     {/* Right: Calendar Panel */}
                     <div className="w-full lg:w-[30%]  rounded-xl p-4 shadow-md flex flex-col gap-4">
-                        <div className="text-xl font-bold text-gray-100">
-                            <Calendar
-                                onChange={setDate}
-                                value={date}
-                                className="text-sm border-2 rounded-xl p-3" /></div>
+                        {/* ------ */}
                         <div className="flex-1 bg-slate-800 rounded-lg shadow-inner p-4">
                             {/* Placeholder for Calendar */}
                             <p className="text-gray-500 text-sm text-center">Calendar component here</p>
