@@ -69,7 +69,11 @@ const NewMonthPage = () => {
         fetchMonthData()
     }, [selectedMonthNumber, selectedYear])
 
-    const weeks = Object.keys(journalObject[monthYear])
+    const monthYearSet = `${selectedMonth} ${selectedYear}`
+    console.log("month year set: ", monthYearSet)
+    console.log("month year: ", monthYear, monthYearSet, "\n", journalObject[monthYearSet])
+    const weeks = journalObject[monthYearSet] ? Object.keys(journalObject[monthYearSet]) : undefined
+    console.log("weeks: ", weeks)
 
     const handleSelectMonth = (e) => {
         const month = e.target.value
@@ -148,10 +152,23 @@ const NewMonthPage = () => {
                     </div>
                 </div>
                 {/* according to the data , weekly dividing journals */}
+                {/* {
+                    monthlyJournalData ? 
+                } */}
                 {
-                    weeks && weeks.map((week, i) => (
+                    weeks ? weeks.map((week, i) => (
                         <WeeklyJournalSection key={i} week={week} />
-                    ))
+
+                    )) : <>
+                        <div className='flex flex-col justify-center items-center w-full h-full gap-3 '>
+                            <div className=' flex text-orange-500 text-2xl  font-light font-mono '> Oops!! I think you might want to write journal. Lets start your month journaling now.
+                            </div>
+                            <Link to="/new-journals">
+                                <span className='p-2 rounded-2xl shadow-md shadow-violet-400 hover:bg-violet-400 text-orange-500 hover:text-black cursor-pointer'>New Journal Entry</span>
+                            </Link>
+                        </div>
+
+                    </>
                 }
 
             </div>
