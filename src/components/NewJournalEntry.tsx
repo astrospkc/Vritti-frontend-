@@ -48,7 +48,7 @@ const NewJournalEntry = () => {
 
     return (
         <div className='flex flex-row w-full h-screen'>
-            <Sidebar currentPage="community" />
+            <Sidebar />
             <div className='w-[80%] overflow-y-auto no-scrollbar m-4'>
 
                 <h1 className='text-5xl font-bold font-sans text-yellow-100 mb-10 p-2 rounded-2xl shadow-lg shadow-black w-fit'>New Journal Entry</h1>

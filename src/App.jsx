@@ -25,6 +25,7 @@ import { UserContext } from "./context/UserContext";
 import ErrorPage from "./components/ErrorPage";
 import ReadJournalPage from "./components/ReadJournalPage";
 import Analytics from "./components/Analytics";
+import NewMonthPage from "./components/NewMonthPage";
 // import MonthlyJournals from "./components/MonthlyJournals";
 
 function App() {
@@ -78,7 +79,6 @@ function App() {
                 {isAuthenticated && (
                   <>
                     <Route path="/" element={<Homepage />} />
-
                     <Route path="/journals" element={<MonthlyJournalPage />} />
                     <Route path="/journals/week/:id" element={<WeekPage />} />
                     <Route
@@ -99,6 +99,10 @@ function App() {
                       element={<ReadJournalPage />}
                     />
                     <Route path="/analytics" element={<Analytics />} />
+                    <Route
+                      path="/dashboard/newMonthPage"
+                      element={<NewMonthPage />}
+                    />
                   </>
                 )}
               </Routes>

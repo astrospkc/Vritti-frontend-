@@ -104,15 +104,15 @@ const ReadJournalPage = () => {
 
     return (
         <div className='flex flex-row w-full h-screen '>
-            <Sidebar currentPage="community" />
+            <Sidebar />
             <div className=' w-[80%]  overflow-y-auto no-scrollbar m-4'>
                 <Link to="/dashboard/monthlypage">
                     <Button>Back</Button>
                 </Link>
                 <div className='flex flex-col justify-center items-center'>
-                    <div className=' text-5xl text-violet-400 my-2 p-3 rounded-xl shadow-lg shadow-violet-800/60'>
+                    {/* <div className=' text-5xl text-violet-400 my-2 p-3 rounded-xl shadow-lg shadow-violet-800/60'>
                         Read the journal
-                    </div>
+                    </div> */}
                     <div className='mx-4 shadow-lg shadow-orange-500 p-3 rounded-2xl'>
                         <img src="../images/openbooks.jpg" alt="" height={400} />
                         <div className='flex flex-col w-fit'>

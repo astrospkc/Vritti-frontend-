@@ -15,11 +15,16 @@ const months = [
 
 const Dashboard = () => {
     const date = new Date()
-    const month = date.toDateString().split(" ")[1]
+    const month = date.toLocaleString("default", { month: "long" });
+    const monthNumber = date.getMonth() + 1
     const year = date.getFullYear()
     // console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
+    const [selectedYear, setSelectedYear] = useState("")
+    const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
+
+
     // const { journals } = useContext(journalContext)
 
     const query = useQuery({
@@ -45,6 +50,7 @@ const Dashboard = () => {
         }
     }, [query.data])
 
+    // TODO: must be completed
     const handleWeek = async (week) => {
         const token = localStorage.getItem('token')
         const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchWeekJournal?year=${year}&month=${month}&week=${week}`, {
@@ -61,19 +67,22 @@ const Dashboard = () => {
         console.log("week clicked: ", week, data)
     }
 
-
-
+    const dataToPass = {
+        year: year,
+        month: month,
+        monthNumber: monthNumber
+    }
 
 
     return (
         <div className='flex flex-row w-full h-screen  '>
-            <Sidebar currentPage="community" />
+            <Sidebar />
             <div className='   overflow-y-auto overflow-x-hidden no-scrollbar m-4 p-4'>
                 <div className='m-4 flex flex-col  w-full'>
                     <div
                         style={{ backgroundImage: 'url("/images/forest.jpg")' }}
                         className=' text-5xl md:text-7xl lg:text-9xl my-5 text-emerald-800 font-serif text-image-fill shadow-lg shadow-black rounded-3xl p-2'>Journal Entries</div>
-                    <Link to="/dashboard/monthlypage">
+                    <Link to={{ pathname: "/dashboard/newMonthPage" }} state={dataToPass}>
 
                         <div className='relative w-full   flex flex-col '>
                             <div style={{
@@ -116,32 +125,52 @@ const Dashboard = () => {
 
                 </div>
                 <div className="m-4 w-full border-t-2 border-gray-800 ">
-                    <div className='flex flex-row justify-between items-center  my-3 p-3 shadow-lg shadow-black'>
+                    <div className='flex flex-col justify-start items-start  my-3 p-3 shadow-lg shadow-black'>
                         <div className="text-xl text-violet-400 yusei-magic-regular my-10 p-2 rounded-xl shadow-sm shadow-orange-600 w-fit">
-                            Month-wise Journals
+                            Journals
                         </div>
+                        <div className='flex flex-row justify-start items-center px-2 border-2 border-gray-700 w-full rounded-2xl shadow-lg shadow-black'>
+                            <div className="w-full flex flex-row gap-2  h-fit  p-4 justify-center items-center">
+                                <label className="block text-lg font-medium text-gray-300 mb-2">
+                                    Month
+                                </label>
 
-                        <div className="w-full flex flex-row gap-3  h-fit  p-4 justify-center items-center">
-                            <label className="block text-lg font-medium text-gray-300 mb-2">
-                                Select a Month
-                            </label>
+                                <select
+                                    value={selectedMonth}
+                                    onChange={(e) => setSelectedMonth(e.target.value)}
+                                    className="w-1/2 p-3 rounded-xl bg-black text-white border border-emerald-500 shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+                                >
+                                    {months.map((month) => (
+                                        <option key={month} value={month}>
+                                            {month}
+                                        </option>
+                                    ))}
+                                </select>
 
-                            <select
-                                value={selectedMonth}
-                                onChange={(e) => setSelectedMonth(e.target.value)}
-                                className="w-1/2 p-3 rounded-xl bg-black text-white border border-emerald-500 shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
-                            >
-                                {months.map((month) => (
-                                    <option key={month} value={month}>
-                                        {month}
-                                    </option>
-                                ))}
-                            </select>
-
-                            <div className=" text-center text-emerald-500 text-xl">
+                                {/* <div className=" text-center text-emerald-500 text-xl">
                                 Selected: <span className="font-bold">{selectedMonth}</span>
+                            </div> */}
+                            </div>
+                            <div className='flex flex-row gap-2'>
+                                <label className='text-white mx-2' >Year</label>
+                                <select
+                                    name=""
+                                    id=""
+                                    value={selectedYear}
+                                    onChange={(e) => setSelectedYear(e.target.value)}
+                                    className='rounded-xl bg-gray-300'
+                                >
+                                    <option value="" disabled >Search with year</option>
+                                    {years.map((year, index) => (
+                                        <option value={index + 1} key={index}>
+                                            {year}
+                                        </option>
+                                    ))}
+
+                                </select>
                             </div>
                         </div>
+
                     </div>
 
 
@@ -149,7 +178,7 @@ const Dashboard = () => {
                     {/* TODO : get all the journals monthly wise , and separate them according to the month, arrange the journals. when month is selected , the selected month journal reaches the top and rest below the one selected */}
                     {
                         selectedMonth &&
-                        <MonthlyJournals month={selectedMonth} />
+                        <MonthlyJournals month={selectedMonth} year={selectedYear} />
                     }
 
 

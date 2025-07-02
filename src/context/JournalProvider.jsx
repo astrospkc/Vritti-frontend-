@@ -48,6 +48,7 @@ export const JournalProvider = ({ children }) => {
   }, []);
 
   const journalObject = groupJournalsByMonthAndWeek(journals);
+  console.log("journal Object: ", journalObject);
   let monthYear;
   if (journalObject != null) {
     monthYear = Object.keys(journalObject);

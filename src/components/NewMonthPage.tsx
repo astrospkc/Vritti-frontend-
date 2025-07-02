@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+
+import React, { useContext, useEffect } from 'react'
 import Sidebar from './Sidebar'
 
 import { useState } from 'react'
@@ -8,28 +9,86 @@ import { journalContext } from '../context/JournalContext.jsx'
 import WeeklyJournalSection from './WeeklyJournalSection.js'
 import usePreviousLocation from '../customHooks/PreviousPage.js'
 import { AiFillBackward } from "react-icons/ai";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { dataTagErrorSymbol } from '@tanstack/react-query'
 
 
-const MonthlyPage = () => {
-    const { journals, monthYear, journalObject } = useContext(journalContext)
+const NewMonthPage = () => {
+    const { monthYear, journalObject } = useContext(journalContext)
     console.log("month year in monthly page: ", journalObject, monthYear)
     const [selectedMonth, setSelectedMonth] = useState("")
+    const [selectedMonthNumber, setSelectedMonthNumber] = useState(0)
+    const [monthlyJournalData, setMonthlyJournalData] = useState()
+
+
     const [selectedYear, setSelectedYear] = useState("")
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
     const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
-    console.log("months")
+    // console.log("months")
 
+    // TODO: getting the data passed through link
+    const location = useLocation()
+    const data = location.state || {}
+    // console.log("data passed: ", data)
+    // console.log("month number type: ", typeof (data.monthNumber))
+
+
+
+    // TODO: get all the monthly data 
+    useEffect(() => {
+        setSelectedMonth(data.month)
+        setSelectedMonthNumber(data.monthNumber)
+        setSelectedYear(data.year)
+    }, [data])
+    useEffect(() => {
+        if (!selectedMonthNumber || !selectedYear) return;
+        // console.log("selected month, selected year: ", selectedMonthNumber, selectedYear)
+        const fetchMonthData = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchMonthJournal?year=${selectedYear}&month=${selectedMonthNumber}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                });
+
+                const result = await res.json();
+                // console.log("monthly data: ", result);
+                setMonthlyJournalData(result)
+                return result
+            } catch (error) {
+                console.error("Failed to fetch month data:", error);
+            }
+        }
+
+        fetchMonthData()
+    }, [selectedMonthNumber, selectedYear])
 
     const weeks = Object.keys(journalObject[monthYear])
+
+    const handleSelectMonth = (e) => {
+        const month = e.target.value
+        setSelectedMonth(month)
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const monthNumber = months.indexOf(month) + 1;
+        setSelectedMonthNumber(monthNumber);
+    }
 
     // TODO: This is not working , see it later
     const prevLocation = usePreviousLocation()
     console.log("pathname")
     console.log(prevLocation?.pathname)
+
+    console.log("month journal data: ", monthlyJournalData)
+    // TODO: when monthly journal data is [] , then open the page newMonthPage  but show some "text" , otherwise [...] , then show all the data weekly
 
 
     return (
@@ -57,7 +116,7 @@ const MonthlyPage = () => {
                             name=""
                             id=""
                             value={selectedMonth}
-                            onChange={(e) => setSelectedMonth(e.target.value)}
+                            onChange={handleSelectMonth}
                             className='rounded-xl bg-gray-300'
                         >
                             <option value="" disabled >Search with month</option>
@@ -94,65 +153,10 @@ const MonthlyPage = () => {
                         <WeeklyJournalSection key={i} week={week} />
                     ))
                 }
-                {/* <div>
-                    <h1 className='text-3xl text-yellow-100  mb-10 border-b-2 border-gray-600 p-2'>
-                        Week 1
-                    </h1>
-                    <div className="grid grid-cols-5 gap-4">
-                        {Array.from({ length: 7 }).map((_, index) => (
-                            <JournalCard
-                                key={index}
-                                title="Sunset Reflections"
-                                subtitle="Nature Photography"
-                                date="June 14, 2025"
-                            />
-                        ))}
-                    </div>
-                </div>
 
-                <div>
-                    <h1 className='text-3xl text-yellow-100 mb-10 border-b-2 border-gray-600 p-2'>Week 2</h1>
-                    <div className="grid grid-cols-5 gap-4">
-                        {Array.from({ length: 7 }).map((_, index) => (
-                            <JournalCard
-                                key={index}
-                                title="Sunset Reflections"
-                                subtitle="Nature Photography"
-                                date="June 14, 2025"
-
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div>
-                    <h1 className='text-3xl text-yellow-100 mb-10 border-b-2 border-gray-600 p-2'>Week 3</h1>
-                    <div className="grid grid-cols-5 gap-4">
-                        {Array.from({ length: 7 }).map((_, index) => (
-                            <JournalCard
-                                key={index}
-                                title="Sunset Reflections"
-                                subtitle="Nature Photography"
-                                date="June 14, 2025"
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div>
-                    <h1 className='text-3xl text-yellow-100 mb-10 border-b-2 border-gray-600 p-2'>Week 4</h1>
-                    <div className="grid grid-cols-5 gap-4">
-                        {Array.from({ length: 7 }).map((_, index) => (
-                            <JournalCard
-                                key={index}
-                                title="Sunset Reflections"
-                                subtitle="Nature Photography"
-                                date="June 14, 2025"
-                            />
-                        ))}
-                    </div>
-                </div> */}
             </div>
         </div>
     )
 }
 
-export default MonthlyPage
+export default NewMonthPage

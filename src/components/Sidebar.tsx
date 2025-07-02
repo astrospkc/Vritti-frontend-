@@ -4,13 +4,15 @@ import { UserContext } from '../context/UserContext';
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 
-const Sidebar = ({ currentPage }) => {
-    const isCommunityPage = currentPage === 'community';
+const Sidebar = () => {
+
     const { openSidebar, setOpenSidebar } = useContext(UserContext)
 
     const navItems = [
         { name: 'Home', path: '/' },
-        { name: isCommunityPage ? 'Dashboard' : 'Community', path: '/community' },
+        { name: 'Dashboard', path: '/dashboard' },
+
+        { name: 'CommunityPage', path: '/community' },
         { name: 'Journals', path: '/journals' },
         { name: 'New Journal Entry', path: '/new-journal' },
         { name: 'Analytics', path: '/analytics' },
@@ -47,6 +49,11 @@ const Sidebar = ({ currentPage }) => {
                                 className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
                             >
                                 Home
+                            </Link>
+                            <Link to={"/dashboard"}
+                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
+                            >
+                                Dashboard
                             </Link>
                             <Link to={"/community"}
 
