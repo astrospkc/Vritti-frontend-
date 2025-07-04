@@ -6,25 +6,128 @@ import 'react-calendar/dist/Calendar.css';
 import { journalContext } from '../context/JournalContext';
 import JournalCard from './cards/JournalCard';
 
+
 const Analytics = () => {
     const [date, setDate] = useState(new Date());
     const { journals, monthYear, journalObject } = useContext(journalContext)
     // console.log("journals, monthYear, journalObject: ", journals, monthYear, journalObject)
     const [selectedMonth, setSelectedMonth] = useState("")
+    const [selectedMonthNumber, setSelectedMonthNumber] = useState(0)
+    const [monthlyJournalData, setMonthlyJournalData] = useState()
+    const [selectedYear, setSelectedYear] = useState("2025")
+    const [weekData, setWeekData] = useState()
+
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
     // console.log(journals, monthYear, journalObject)
+    const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
+
     let month
     if (monthYear.length > 0) {
         month = monthYear[0].split(" "[0])
         console.log("month: ", month[0])
+        setSelectedMonth
     }
 
     useEffect(() => {
         setSelectedMonth(month[0])
+        const month_num = months.indexOf(month[0]) + 1
+        setSelectedMonthNumber(month_num)
     }, [])
+
+    const handleSelectMonth = (e) => {
+        const m = e.target.value
+        setSelectedMonth(m)
+        const monthNumber = months.indexOf(m) + 1;
+        setSelectedMonthNumber(monthNumber)
+    }
+    console.log("select year, month, monthnumber: ", selectedMonth, selectedYear, selectedMonthNumber)
+
+    // TODO: The default analytics will be shown , when year and month selected , then the respective data will be shown
+    const handleAnalytics = () => {
+        console.log("handling analytics", journals, journalObject)
+    }
+
+
+    const getJournalsByMonthYear = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchMonthJournal?year=${selectedYear}&month=${selectedMonthNumber}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+
+            const result = await res.json()
+            setMonthlyJournalData(result)
+            return result
+        } catch (error) {
+            console.error("Failed to fetch month data: ", error)
+        }
+
+    }
+
+    const summarizeJournalsByMonthYear = async () => {
+        console.log("summarize journals by month year")
+        try {
+            const token = localStorage.getItem("token")
+            const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/summarizeMonthJournal?year=${selectedYear}&month=${selectedMonthNumber}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+
+            const result = await res.json()
+
+            // console.log("month data: ", result)
+            const jsonResult = JSON.parse(result)
+            console.log("json result: ", jsonResult)
+            setMonthlyJournalData(jsonResult)
+        } catch (error) {
+            console.error("Failed to fetch month data: ", error)
+        }
+    }
+
+    const handleAnalyticsData_Time = (TimeType) => {
+        if (TimeType == "Monthly") {
+            console.log("time type: ", TimeType)
+            // getJournalsByMonthYear()
+            summarizeJournalsByMonthYear()
+        } else if (TimeType == "Weekly") {
+            console.log("time type: ", TimeType)
+        } else if (TimeType == "Daily") {
+            console.log("time type: ", TimeType)
+        }
+    }
+
+    // console.log("monthly journal Data: ")
+
+    // const dataOfWeek = (weekNum) => {
+    //     const weekJournalData = async () => {
+    //         const token = localStorage.getItem("token")
+    //         const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchWeekJournal?year=${selectedYear}&month=${selectedMonthNumber}&week=${weekNum}`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Authorization": `Bearer ${token}`
+    //             }
+    //         })
+    //         const data = await res.json()
+    //         // console.log("data: ", data)
+    //         return data
+    //     }
+
+    //     weekJournalData().then((data) => {
+    //         setWeekData(data)
+    //     }).catch((error) => {
+    //         console.error("error fetching week data: ", error)
+    //     })
+    //     console.log("week data: ", weekData)
+    // }
 
 
 
@@ -40,7 +143,7 @@ const Analytics = () => {
                     Analytics
                 </div>
 
-                <div className='flex flex-row gap-4 w-full'>
+                <div className='flex flex-row gap-4 w-full my-3'>
                     <div className='w-full'>
                         <h1 className=' p-2 rounded-lg shadow-sm shadow-emerald-500 w-fit text-2xl text-emerald-500 my-4'>Recent journals</h1>
 
@@ -91,14 +194,31 @@ const Analytics = () => {
                     {/* Left: Weekly Overview */}
                     <div className="flex-1  rounded-xl p-4 shadow-md">
                         <div className="mb-4 flex flex-row gap-4 justify-start items-center">
+                            <div>
+                                <label className='text-white mx-2' >Year</label>
+                                <select
+                                    name=""
+                                    id=""
+                                    value={selectedYear}
+                                    onChange={(e) => setSelectedYear(e.target.value)}
+                                    className='rounded-xl bg-gray-300'
+                                >
+                                    <option value="" disabled >Search with year</option>
+                                    {years.map((year, index) => (
+                                        <option value={index + 1} key={index}>
+                                            {year}
+                                        </option>
+                                    ))}
 
+                                </select>
+                            </div>
                             <div>
                                 <label className='text-white mx-2' >Month</label>
                                 <select
                                     name=""
                                     id=""
                                     value={selectedMonth}
-                                    onChange={(e) => setSelectedMonth(e.target.value)}
+                                    onChange={handleSelectMonth}
                                     className='rounded-xl bg-gray-300'
                                 >
                                     <option value="" disabled >Search with month</option>
@@ -110,52 +230,68 @@ const Analytics = () => {
 
                                 </select>
                             </div>
+                            <div>
+                                <Button onclick={handleAnalytics}>Show Analytics</Button>
+                            </div>
                         </div>
-                        <div className='text-8xl text-yellow-100 my-2'>
+                        <div className='text-8xl text-yellow-100 my-4'>
                             {selectedMonth}
                         </div>
 
-                        <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-lg">
-                            {/* Background image */}
-                            <div
-                                className="absolute inset-0 bg-cover bg-center opacity-20 hover:opacity-40 transition duration-300"
-                                style={{
-                                    backgroundImage: `url("/images/glasseffect.jpg")`,
-                                }}
-                            />
+                        <div className="flex w-full justify-between gap-4 px-8 my-4 rounded-xl shadow-lg shadow-black py-4">
+                            {["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"].map((week, i) => {
 
-                            {/* Foreground content */}
-                            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full h-full p-6 gap-6">
-                                <div className="text-5xl md:text-8xl text-emerald-600 rotate-0 md:rotate-90">
-                                    MONTH
-                                </div>
+                                // const data = dataOfWeek(i + 1)
+                                // console.log("data of week: ", data)
 
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                    {["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"].map((week, index) => (
-                                        <div
-                                            key={index}
-                                            className="bg-black text-white flex items-center justify-center rounded-xl h-[100px] md:h-[140px] w-[90px] text-xl font-semibold shadow-md shadow-emerald-700 hover:scale-105 transition duration-300"
-                                        >
-                                            {week}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                console.log("week: ", week)
+                                return (
+                                    <div
+                                        key={i}
+                                        className="flex-1 bg-black text-white rounded-xl p-6 text-center shadow-lg hover:scale-105 transition-all duration-300"
+                                        style={{
+                                            boxShadow: "0px 0px 8px 2px rgba(0, 255, 180, 0.6)"
+                                        }}
+                                    >
+                                        {week}
+
+                                    </div>
+                                )
+                            })}
                         </div>
+                        <div className=' border-b-2 p-4 border-gray-700'>
+                            <ul className='flex flex-row justify-evenly items-center text-white'>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Monthly")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Monthly Analytics</li>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Weekly")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Weekly Analytics</li>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Daily")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Daily Analytics</li>
+                            </ul>
+
+                        </div>
+
+                        <div className='text-xl text-cyan-500'>
+                            Summarize data + option added( add more prompt to describe situation)
+                            improvement tips
+                            suggested resources
+
+                        </div>
+
                     </div>
 
                     {/* Right: Calendar Panel */}
-                    <div className="w-full lg:w-[30%]  rounded-xl p-4 shadow-md flex flex-col gap-4">
-                        {/* ------ */}
+                    {/* <div className="w-full lg:w-[30%]  rounded-xl p-4 shadow-md flex flex-col gap-4">
                         <div className="flex-1 bg-slate-800 rounded-lg shadow-inner p-4">
-                            {/* Placeholder for Calendar */}
                             <p className="text-gray-500 text-sm text-center">Calendar component here</p>
                         </div>
                         <div className="flex-1 bg-slate-600 rounded-lg shadow-inner p-4">
-                            {/* Placeholder for Notes/Insights */}
                             <p className="text-gray-500 text-sm text-center">Insights or actions</p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

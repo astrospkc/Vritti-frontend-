@@ -6,7 +6,7 @@ import axios from "axios";
 export const UserProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState();
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(true);
 
   const getUser = async () => {
     try {

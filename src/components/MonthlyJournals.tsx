@@ -9,9 +9,9 @@ const MonthlyJournals = ({ month, year }) => {
 
     // const m = monthYear[0].split(" ")[0]
     // console.log(m)
-    console.log("data: ", data, monthYear,)
-    const week = Object.keys(data[monthYear])
-    console.log("week: ", week)
+    // console.log("data: ", data, monthYear,)
+    // const week = Object.keys(data[monthYear])
+    // console.log("week: ", week)
     return (
         <div>
             {
