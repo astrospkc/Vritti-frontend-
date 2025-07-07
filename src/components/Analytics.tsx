@@ -5,6 +5,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { journalContext } from '../context/JournalContext';
 import JournalCard from './cards/JournalCard';
+import SummarizeChartPage from './SummarizeChartPage';
 
 
 const Analytics = () => {
@@ -93,6 +94,10 @@ const Analytics = () => {
         }
     }
 
+    useEffect(() => {
+        summarizeJournalsByMonthYear()
+    }, [])
+
     const handleAnalyticsData_Time = (TimeType) => {
         if (TimeType == "Monthly") {
             console.log("time type: ", TimeType)
@@ -104,6 +109,8 @@ const Analytics = () => {
             console.log("time type: ", TimeType)
         }
     }
+
+    console.log("monthly journal data; ", monthlyJournalData)
 
     // console.log("monthly journal Data: ")
 
@@ -144,7 +151,7 @@ const Analytics = () => {
                 </div>
 
                 <div className='flex flex-row gap-4 w-full my-3'>
-                    <div className='w-full'>
+                    <div className=' flex-1'>
                         <h1 className=' p-2 rounded-lg shadow-sm shadow-emerald-500 w-fit text-2xl text-emerald-500 my-4'>Recent journals</h1>
 
                         <div className='grid grid-cols-4 gap-4'>
@@ -179,7 +186,7 @@ const Analytics = () => {
                             }
                         </div>
                     </div>
-                    <div className="text-xl font-bold text-gray-100">
+                    <div className="text-xl font-bold text-gray-100 flex-1">
                         <Calendar
                             onChange={setDate}
                             value={date}
@@ -190,7 +197,7 @@ const Analytics = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="flex flex-col lg:flex-row gap-6 w-full h-full border-t-2 border-gray-500 py-4 my-2">
+                <div className="flex flex-col  gap-6 w-full h-full border-t-2 border-gray-500 py-4 my-2">
                     {/* Left: Weekly Overview */}
                     <div className="flex-1  rounded-xl p-4 shadow-md">
                         <div className="mb-4 flex flex-row gap-4 justify-start items-center">
@@ -223,7 +230,7 @@ const Analytics = () => {
                                 >
                                     <option value="" disabled >Search with month</option>
                                     {months.map((month, index) => (
-                                        <option value={index + 1} key={index}>
+                                        <option value={month} key={index}>
                                             {month}
                                         </option>
                                     ))}
@@ -234,9 +241,24 @@ const Analytics = () => {
                                 <Button onclick={handleAnalytics}>Show Analytics</Button>
                             </div>
                         </div>
+                        <div className=' border-b-2 p-4 border-gray-700'>
+                            <ul className='flex flex-row justify-evenly items-center text-white'>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Monthly")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 cursor-pointer'>Monthly Analytics</li>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Weekly")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 cursor-pointer'>Weekly Analytics</li>
+                                <li
+                                    onClick={() => handleAnalyticsData_Time("Daily")}
+                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 cursor-pointer'>Daily Analytics</li>
+                            </ul>
+
+                        </div>
                         <div className='text-8xl text-yellow-100 my-4'>
                             {selectedMonth}
                         </div>
+
 
                         <div className="flex w-full justify-between gap-4 px-8 my-4 rounded-xl shadow-lg shadow-black py-4">
                             {["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"].map((week, i) => {
@@ -259,28 +281,9 @@ const Analytics = () => {
                                 )
                             })}
                         </div>
-                        <div className=' border-b-2 p-4 border-gray-700'>
-                            <ul className='flex flex-row justify-evenly items-center text-white'>
-                                <li
-                                    onClick={() => handleAnalyticsData_Time("Monthly")}
-                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Monthly Analytics</li>
-                                <li
-                                    onClick={() => handleAnalyticsData_Time("Weekly")}
-                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Weekly Analytics</li>
-                                <li
-                                    onClick={() => handleAnalyticsData_Time("Daily")}
-                                    className='border-r-2 border-gray-700 pr-4 hover:border-2 hover:rounded-xl p-2 hover:cursor-pointer'>Daily Analytics</li>
-                            </ul>
-
-                        </div>
-
-                        <div className='text-xl text-cyan-500'>
-                            Summarize data + option added( add more prompt to describe situation)
-                            improvement tips
-                            suggested resources
-
-                        </div>
-
+                    </div>
+                    <div>
+                        <SummarizeChartPage result={monthlyJournalData} />
                     </div>
 
                     {/* Right: Calendar Panel */}

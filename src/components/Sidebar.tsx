@@ -14,7 +14,7 @@ const Sidebar = () => {
 
         { name: 'CommunityPage', path: '/community' },
         { name: 'Journals', path: '/journals' },
-        { name: 'New Journal Entry', path: '/new-journal' },
+        { name: 'New Journal Entry', path: '/new-journals' },
         { name: 'Analytics', path: '/analytics' },
         { name: 'User Settings', path: '/settings' },
         { name: 'API', path: '/api' },
@@ -37,76 +37,26 @@ const Sidebar = () => {
                         onClick={handleOpenSidebar}
                         className='hover:cursor-pointer text-2xl' /></div>
                     :
-                    <div className="w-[20%] min-h-screen bg-violet-950/20 text-white p-6 shadow-lg z-10 ">
+                    <div className="w-[20%] min-h-screen bg-violet-950/20 text-white p-6 z-10  shadow-md shadow-orange-500 ">
 
                         <div className="text-2xl font-bold mb-8 font-serif text-violet-300  ">VRiTTi</div>
                         <BsArrowLeftCircleFill
                             onClick={handleOpenSidebar}
                             className='hover:cursor-pointer text-2xl' />
                         <nav className="flex flex-col gap-4">
-
-                            <Link to={"/"}
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Home
-                            </Link>
-                            <Link to={"/dashboard"}
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Dashboard
-                            </Link>
-                            <Link to={"/community"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Community
-                            </Link>
-                            <Link to={"/journals"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Journals
-                            </Link>
-                            <Link to={"/analytics"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Analytics
-                            </Link>
-                            <Link to={"/new-journals"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition bg-violet-400/50"
-                            >
-                                New Journal Entry
-                            </Link>
-                            <div className='border-2 border-violet-700/40'></div>
-                            <Link to={"/api"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                API
-                            </Link>
-                            <Link to={"/settings"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                User settings
-                            </Link>
-                            <Link to={"/usage"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Usage
-                            </Link>
-                            <Link to={"/billing"}
-
-                                className="px-3 py-2 rounded hover:bg-violet-700/40 transition"
-                            >
-                                Billing
-                            </Link>
-
-
+                            {
+                                navItems && navItems.map((item, i) => (
+                                    <Link
+                                        key={i}
+                                        to={`${item.path}`}
+                                        className={`px-3 py-2  hover:bg-gradient-to-b hover:from-violet-500 hover:to-black  hover:shadow-sm hover:shadow-orange-500 transition  ${i < 6 ? 'rounded-xl' : 'hover:rounded-xl border-t-2 border-gray-600 text-gray-400 hover:text-orange-500'}`}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))
+                            }
                         </nav>
+
                     </div>
             }
 
