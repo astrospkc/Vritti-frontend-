@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FiGrid, FiStar, FiMessageCircle, FiCompass, FiList } from "react-icons/fi";
 
 const CommunityPage = () => {
     return (
@@ -38,17 +39,22 @@ const CommunityPage = () => {
                         </div> */}
                     </div>
                     <div className="bg-black shadow-md shadow-violet-950/80 p-4 rounded-xl">
-                        <h1 className='border-b-2 p-2 w-fit'>Navigate to :</h1>
-                        <ul className='text-sm font-semibold p-2 gap-2 flex flex-col'>
-                            <Link to="/dashboard">
-                                <li className=' hover:text-violet-500 hover:cursor-pointer'>Dashboard</li>
-
+                        <h1 className='p-2 w-fit'>Navigate to :</h1>
+                        <nav className="flex flex-col gap-4 text-md my-2">
+                            <Link to="/dashboard" className=" px-3 py-2 rounded-xl bg-gradient-to-b from-violet-500 to-black  shadow-sm shadow-orange-500  flex items-center gap-2 scale-90 hover:scale-75  transition">
+                                <FiGrid /> Dashboard
                             </Link>
-                            <li className=' hover:text-violet-500 hover:cursor-pointer'>Popular</li>
-                            <li className=' hover:text-violet-500 hover:cursor-pointer'>Replies</li>
-                            <li className=' hover:text-violet-500 hover:cursor-pointer'>Explore</li>
-                            <li className=' hover:text-violet-500 hover:cursor-pointer'>All</li>
-                        </ul>
+                            <Link to="/popular" className=" px-3 py-2 rounded-xl bg-gradient-to-b from-violet-500 to-black  shadow-sm shadow-orange-500  flex items-center gap-2 scale-90 hover:scale-75   transition">
+                                <FiStar /> Popular
+                            </Link>
+
+                            <Link to="/explore" className=" px-3 py-2 rounded-xl bg-gradient-to-b from-violet-500 to-black  shadow-sm shadow-orange-500  flex items-center gap-2 scale-90 hover:scale-75   transition">
+                                <FiCompass /> Explore
+                            </Link>
+                            <Link to="/all" className=" px-3 py-2 rounded-xl bg-gradient-to-b from-violet-500 to-black  shadow-sm shadow-orange-500  flex items-center gap-2 scale-90 hover:scale-75   transition">
+                                <FiList /> All
+                            </Link>
+                        </nav>
 
                     </div>
 
@@ -70,6 +76,11 @@ const CommunityPage = () => {
                     <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl">
 
                         + Create Post
+                    </div>
+                    <div className='border-t-2 border-gray-600'></div>
+                    <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl hover:cursor-pointer hover:bg-violet-600 hover:scale-75 ">
+
+                        + Create Community
                     </div>
                     <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl">
 

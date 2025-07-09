@@ -6,10 +6,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Sector,
-  Cell,
+
 } from "recharts";
 import { curveCardinal } from "d3-shape";
 

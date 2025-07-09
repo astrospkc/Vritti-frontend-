@@ -52,6 +52,8 @@ const Homepage = () => {
                             opacity: 0.5,
                             clipPath: "polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%, 0% 38%)",
                             zIndex: 0,
+                            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.45)", // Deep realistic shadow
+                            filter: "contrast(1.2) brightness(0.9)",
 
                         }}
                         className='absolute inset-0 shadow-lg shadow-black'
