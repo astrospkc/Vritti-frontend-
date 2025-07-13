@@ -79,7 +79,7 @@ function App() {
                 {isAuthenticated && (
                   <>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/journals" element={<MonthlyJournalPage />} />
+                    {/* <Route path="/journals" element={<MonthlyJournalPage />} /> */}
                     <Route path="/journals/week/:id" element={<WeekPage />} />
                     <Route
                       path="/journals/week/:id/day"

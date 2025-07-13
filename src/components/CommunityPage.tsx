@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiGrid, FiStar, FiMessageCircle, FiCompass, FiList } from "react-icons/fi";
+import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityPage = () => {
+    const { user, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
+    const navigate = useNavigate()
+
+    const [postTitle, setPostTitle] = useState()
+    const [postBody, setPostBody] = useState()
+
+    // const handleLogout = () => {
+    //     console.log()
+    //     localStorage.removeItem("token")
+    //     setIsAuthenticated(prev => !prev)
+    //     navigate("/")
+    // }
+    console.log("user: ", user)
+
+    const handleCreatePost = () => {
+        console.log("create post")
+    }
     return (
 
 
@@ -22,7 +41,13 @@ const CommunityPage = () => {
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm">
                     Shout Any Plan?
                 </button>
-                <div className="w-10 h-10 rounded-full bg-gray-500"></div>
+
+                <div>
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm ">
+                        Logout
+                    </button>
+
+                </div>
             </div>
 
             {/* Page Content */}
@@ -30,8 +55,8 @@ const CommunityPage = () => {
                 {/* Left Sidebar */}
                 <div className="w-1/5 space-y-6">
                     <div className="bg-black shadow-md shadow-violet-500 p-4 rounded-xl">
-                        <h2 className="font-semibold text-lg">Joshua Premise</h2>
-                        <p className="text-sm text-gray-400">@joshuaLink_87</p>
+                        <h2 className="font-semibold text-lg">{user?.name.toUpperCase()}</h2>
+                        <p className="text-sm text-gray-400">@{user?.anonymousName}</p>
                         {/* <div className="mt-4 text-sm space-y-1">
                             <p>Buckets: <span className="text-white font-semibold">25</span></p>
                             <p>Followers: <span className="text-white font-semibold">65</span></p>
@@ -73,12 +98,16 @@ const CommunityPage = () => {
                         <p className="text-sm text-gray-400 mt-2">Design Virtual Summit</p>
                     </div>
 
-                    <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl">
+                    <div
+                        onClick={handleCreatePost}
+                        className="bg-black shadow-2xl shadow-black p-4 rounded-xl">
 
                         + Create Post
                     </div>
                     <div className='border-t-2 border-gray-600'></div>
-                    <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl hover:cursor-pointer hover:bg-violet-600 hover:scale-75 ">
+                    <div
+
+                        className="bg-black shadow-2xl shadow-black p-4 rounded-xl hover:cursor-pointer hover:bg-violet-600 hover:scale-75 ">
 
                         + Create Community
                     </div>
@@ -90,12 +119,14 @@ const CommunityPage = () => {
 
                 {/* Main Feed */}
                 <div className="w-3/5 space-y-6">
-                    <div className="bg-black shadow-2xl shadow-black p-4 rounded-xl">
-                        <p className="text-sm text-gray-300">
-                            I am a representative of the New Australian company <span className="text-white">troffer.com</span>... <br />
-                            <span className="text-blue-400">Share This Post</span>
-                        </p>
-                        <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm">
+                    <div className=" flex flex-col bg-black shadow-2xl shadow-black p-4 rounded-xl">
+                        <input
+
+                            type="text"
+                            placeholder='share the post'
+                            className='bg-black shadow-2xl shadow-black p-4 rounded-xl border-2 border-gray-800' />
+
+                        <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm w-fit">
                             Share This Post
                         </button>
                     </div>
@@ -122,7 +153,6 @@ const CommunityPage = () => {
 
                 {/* Right Sidebar */}
                 <div className="w-1/5 space-y-6">
-
 
                     <div className="bg-[#2A2A3C] p-4 shadow-md shadow-orange-700  rounded-xl">
                         <h3 className="font-semibold mb-2">Trending</h3>

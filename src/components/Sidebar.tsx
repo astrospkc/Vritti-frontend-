@@ -6,8 +6,12 @@ import { BsArrowLeftCircleFill } from "react-icons/bs";
 
 const Sidebar = () => {
 
-    const { openSidebar, setOpenSidebar } = useContext(UserContext)
+    const { openSidebar, setOpenSidebar, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
 
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        setIsAuthenticated(prev => !prev)
+    }
     const navItems = [
         { name: 'Home', path: '/' },
         { name: 'Dashboard', path: '/dashboard' },
@@ -20,6 +24,7 @@ const Sidebar = () => {
         { name: 'API', path: '/api' },
         { name: 'Usage', path: '/usage' },
         { name: 'Billing', path: '/billing' },
+
     ];
 
     const handleOpenSidebar = () => {
@@ -55,6 +60,12 @@ const Sidebar = () => {
                                     </Link>
                                 ))
                             }
+
+                            <h1
+                                className="px-3 py-2  bg-gradient-to-b from-violet-500 to-black shadow-sm shadow-orange-500 transition  rounded-xl hover:rounded-xl border-t-2 border-gray-600 text-white cursor-pointer hover:text-orange-500">
+                                Logout
+                            </h1>s
+
                         </nav>
 
                     </div>

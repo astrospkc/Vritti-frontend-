@@ -37,10 +37,10 @@ const Homepage = () => {
     return (
         <>
             <div
-                style={{
-                    background: 'radial-gradient(circle at center, #1a0c2b, #1E293B, #0F172A)',
-                }}
-                className='flex flex-col w-full overflow-x-hidden '>
+                // style={{
+                //     background: 'radial-gradient(circle at center, #1a0c2b, #1E293B, #0F172A)',
+                // }}
+                className='flex flex-col w-full overflow-x-hidden bg-black'>
                 <div className='relative w-full h-screen flex flex-col'>
                     <div
                         style={{
@@ -122,7 +122,7 @@ const Homepage = () => {
                     <div className='flex flex-row justify-center items-center w-3/4 m-auto '>
                         <div className='flex w-1/2  flex-col border-r-2 border-gray-600 mr-2 pr-4'>
                             <h1
-                                className="text-image-fill text-9xl font-extrabold"
+                                className="text-image-fill text-8xl lg:text-9xl font-extrabold"
                                 style={{ backgroundImage: 'url("/images/forest.jpg")' }}
                             >
                                 VRiTTi
