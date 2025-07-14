@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiGrid, FiStar, FiMessageCircle, FiCompass, FiList } from "react-icons/fi";
 import { UserContext } from '../context/UserContext';
@@ -7,21 +7,34 @@ import { useNavigate } from 'react-router-dom';
 const CommunityPage = () => {
     const { user, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
     const navigate = useNavigate()
-
+    const [postWithNullCommunityId, setPostWithNullCommunityId] = useState<any[]>([])
     const [postTitle, setPostTitle] = useState()
     const [postBody, setPostBody] = useState()
 
-    // const handleLogout = () => {
-    //     console.log()
-    //     localStorage.removeItem("token")
-    //     setIsAuthenticated(prev => !prev)
-    //     navigate("/")
-    // }
-    console.log("user: ", user)
+    const fetchPostWithNullCommunityId = async () => {
+        const token = localStorage.getItem("token")
+        const res = await fetch(`${import.meta.env.VITE_URL}/post/fetchPostByCommmunityId`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        const data = await res.json()
+        console.log("data")
+        setPostWithNullCommunityId([...postWithNullCommunityId, ...data])
+    }
+    useEffect(() => {
+        fetchPostWithNullCommunityId()
+    }, [])
 
     const handleCreatePost = () => {
         console.log("create post")
     }
+
+    console.log("fetch post with null id: ", postWithNullCommunityId)
+
+
     return (
 
 
@@ -131,24 +144,27 @@ const CommunityPage = () => {
                         </button>
                     </div>
 
-                    {["Querindolina Rodriguez Perezenco", "Britney Spears", "Mark Ruffalo"].map((name, idx) => (
-                        <div key={idx} className="bg-black shadow-2xl shadow-blackbg-[#2A2A3C] p-4 rounded-xl">
-                            <h3 className="font-semibold text-md mb-1">{name}</h3>
-                            <p className="text-sm text-gray-300 mb-2">
-                                Kiersten's site focuses on the intersection of fashion and travel. She gives tips and advice...
-                            </p>
-                            <div className="flex space-x-2 mb-2">
-                                <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
-                                <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
-                                <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
+                    {postWithNullCommunityId.map((post, idx) => {
+                        console.log("post: ", post.anonymousName)
+                        return (
+                            <div key={idx} className="bg-black shadow-2xl shadow-blackbg-[#2A2A3C] p-4 rounded-xl">
+                                <h3 className="font-semibold text-md mb-1">{post?.anonymousName}</h3>
+                                <p className="text-sm text-gray-300 mb-2">
+                                    {post?.body}
+                                </p>
+                                <div className="flex space-x-2 mb-2">
+                                    <div className="bg-gray-500 w-20 h-20 rounded-lg">{ }</div>
+                                    <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
+                                    <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
+                                </div>
+                                <div className="flex space-x-4 text-sm text-gray-400">
+                                    <span>❤ 18</span>
+                                    <span>💬 25</span>
+                                    <span>🔁 8</span>
+                                </div>
                             </div>
-                            <div className="flex space-x-4 text-sm text-gray-400">
-                                <span>❤ 18</span>
-                                <span>💬 25</span>
-                                <span>🔁 8</span>
-                            </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
 
                 {/* Right Sidebar */}
