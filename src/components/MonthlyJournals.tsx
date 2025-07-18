@@ -12,6 +12,7 @@ const MonthlyJournals = ({ month, year }) => {
     // console.log("data: ", data, monthYear,)
     // const week = Object.keys(data[monthYear])
     // console.log("week: ", week)
+    console.log("journals: ", journals)
     return (
         <div>
             {

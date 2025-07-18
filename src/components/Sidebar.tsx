@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
@@ -7,10 +7,11 @@ import { BsArrowLeftCircleFill } from "react-icons/bs";
 const Sidebar = () => {
 
     const { openSidebar, setOpenSidebar, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
-
+    const navigate = useNavigate()
     const handleLogout = () => {
         localStorage.removeItem("token")
         setIsAuthenticated(prev => !prev)
+        navigate("/")
     }
     const navItems = [
         { name: 'Home', path: '/' },
@@ -62,6 +63,7 @@ const Sidebar = () => {
                             }
 
                             <h1
+                                onClick={handleLogout}
                                 className="px-3 py-2  bg-gradient-to-b from-violet-500 to-black shadow-sm shadow-orange-500 transition  rounded-xl hover:rounded-xl border-t-2 border-gray-600 text-white cursor-pointer hover:text-orange-500">
                                 Logout
                             </h1>s

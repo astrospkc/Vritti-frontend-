@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FiGrid, FiStar, FiMessageCircle, FiCompass, FiList } from "react-icons/fi";
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { Bookmark, BookmarkCheck, Image } from 'lucide-react'
 
 const CommunityPage = () => {
     const { user, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
@@ -10,6 +11,8 @@ const CommunityPage = () => {
     const [postWithNullCommunityId, setPostWithNullCommunityId] = useState<any[]>([])
     const [postTitle, setPostTitle] = useState()
     const [postBody, setPostBody] = useState()
+    const [imageOpen, setImageOpen] = useState(false)
+    const [recentUsers, setRecentUsers] = useState(new Set())
 
     const fetchPostWithNullCommunityId = async () => {
         const token = localStorage.getItem("token")
@@ -32,12 +35,28 @@ const CommunityPage = () => {
         console.log("create post")
     }
 
+    const handleClickImage = () => {
+        setImageOpen(prev => !prev)
+    }
+
+    const handleLike = async (targetId, targetType) => {
+        const token = localStorage.getItem("token")
+        await fetch(`${import.meta.env.VITE_URL}/vote/upVote${targetType}/${targetId}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+    }
+
     console.log("fetch post with null id: ", postWithNullCommunityId)
+    // const getUsersOfRecentPost = postWithNullCommunityId.map((post, i) => {
+    //     setRecentUsers(prevSet => new Set(prevSet).add(post.anonymousName))
+    // })
+    // console.log("get users of recent post", recentUsers)
 
 
     return (
-
-
         <div
 
             style={{
@@ -139,28 +158,53 @@ const CommunityPage = () => {
                             placeholder='share the post'
                             className='bg-black shadow-2xl shadow-black p-4 rounded-xl border-2 border-gray-800' />
 
+                        <Image onClick={handleClickImage} className='cursor-pointer hover:text-blue-600 hover:scale-75' />
+                        {
+                            imageOpen &&
+                            <input type='file' />
+                        }
+
                         <button className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm w-fit">
                             Share This Post
                         </button>
                     </div>
 
                     {postWithNullCommunityId.map((post, idx) => {
-                        console.log("post: ", post.anonymousName)
+                        // console.log("post: ", post)
+                        // console.log()
+                        let formattedDate = "0"
+                        if (post?.createdAt) {
+                            const dateobj = new Date(post?.createdAt)
+                            const d = dateobj.getUTCDate()
+                            const month = dateobj.getUTCMonth() + 1
+                            const year = dateobj.getUTCFullYear()
+                            const getHour = dateobj.getUTCHours()
+                            const getMinute = dateobj.getUTCMinutes()
+                            formattedDate = `${getHour}:${getMinute}  ${d}-${month}-${year}`
+
+                        }
+
                         return (
                             <div key={idx} className="bg-black shadow-2xl shadow-blackbg-[#2A2A3C] p-4 rounded-xl">
-                                <h3 className="font-semibold text-md mb-1">{post?.anonymousName}</h3>
-                                <p className="text-sm text-gray-300 mb-2">
+                                <div className='flex flex-col border-b-2 border-gray-800 pb-2'>
+                                    <h3 className="font-semibold text-md mb-1">{post?.anonymousName}</h3>
+                                    <h3 className='text-gray-500 font-semibold text-xs'>{formattedDate}</h3>
+                                </div>
+
+                                <p className="text-sm text-gray-300 mb-2 mt-4">
                                     {post?.body}
                                 </p>
-                                <div className="flex space-x-2 mb-2">
+                                {/* <div className="flex space-x-2 mb-2">
                                     <div className="bg-gray-500 w-20 h-20 rounded-lg">{ }</div>
                                     <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
                                     <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
-                                </div>
-                                <div className="flex space-x-4 text-sm text-gray-400">
-                                    <span>❤ 18</span>
-                                    <span>💬 25</span>
-                                    <span>🔁 8</span>
+                                </div> */}
+                                <div className="flex space-x-4 text-sm text-gray-300">
+                                    <span className='cursor-pointer' onClick={() => handleLike(post._id, "posts")}>❤ {post?.voteScore}</span>
+                                    <span className='cursor-pointer'>💬 { }</span>
+                                    <span className='cursor-pointer'><Bookmark /> { }</span>
+                                    {/* <BookmarkCheck /> */}
+
                                 </div>
                             </div>
                         )

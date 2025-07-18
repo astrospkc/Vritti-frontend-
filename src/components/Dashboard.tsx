@@ -50,6 +50,8 @@ const Dashboard = () => {
         }
     }, [query.data])
 
+
+
     // TODO: must be completed
     const handleWeek = async (week) => {
         const token = localStorage.getItem('token')
@@ -61,7 +63,6 @@ const Dashboard = () => {
             },
         })
         const data = await res.json()
-
 
         console.log("week clicked: ", week, data)
     }
