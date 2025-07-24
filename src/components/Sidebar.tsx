@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+
 import { UserContext } from '../context/UserContext';
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Sidebar = () => {
 
     const { openSidebar, setOpenSidebar, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
-    const navigate = useNavigate()
+    const router = useRouter()
     const handleLogout = () => {
         localStorage.removeItem("token")
         setIsAuthenticated(prev => !prev)
-        navigate("/")
+        router.push("/")
     }
     const navItems = [
         { name: 'Home', path: '/' },
@@ -54,7 +56,7 @@ const Sidebar = () => {
                                 navItems && navItems.map((item, i) => (
                                     <Link
                                         key={i}
-                                        to={`${item.path}`}
+                                        href={`${item.path}`}
                                         className={`px-3 py-2  hover:bg-gradient-to-b hover:from-violet-500 hover:to-black  hover:shadow-sm hover:shadow-orange-500 transition  ${i < 6 ? 'rounded-xl' : 'hover:rounded-xl border-t-2 border-gray-600 text-gray-400 hover:text-orange-500'}`}
                                     >
                                         {item.name}

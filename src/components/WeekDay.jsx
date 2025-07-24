@@ -45,7 +45,7 @@ const WeekDay = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_URL}/journals/fetchData/${id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/journals/fetchData/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const WeekDay = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_URL}/weekJournals/create`,
+        `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/create`,
         dayJournal,
         {
           headers: {
@@ -170,9 +170,7 @@ const WeekDay = () => {
 
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_URL}/weekJournals/updateDayJournal/${
-          weekdayJournal._id
-        }`,
+        `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/updateDayJournal/${weekdayJournal._id}`,
         dayJournal, // The data to be sent in the request body
         {
           headers: {

@@ -7,7 +7,7 @@ const CommunityModal = () => {
 
     const createCommunity = async () => {
         const token = localStorage.getItem("token")
-        const res = await fetch(`${import.meta.env.VITE_URL}/post/createPost`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/createPost`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -20,9 +20,7 @@ const WeekDayCard = (props) => {
     try {
       if (day) {
         const res = await axios.delete(
-          `${import.meta.env.VITE_URL}/weekJournals/deleteDayJournal/${
-            day._id
-          }`,
+          `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/deleteDayJournal/${day._id}`,
           {
             headers: {
               "Content-Type": "application/json",

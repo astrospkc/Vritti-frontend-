@@ -4,19 +4,23 @@ import { FiGrid, FiStar, FiMessageCircle, FiCompass, FiList } from "react-icons/
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { Bookmark, BookmarkCheck, Image } from 'lucide-react'
+import { PostInteractionContext } from '../context/PostInteractionProvider';
 
 const CommunityPage = () => {
     const { user, isAuthenticated, setIsAuthenticated } = useContext(UserContext)
+    const { bookmark_arr, setBookmark_arr } = useContext(PostInteractionContext)
     const navigate = useNavigate()
     const [postWithNullCommunityId, setPostWithNullCommunityId] = useState<any[]>([])
     const [postTitle, setPostTitle] = useState()
     const [postBody, setPostBody] = useState()
     const [imageOpen, setImageOpen] = useState(false)
     const [recentUsers, setRecentUsers] = useState(new Set())
+    const [bookmarked, setBookmarked] = useState(false)
+
 
     const fetchPostWithNullCommunityId = async () => {
         const token = localStorage.getItem("token")
-        const res = await fetch(`${import.meta.env.VITE_URL}/post/fetchPostByCommmunityId`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/fetchPostByCommmunityId`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +29,7 @@ const CommunityPage = () => {
         })
         const data = await res.json()
         console.log("data")
-        setPostWithNullCommunityId([...postWithNullCommunityId, ...data])
+        // setPostWithNullCommunityId([...postWithNullCommunityId, ...data])
     }
     useEffect(() => {
         fetchPostWithNullCommunityId()
@@ -41,7 +45,7 @@ const CommunityPage = () => {
 
     const handleLike = async (targetId, targetType) => {
         const token = localStorage.getItem("token")
-        await fetch(`${import.meta.env.VITE_URL}/vote/upVote${targetType}/${targetId}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/upVote${targetType}/${targetId}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -54,6 +58,31 @@ const CommunityPage = () => {
     //     setRecentUsers(prevSet => new Set(prevSet).add(post.anonymousName))
     // })
     // console.log("get users of recent post", recentUsers)
+    const handleAddBookmark = async () => {
+        const token = localStorage.getItem("token")
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmark/createBookmark`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const data = await res.json()
+        setBookmarked(prev => !prev)
+        setBookmark_arr([...bookmark_arr, data])
+    }
+
+    const handleRemoveBookmark = async () => {
+        const token = localStorage.getItem("token")
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmark/removeBookmark`, {
+            method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const data = await res.json()
+        setBookmarked(prev => !prev)
+        setBookmark_arr([...bookmark_arr, data])
+    }
 
 
     return (
@@ -202,9 +231,18 @@ const CommunityPage = () => {
                                 <div className="flex space-x-4 text-sm text-gray-300">
                                     <span className='cursor-pointer' onClick={() => handleLike(post._id, "posts")}>❤ {post?.voteScore}</span>
                                     <span className='cursor-pointer'>💬 { }</span>
-                                    <span className='cursor-pointer'><Bookmark /> { }</span>
-                                    {/* <BookmarkCheck /> */}
-
+                                    {
+                                        bookmarked ?
+                                            <span
+                                                onClick={handleRemoveBookmark}
+                                                className='cursor-pointer'><BookmarkCheck />
+                                            </span>
+                                            :
+                                            <span
+                                                onClick={handleAddBookmark}
+                                                className='cursor-pointer'><Bookmark />
+                                            </span>
+                                    }
                                 </div>
                             </div>
                         )

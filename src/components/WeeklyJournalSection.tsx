@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext } from 'react'
 import JournalCard from './cards/JournalCard'
 import { journalContext } from '../context/JournalContext'

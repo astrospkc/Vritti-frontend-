@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { journalContext } from "./JournalContext";
 import PropTypes from "prop-types";
@@ -23,7 +24,7 @@ export const JournalProvider = ({ children }) => {
       }
 
       const res = await axios.get(
-        `${import.meta.env.VITE_URL}/weekJournals/fetchAlljournals`,
+        `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/fetchAlljournals`,
         {
           headers: {
             "Content-Type": "application/json",

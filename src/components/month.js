@@ -1,3 +1,4 @@
+"use client"
 const months = [
   {
     id: 0,

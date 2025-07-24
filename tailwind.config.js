@@ -1,10 +1,22 @@
-import tailwindScrollbar from "tailwind-scrollbar";
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}", // Adjust paths as per your project structure
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
+        gray: {
+          100: "#f3f4f6",
+          300: "#d1d5db",
+        },
+        neutral: {
+          500: "#737373",
+          700: "#404040",
+        },
+
         juice: {
           background: "#0F172A",
           surface: "#1E293B",
@@ -13,6 +25,11 @@ export default {
           neon: "#3B82F6",
           muted: "#94A3B8",
         },
+      },
+      fontFamily: {
+        chonburi: ['"Chonburi"', "cursive"],
+        yusei: ['"Yusei Magic"', "sans-serif"],
+        // ...map more fonts if needed
       },
       keyframes: {
         "fade-in": {
@@ -25,5 +42,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindScrollbar],
+  plugins: [],
 };

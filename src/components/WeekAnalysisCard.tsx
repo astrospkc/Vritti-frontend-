@@ -13,7 +13,7 @@ const WeekAnalysisCard = ({ journalId, journal }) => {
     const summarize = async (journalId) => {
         const token = localStorage.getItem("token")
         try {
-            const res = await axios.get(`${import.meta.env.VITE_URL}/weekJournals/summarizeJournal/${journalId}`, {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/weekJournals/summarizeJournal/${journalId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`

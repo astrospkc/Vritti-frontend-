@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 
 const Button = ({ children, onclick }: any) => {
@@ -6,7 +7,7 @@ const Button = ({ children, onclick }: any) => {
     return (
         <div
             onClick={onclick}
-            className='text-md text-yellow-100 my-2 p-2 bg-gradient-to-l from-violet-400 to-gray-800 shadow-md shadow-black rounded-lg w-fit  hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+            className='text-md text-yellow-100 my-2 p-2 bg-gradient-to-l bg-black shadow-md shadow-black rounded-lg w-fit  hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
             {children}
         </div>
 

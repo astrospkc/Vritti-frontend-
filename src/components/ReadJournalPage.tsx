@@ -68,7 +68,7 @@ const ReadJournalPage = () => {
         const token = localStorage.getItem("token")
         try {
             const res = await fetch(
-                `${import.meta.env.VITE_URL}/weekJournals/updateDayJournal/${data?.id}`, {
+                `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/updateDayJournal/${data?.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

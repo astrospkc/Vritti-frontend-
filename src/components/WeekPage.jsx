@@ -33,7 +33,7 @@ const WeekPage = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_URL}/weekJournals/fetchJournal/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/fetchJournal/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const WeekPage = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_URL}/weekJournals/summarizeJournal/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/weekJournals/summarizeJournal/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

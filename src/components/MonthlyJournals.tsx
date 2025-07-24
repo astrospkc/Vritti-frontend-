@@ -1,7 +1,9 @@
+"use client"
 import React, { useContext } from 'react'
 import { groupJournalsByMonthAndWeek } from './miscellaneous/GetJournalsMonthWeek'
 import { journalContext } from '../context/JournalContext'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
+
 
 const MonthlyJournals = ({ month, year }) => {
     const { journals, monthYear } = useContext(journalContext)
@@ -21,7 +23,7 @@ const MonthlyJournals = ({ month, year }) => {
                     console.log("week num: ", weekNum)
 
                     return (
-                        <Link key={i} to="/dashboard/monthlypage">
+                        <Link key={i} href="/dashboard/journalpage">
                             <div
                                 key={i}
                                 className="relative w-full h-[500px] overflow-hidden rounded-xl shadow-lg hover:shadow-md hover:shadow-orange-500">

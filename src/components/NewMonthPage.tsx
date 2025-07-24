@@ -49,7 +49,7 @@ const NewMonthPage = () => {
         const fetchMonthData = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch(`${import.meta.env.VITE_URL}/weekJournals/fetchMonthJournal?year=${selectedYear}&month=${selectedMonthNumber}`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/weekJournals/fetchMonthJournal?year=${selectedYear}&month=${selectedMonthNumber}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

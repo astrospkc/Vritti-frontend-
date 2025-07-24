@@ -1,3 +1,4 @@
+"use client";
 import { useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { UserContext } from "./UserContext";
@@ -11,7 +12,7 @@ export const UserProvider = ({ children }) => {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/auth/getuser`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/getuser`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -12,6 +12,32 @@ This app helps you journal your daily experiences and visualize your emotional j
 - [ ] summarized journal for each content along with weekly basis.
 ---
 
+
+## 🎨Color palette
+
+- Primary Color (Peach/Orange background & accents)
+    Hex: #F6C08E (light peach)
+
+    Hex: #F29C50 (muted orange used for headings like "Elegance")
+
+- Secondary Color (Cream background)
+    Hex: #FAF4EF (soft cream/off-white background)
+
+    Neutral Colors
+    Dark Gray/Black Text: #2B2B2B
+
+    Light Gray (UI elements, shadows): #E0E0E0
+
+    Accent Color (Mint/Turquoise in cabinet illustration)
+    Hex: #A6D8C5 (soft mint green)
+    Hex min twist: #97ccb8
+    lichen: #8dbaa8
+
+- Button Colors
+    Black Button: #2C2C2C
+
+- Orange Button: #F29C50 with white text
+  
 ## ✨ Features
 
 - 📝 **Daily Journaling**: Privately write your thoughts and feelings.
