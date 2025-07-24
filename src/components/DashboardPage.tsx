@@ -71,10 +71,21 @@ const DashboardPage = () => {
     }
     return (
         <div className='   overflow-y-auto overflow-x-hidden no-scrollbar m-4 p-4'>
-            <div className='m-4 flex flex-col  w-full'>
+            <div className='m-4 flex flex-row  w-full'>
                 <div
-                    style={{ backgroundImage: 'url("/images/forest.jpg")' }}
-                    className=' text-5xl md:text-7xl lg:text-9xl my-5 text-emerald-800 font-serif text-image-fill shadow-lg shadow-black rounded-3xl p-2'>Journal Entries</div>
+                // style={{ backgroundImage: 'url("/images/forest.jpg")' }}
+                >
+                    <span
+                        className=' text-5xl md:text-7xl lg:text-9xl my-5 text-[#8dbaa8] font-serif knewave-regular  rounded-3xl p-2 mx-6'
+
+                    >
+                        Journal Entries
+                    </span>
+
+                    <p className='text-xl mt-6 '>
+                        "Write it down, laugh about it later — your future self will thank you."
+                    </p>
+                </div>
                 <Link
                     href={{
                         pathname: "/dashboard/newMonthPage",
@@ -82,7 +93,7 @@ const DashboardPage = () => {
                     }}
                 >
 
-                    <div className='relative w-full   flex flex-col '>
+                    <div className='relative w-full   flex flex-col  '>
                         <div style={{
                             backgroundImage:
                                 `url("/images/forest.jpg")`,
@@ -95,12 +106,12 @@ const DashboardPage = () => {
                             zIndex: 0,
                             // height: 500
                         }}
-                            className='absolute rounded-b-xl shadow-lg shadow-black inset-0   opacity-20 hover:opacity-45'
+                            className='absolute rounded-b-xl shadow-lg shadow-black inset-0   opacity-40 hover:opacity-70 '
                         >
                         </div>
                         <div
                             className='relative z-10 p-2 flex flex-row  '>
-                            <div className='flex flex-col text-6xl text-emerald-600 justify-center items-center'>
+                            <div className='flex flex-col text-8xl text-orange-900  justify-cente marck-script-regular items-center'>
                                 <h1>{month}</h1>
                                 <h1>{year}</h1>
                             </div>
@@ -110,7 +121,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                 </Link>
-                <div className="w-full px-10 no-scrollbar ">
+                {/* <div className="w-full px-10 no-scrollbar ">
                     <div className="flex flex-row px-8  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
                         <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-[#ffffff] shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(1)}>Week 1</div>
                         <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(2)} >Week 2</div>
@@ -119,8 +130,18 @@ const DashboardPage = () => {
                         <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(5)}>Week 5</div>
 
                     </div>
-                </div>
+                </div> */}
 
+            </div>
+            <div className="w-full px-10 no-scrollbar ">
+                <div className="flex flex-row px-8  justify-center items-center m-auto gap-3 overflow-x-auto no-scrollbar py-4">
+                    <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg-[#ffffff] shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(1)}>Week 1</div>
+                    <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(2)} >Week 2</div>
+                    <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(3)} >Week 3</div>
+                    <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(4)}>Week 4</div>
+                    <div className="min-w-[20%] h-[300px] hover:cursor-pointer hover:shadow-sm hover:shadow-orange-600 bg- shadow-md shadow-emerald-400/60 rounded-xl flex justify-center items-center text-white" onClick={() => handleWeek(5)}>Week 5</div>
+
+                </div>
             </div>
             <div className="m-4 w-full border-t-2 border-gray-800 ">
                 <div className='flex flex-col justify-start items-start  my-3 p-3 shadow-lg shadow-black'>

@@ -2,10 +2,11 @@
 import React, { useContext, useState } from 'react'
 
 import { AiFillBackward } from "react-icons/ai";
-import { Link } from 'react-router-dom'
+
 import { journalContext } from '../../../context/JournalContext';
 import usePreviousLocation from '../../../customHooks/PreviousPage';
 import WeeklyJournalSection from '../../../components/WeeklyJournalSection';
+import Link from 'next/link';
 
 
 const JournalPage = () => {
@@ -34,7 +35,7 @@ const JournalPage = () => {
             {/* <h1 className='text-emerald-700 text-6xl mb-10'>Monthy Journal</h1> */}
             <div className='flex flex-row gap-4 justify-center items-center rounded-2xl p-2 bg-violet-200/10 shadow-lg shadow-black'>
                 <div className='text-white'>
-                    <Link to="/dashboard">
+                    <Link href="/dashboard">
                         <AiFillBackward className='text-white text-2xl hover:scale-110 hover:text-orange-500 hover:cursor-pointer' />
 
                     </Link>
