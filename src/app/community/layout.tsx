@@ -1,4 +1,7 @@
+"use client"
+import Link from 'next/link'
 import React from 'react'
+// import "../globals.css"
 
 const CommunityLayout = ({
     children
@@ -8,26 +11,47 @@ const CommunityLayout = ({
 ) => {
     return (
         <div
-
-            // style={{
-            //     background: 'radial-gradient(circle at center, #1a0c2b, #1E293B, #0F172A)',
-            // }}
-            className="flex flex-col min-h-screen text-white font-sans w-full bg-[#F6F6F6]">
+            className="flex flex-col min-h-screen text-white font-sans w-full ">
             {/* Top Navbar */}
             <div className="flex items-center justify-between px-6 py-4 bg-[#F3E9DC] shadow-lg shadow-gray-300">
-                <input
-                    type="text"
-                    placeholder="trump got mad"
-                    className="bg-[#3B3B4F] text-sm text-white placeholder-gray-400 px-4 py-2 rounded-md w-1/3 focus:outline-none"
-                />
-                <button className="bg-blue-600 hover:bg-blue-700  px-4 py-2 rounded-md text-sm">
-                    Shout Any Plan?
-                </button>
+                <div className='flex flex-row gap-8 items-center'>
+                    <Link href="/">
+                        <div className='font-bold text-orange-900 text-2xl knewave-regular cursor-pointer '>
+                            VRiTTi
+                        </div>
+                    </Link>
 
+                    <div>
+                        <ul className='flex flex-row gap-4 text-black p-4'>
+                            <Link href="/dashboard">
+                                <li
+                                    className='hover:cursor-pointer p-2 hover:bg-gray-400/30 rounded-xl transition-colors duration-500 ease-out'
+
+                                >Dashboard</li>
+                            </Link>
+                            <Link href="">
+                                <li
+                                    className='hover:cursor-pointer p-2 hover:bg-gray-400/30 rounded-xl transition-colors duration-500 ease-out'
+
+                                >Popular</li>
+                            </Link>
+                            <Link href="">
+                                <li
+                                    className='hover:cursor-pointer p-2 hover:bg-gray-400/30 rounded-xl transition-colors duration-500 ease-out'
+
+                                >Explore</li>
+                            </Link>
+                            <Link href="">
+                                <li
+                                    className='hover:cursor-pointer p-2 hover:bg-gray-400/30 rounded-xl transition-colors duration-500 ease-out'
+
+                                >All</li>
+                            </Link>
+                        </ul>
+                    </div>
+                </div>
                 <div>
-                    <button className="bg-gray-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm ">
-                        Logout
-                    </button>
+                    <div className='bg-orange-400 rounded-xl p-2 hover:cursor-pointer font-bold hover:bg-transparent hover:shadow-lg hover:shadow-orange-400 hover:text-black'>Login</div>
                 </div>
             </div>
             <div>

@@ -1,5 +1,5 @@
 "use client"
-import { useToast } from "@chakra-ui/react";
+
 import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../../context/UserContext";
@@ -8,8 +8,6 @@ import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
     const router = useRouter();
-    const toast = useToast();
-
     const { setIsAuthenticated } = useContext(UserContext);
     // default user
     const [user, setUser] = useState({
@@ -21,7 +19,7 @@ const SignIn = () => {
     // loader
     // const [loading, setLoading] = useState(false);
 
-    const signin = async () => {
+    const sign_in = async () => {
         try {
             // setLoading(true);
             const res = await axios.post(
@@ -52,12 +50,7 @@ const SignIn = () => {
                 alert("fill up all the spaces");
             }
         } catch (error) {
-            toast({
-                title: "Can't create account",
-                status: "danger",
-                duration: 3000,
-                isClosable: true,
-            });
+
             console.error("error: ", error);
         } finally {
             // setLoading(false);
@@ -81,15 +74,20 @@ const SignIn = () => {
     return (
         <>
             <div className="flex flex-col justify-center items-center m-auto w-full h-full p-4 font-serif  ">
-                <div className="font-semibold rounded-xl  text-yellow-400 text-3xl my-4">
-                    Sign In
-                </div>
-                {/* {loading ? <div>....loading</div> : <div></div>} */}
+                <span
+                    className="text-orange-500 text-8xl font-extrabold knewave-regular"
+                >
+                    VRiTTi
+                </span>
+                <span className="font-bold  rounded-xl  marck-script-regular text-6xl my-4 text-orange-900">
+                    Signin
+                </span>
                 <form
                     action="submit"
-                    className="bg-black p-10 rounded-xl shadow-lg shadow-stone-500"
+                    className=" p-10 rounded-xl shadow-lg shadow-stone-400 bg-gray-500/30"
+
                 >
-                    <div className="flex flex-col gap-10 text-yellow-500">
+                    <div className="flex flex-col gap-10 text-black">
                         <div className="flex flex-col ">
                             <label htmlFor="Username" className="font-semibold text-xl">
                                 Username
@@ -97,10 +95,10 @@ const SignIn = () => {
                             <input
                                 type="text"
                                 name="username"
-                                value={user.username}
+                                value={user.name}
                                 onChange={handleSignIn}
                                 placeholder="xyz"
-                                className="p-4 rounded-3xl text-violet-950"
+                                className="p-4 rounded-3xl bg-transparent "
                             />
                         </div>
                         <div className="flex flex-col">
@@ -132,18 +130,21 @@ const SignIn = () => {
                         </div>
                     </div>
                 </form>
-                <button
-                    onClick={signin}
-                    className="p-2 rounded-xl bg-stone-600 my-2 text-white hover:bg-stone-500"
+                <div
+                    onClick={sign_in}
+                    className="p-2 rounded-xl cursor-pointer  bg-orange-900 shadow-lg shadow-gray-900/70 my-2 text-white hover:bg-stone-500"
                 >
                     Submit
-                </button>
+                </div>
                 <div className="flex flex-row my-2 gap-2 items-center">
-                    <h1 className="text-yellow-400 text-xl">Already have an account</h1>
-                    <Link href="/signin">
-                        <button className="p-2 rounded-xl bg-stone-400 hover:bg-stone-200">
-                            SignIn
-                        </button>
+                    <span
+                        className="text-[#8dbcaa] font-bold  text-2xl"
+
+                    >Already have an account</span>
+                    <Link href="/auth/login">
+                        <div className="p-2 rounded-xl bg-stone-400/40 shadow-lg shadow-gray-700 hover:bg-stone-200">
+                            Login
+                        </div>
                     </Link>
                 </div>
             </div>

@@ -1,15 +1,17 @@
 
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 
 const JournalCard = ({ id, title, subtitle, body, date }) => {
-    const dataToPass = {
-        id: id,
-        title: title,
-        subtitle: subtitle,
-        body: body,
-        date: date
-    }
+    // const dataToPass = {
+    //     id: id,
+    //     title: title,
+    //     subtitle: subtitle,
+    //     body: body,
+    //     date: date
+    // }
     // console.log("data to pass: ", dataToPass)
     let short_title;
     let short_subtitle;
@@ -29,15 +31,25 @@ const JournalCard = ({ id, title, subtitle, body, date }) => {
     // console.log("short_title and subtitle: ", short_title, short_subtitle)
     return (
         //   picture, title , subtitle, date
-        <Link to={{ pathname: "/readJournalPage" }} state={dataToPass}>
+        <Link
+            href={{
+                pathname: `readJournal/${id}`,
+                // convert object to string
+            }}
+        >
             <div
-                className="relative w-full max-w-md h-64 rounded-2xl overflow-hidden  transform transition duration-500 hover:scale-105 group animate-fade-in shadow-md shadow-orange-500 hover:cursor-pointer"
+                className="relative w-full max-w-md h-64 rounded-2xl overflow-hidden  transform transition duration-500 hover:scale-105 group animate-fade-in shadow-lg shadow-[#3d3d3d] hover:cursor-pointer p-4"
             >
                 {/* Background Image with Zoom on Hover */}
-                <img
-                    src="../images/forest.jpg"
+
+                <Image
+                    src="/images/forest.jpg"
                     alt="card background"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    width={800}
+                    height={200}
+                    priority
+
                 />
 
                 {/* Overlay */}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import "./globals.css"
 import writeJournal from "../images/writeJournal.jpg"
 import readJournal from "../images/readJournal.jpg"
@@ -8,12 +8,13 @@ import graph from "../images/graphAnalysis.jpg"
 import anonymous from "../images/crushedpaper5.jpg"
 import reply from "../images/crushedpaper4.jpg"
 import community from "../images/crushedpaper3.jpg"
-import { motion } from "motion/react"
+import { motion, useInView } from "motion/react"
 import Link from 'next/link'
 import { UserContext } from '../context/UserContext'
 import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
+import { AlarmClock, NotebookPen } from 'lucide-react'
 
 
 
@@ -46,22 +47,31 @@ const Homepage = () => {
         }
     }
 
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, margin: "-100px" })
+
     return (
-        <>
+        <div>
             <motion.div
+                initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                animate={{ y: 0, opacity: 1, scale: 1 }} // Slide down and fade in
+                transition={{
+                    duration: 1,
+                    ease: "easeOut",
 
-
+                }}
                 className='flex flex-col w-full overflow-x-hidden '>
                 <div className='relative w-full h-screen flex flex-col'>
-                    <div
-                        suppressHydrationWarning
+                    {/* <div
+
                         style={{
                             backgroundImage: `url("/images/crushedpaper4.jpg")`,
                             // height: 500,
                             backgroundSize: "cover",
                             backgroundRepeat: "no-repeat, repeat",
                             backgroundBlendMode: "luminosity",
-                            opacity: 0.1,
+                            opacity: 0.1
+                            ,
                             // clipPath: "polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%, 0% 38%)",
                             zIndex: 0,
                             boxShadow: "0 20px 60px rgba(0, 0, 0, 0.45)", // Deep realistic shadow
@@ -69,30 +79,43 @@ const Homepage = () => {
 
                         }}
                         className='absolute inset-0 shadow-lg shadow-[#E0E0E0]'
-                    ></div>
+                    ></div> */}
                     <div
-                        className='relative z-10   p-2 shadow-lg shadow-[#E0E0E0] flex flex-row justify-between '>
+                        className='relative    m-4   rounded-2xl   p-2  flex flex-row justify-between  '>
 
-                        <div className='font-bold text-orange-900 text-2xl knewave-regular '>
-                            VRiTTi
+                        <div className=' flex flex-row items-center   gap-2 font-bold text-black text-2xl knewave-regular  p-2 rounded-xl  '>
+                            <span className='bg-yellow-200 p-2 rounded-xl'><NotebookPen /></span>VRiTTi
                         </div>
+
                         <ul className='flex flex-row-reverse gap-4 '>
                             {isAuthenticated ?
                                 <li
                                     onClick={handleLogout}
-                                    className='bg-[#A6D8C5] rounded-xl p-2 hover:cursor-pointer font-bold'>Logout</li>
+                                    className='bg-[#A6D8C5] rounded-xl p-2 text-lg text-center hover:cursor-pointer font-bold'>Logout</li>
                                 :
                                 <>
                                     <Link href="/auth/login">
-                                        <li className='bg-orange-400 rounded-xl p-2 hover:cursor-pointer'>Login</li>
+                                        <li className='bg-orange-400 rounded-xl p-2 hover:cursor-pointer font-bold hover:bg-transparent hover:shadow-lg hover:shadow-orange-400'>Login</li>
                                     </Link>
                                     <Link href="/auth/signin">
-                                        <li className='bg-violet-400 rounded-xl p-2 hover:cursor-pointer'>SignIn</li>
+                                        <li className='bg-[#A6D8C5] rounded-xl p-2 hover:cursor-pointer font-bold hover:bg-transparent hover:shadow-lg hover:shadow-[#97ccb8]'>SignIn</li>
                                     </Link>
                                 </>
                             }
 
                         </ul>
+                    </div>
+
+                    {/* CTA section  */}
+                    <div className='flex flex-col w-full m-auto justify-center items-center'>
+
+                        <div className='flex flex-row justify-center items-center  w-2/5 '>
+                            <span className='text-white w-fit h-fit  bg-emerald-900 p-2 rounded-lg'><AlarmClock /></span>
+                            <span className='text-xs rounded-lg  bg-yellow-200  font-semibold tracking-wider px-2'>Created for the people who are looking out for change and for the people who wants to share their stories.</span>
+
+                        </div>
+
+
                     </div>
 
                     {/* ------------------------------------------------------------------------------------------ */}
@@ -158,28 +181,53 @@ const Homepage = () => {
                 </div>
 
 
-                <div className='flex flex-col min-h-screen w-full p-4 justify-center items-center mt-10   '>
+                <div ref={ref} className='flex flex-col min-h-screen w-full p-4 justify-center items-center mt-10   '>
 
                     {/* Hero Section  text-[#F29C50]*/}
                     <span className='flex items-start font-serif font-bold text-7xl mb-10 p-2  border-b-2 text-gray-500 '>FEATURES</span>
 
                     {/* Feature Cards */}
                     <div className='grid grid-cols-3 gap-2 w-full md:w-4/5 '>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
                             {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>FE</h1> */}
                             <FeatureCard
                                 image={writeJournal}
                                 title="Daily Journaling"
                                 desc="Capture your thoughts and moods every day in a safe, private space."
-                            /></div>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
+                            /></motion.div>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
                             {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>A</h1> */}
                             <FeatureCard
                                 image={readJournal}
                                 title="AI-Powered Summaries"
                                 desc="Generate meaningful summaries and highlights from your journal entries."
-                            /></div>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
+                            /></motion.div>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
 
                             {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>T</h1> */}
                             <FeatureCard
@@ -187,8 +235,16 @@ const Homepage = () => {
                                 title="Mood Analytics"
                                 desc="Track your emotions and growth visually over time with charts."
                             />
-                        </div>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
+                        </motion.div>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
 
                             {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>UR</h1> */}
                             <FeatureCard
@@ -196,8 +252,16 @@ const Homepage = () => {
                                 title="Anonymous Sharing"
                                 desc="Share your insights anonymously and discover others' journeys."
                             />
-                        </div>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
+                        </motion.div>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
 
                             {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>E</h1> */}
                             <FeatureCard
@@ -205,15 +269,23 @@ const Homepage = () => {
                                 title="Community Feedback"
                                 desc="Receive kind, constructive advice and support from like-minded individuals."
                             />
-                        </div>
-                        <div className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
+                        </motion.div>
+                        <motion.div
+                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
+                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                            transition={{
+                                duration: 1,
+                                ease: "easeOut",
+
+                            }}
+                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
 
                             {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>S</h1> */}
                             <FeatureCard
                                 image={community}
                                 title="Uplifting Stories"
                                 desc="Get inspired by trending experiences and emotional breakthroughs."
-                            /></div>
+                            /></motion.div>
 
                     </div>
 
@@ -245,7 +317,7 @@ const Homepage = () => {
 
 
 
-        </>
+        </div>
 
     )
 }
@@ -267,19 +339,3 @@ const FeatureCard = ({ image, title, desc }) => (
 )
 
 export default Homepage
-
-
-// suppressHydrationWarning
-// style={{
-//     backgroundImage: `url("/images/forest.jpg")`,
-//     // height: 500,
-//     backgroundSize: "cover",
-//     backgroundRepeat: "no-repeat, repeat",
-//     backgroundBlendMode: "luminosity",
-//     opacity: 0.2,
-//     // clipPath: "polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%, 0% 38%)",
-//     zIndex: 0,
-//     boxShadow: "0 20px 60px rgba(0, 0, 0, 0.45)", // Deep realistic shadow
-//     filter: "contrast(1.2) brightness(0.9)",
-
-// }}

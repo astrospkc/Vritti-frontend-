@@ -1,84 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Yusei+Magic&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Yusei+Magic&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Yusei+Magic&display=swap');
+/* === Tailwind Import (v4) === */
+
+
+/* === Google Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Josefin+Sans:wght@100..700&family=Yusei+Magic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Tangerine:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Passions+Conflict&family=Tangerine:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Knewave&family=Marck+Script&display=swap');
-@import 'tailwindcss';
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oregano:ital@0;1&family=Rammetto+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-@import "tailwindcss";
+@import "tailwindcss" ;
 @import "tw-animate-css";
-
-/* @variant dark (&:is(.dark *)); */
-
-/* @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --animate-move: move 5s linear infinite;
- 
-  @keyframes move {
-    0% {
-      transform: translateX(-200px);
-    }
-    100% {
-      transform: translateX(200px);
-    }
-  }
-} */
-
-
+/* === Scrollbar Styling === */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: #a0aec0;
   border-radius: 8px;
   border: 2px solid #f1f1f1;
 }
 
+/* === Root Theme Variables (Light) === */
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -114,6 +58,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* === Dark Theme Variables === */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -147,18 +92,41 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
-/* 
-@layer base {
-  * {
-     border-border: outline-ring/50;
-  }
-  body {
-     bg-background: text-foreground;
-  }
-} */
 
+/* === Global Resets === */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Josefin Sans', sans-serif;
+}
 
+input{
+  padding: 6px;
+  background-color: rgb(201, 199, 199);
+  border-radius: 10px;
+}
 
+p{
+  margin: 12px 0 0 0 ;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* === Text Image Fill Utility === */
+.text-image-fill {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: cover;
+  background-position: center;
+  -webkit-text-stroke: 1px rgb(34, 125, 73);
+}
+
+/* === Scrollbar Utilities === */
 @layer utilities {
   .custom-scrollbar {
     overflow-y: auto;
@@ -170,101 +138,62 @@
 
   .custom-scrollbar::-webkit-scrollbar-track {
     border-radius: 9999px;
-    background-color:#f3f4f6;
+    background-color: #f3f4f6;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     border-radius: 9999px;
-    background-color:#6b7280
+    background-color: #6b7280;
   }
 
   .dark .custom-scrollbar::-webkit-scrollbar-track {
-    background-color: #d1d5db
+    background-color: #d1d5db;
   }
 
   .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #d1d5db
+    background-color: #d1d5db;
   }
 }
 
-.font-chonburi {
-  font-family: 'Chonburi', cursive;
-}
+/* === Font Utility Classes === */
+.font-chonburi { font-family: 'Chonburi', cursive; }
+.font-yusei { font-family: 'Yusei Magic', sans-serif; }
+.font-josefin { font-family: 'Josefin Sans', sans-serif; }
+.font-arizonia { font-family: 'Arizonia', cursive; }
+.font-tangerine { font-family: 'Tangerine', cursive; }
+.knewave-regular { font-family: "Knewave", system-ui; font-weight: 400; font-style: normal; }
+.marck-script-regular { font-family: "Marck Script", cursive; font-weight: 400; font-style: normal; }
 
-.font-yusei {
-  font-family: 'Yusei Magic', sans-serif;
-}
+/* === Base Styles for Inputs/Textareas (Fix Padding Issue) === */
+/* @layer base {
+  input, textarea {
+    @apply rounded-xl border border-gray-400 bg-gray-600 text-white px-4 py-3;
+  }
+} */
 
-.font-bebas {
-  font-family: 'Bebas Neue', sans-serif;
-}
-
-.font-josefin {
-  font-family: 'Josefin Sans', sans-serif;
-}
-
-.font-comic {
-  font-family: 'Comic Neue', cursive;
-}
-
-.font-passions {
-  font-family: 'Passions Conflict', cursive;
-}
-
-.font-arizonia {
-  font-family: 'Arizonia', cursive;
-}
-
-.font-londrina {
-  font-family: 'Londrina Shadow', cursive;
-}
-
-.font-bungee {
-  font-family: 'Bungee', cursive;
-}
-
-.font-frijole {
-  font-family: 'Frijole', cursive;
-}
-
-.font-stylish {
-  font-family: 'Stylish', sans-serif;
-}
-
-.font-tangerine {
-  font-family: 'Tangerine', cursive;
-}
-.knewave-regular {
-  font-family: "Knewave", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-.marck-script-regular {
-  font-family: "Marck Script", cursive;
-  font-weight: 400;
+.oregano-regular {
+  font-family: "Oregano", cursive;
+  font-weight: 800;
   font-style: normal;
 }
 
-
-
-/* ✅ Reset and universal styles (optional) */
-html,
-body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
+.oregano-regular-italic {
+  font-family: "Oregano", cursive;
+  font-weight: 400;
+  font-style: italic;
+}
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
-.text-image-fill {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-size: cover;
-  background-position: center;
-  -webkit-text-stroke: 1px rgb(34, 125, 73);
-}
 
-* {
-  box-sizing: border-box;
+.rammetto-one-regular {
+  font-family: "Rammetto One", sans-serif;
+  font-weight: 800;
+  font-style: normal;
 }

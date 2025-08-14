@@ -14,12 +14,12 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                style={{
-                    background: `radial-gradient(circle at center,
-            #FBE5D1 0%,
-            #ffffff 100%
-              )`,
-                }}
+            //     style={{
+            //         background: `radial-gradient(circle at center,
+            // #FBE5D1 0%,
+            // #ffffff 100%
+            //   )`,
+            //     }}
             >
                 <Providers>{children}</Providers>
             </body>

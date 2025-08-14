@@ -1,13 +1,21 @@
+"use client";
+
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { usePathname, useSearchParams } from "next/navigation";
 
 function usePreviousLocation() {
-  const location = useLocation();
+  const pathname = usePathname(); // current route path
+  const searchParams = useSearchParams(); // current query params
+
   const prevLocationRef = useRef();
 
+  // Combine pathname + query for full location string
+  const currentLocation = `${pathname}?${searchParams.toString()}`;
+
   useEffect(() => {
-    prevLocationRef.current = location;
-  }, [location]);
+    prevLocationRef.current = currentLocation;
+  }, [currentLocation]);
+
   return prevLocationRef.current;
 }
 

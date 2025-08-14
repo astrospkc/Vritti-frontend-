@@ -21,7 +21,7 @@ const Sidebar = () => {
 
         { name: 'CommunityPage', path: '/community' },
         { name: 'Journals', path: '/journals' },
-        { name: 'New Journal Entry', path: '/new-journals' },
+        { name: 'New Journal Entry', path: '/dashboard/newJournalEntry' },
         { name: 'Analytics', path: '/analytics' },
         { name: 'User Settings', path: '/settings' },
         { name: 'API', path: '/api' },

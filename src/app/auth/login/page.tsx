@@ -74,17 +74,24 @@ const Login = () => {
             <div className="flex flex-col justify-center items-center m-auto w-full h-full p-4 ">
                 <div className=" ">
                     {/* {loading ? <div>....loading</div> : <div></div>} */}
+
                     <div className="flex flex-col justify-center items-center">
-                        <div className="font-semibold rounded-xl yusei-magic-tab text-3xl my-4 text-yellow-500">
+                        <span
+                            className="text-orange-500 text-8xl font-extrabold knewave-regular"
+                        // style={{ backgroundImage: 'url("/images/forest.jpg")' }}
+                        >
+                            VRiTTi
+                        </span>
+                        <span className="font-bold  rounded-xl  marck-script-regular text-6xl my-4 text-orange-900">
                             Login
-                        </div>
+                        </span>
                         <form
                             action="submit"
-                            className="bg-black p-10 rounded-xl shadow-lg shadow-stone-600"
+                            className=" p-10 rounded-xl shadow-lg shadow-stone-400 bg-gray-500/30"
                         >
-                            <div className="flex flex-col gap-10 text-yellow-500">
+                            <div className="flex flex-col gap-10 text-black">
                                 <div className="flex flex-col">
-                                    <label htmlFor="email" className="font-semibold">
+                                    <label htmlFor="email" className="font-bold">
                                         Email
                                     </label>
                                     <input
@@ -93,12 +100,12 @@ const Login = () => {
                                         value={user.email}
                                         onChange={handleChange}
                                         placeholder="em@gmail.com"
-                                        className="p-4 rounded-3xl text-violet-950"
+                                        className="p-4 rounded-2xl  h-auto bg-transparent"
                                     />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label htmlFor="password" className="font-semibold">
+                                    <label htmlFor="password" className="font-semibold t">
                                         Password
                                     </label>
                                     <input
@@ -107,26 +114,28 @@ const Login = () => {
                                         value={user.password}
                                         onChange={handleChange}
                                         placeholder="****"
-                                        className="p-4 rounded-3xl text-violet-950"
+                                        className="p-4 rounded-3xl bg-transparent "
                                     />
                                 </div>
                             </div>
                         </form>
-                        <button
+                        <div
                             onClick={login}
-                            className="p-2 rounded-xl bg-stone-600 my-2 text-white hover:bg-stone-500"
+                            className="p-2 rounded-xl cursor-pointer  bg-orange-900 shadow-lg shadow-gray-900/70 my-2 text-white hover:bg-stone-500"
                         >
                             Submit
-                        </button>
+                        </div>
 
                         <div className="flex flex-row my-2 gap-2 items-center">
-                            <h1 className="text-yellow-400 text-2xl">
+                            <span
+                                className="text-[#8dbcaa] font-bold  text-2xl"
+                            >
                                 Dont have an account?
-                            </h1>
-                            <Link href="/signup">
-                                <button className="p-2 rounded-xl bg-stone-400 hover:bg-stone-200">
+                            </span>
+                            <Link href="/auth/signin">
+                                <div className="p-2 rounded-xl bg-stone-400/40 shadow-lg shadow-gray-700 hover:bg-stone-200">
                                     SignIn
-                                </button>
+                                </div>
                             </Link>
                         </div>
                     </div>

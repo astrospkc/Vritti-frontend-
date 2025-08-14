@@ -13,11 +13,11 @@ const WeeklyJournalSection = ({ week }) => {
     console.log(d.title)
   })
   return (
-    <div>
-      <h1 className='text-3xl text-yellow-100  mb-10 border-b-2 border-gray-600 p-2'>
+    <div className='w-full'>
+      <div className='marck-script-regular text-5xl text-orange-900  mb-2 border-b-2 border-gray-600 p-2 mt-4'>
         {week}
-      </h1>
-      <div className="grid grid-cols-5 gap-4">
+      </div>
+      <div className="grid grid-cols-5 gap-4 p-4 h-full shadow-sm shadow-[#f6dcc2]">
         {data && data.map((item, index) => {
           const dateObj = new Date(item[1].date);
 
