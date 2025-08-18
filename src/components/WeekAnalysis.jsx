@@ -94,7 +94,7 @@ const WeekAnalysis = () => {
           </select>
 
           {/* if the month of journal and selected journal is same ,then show all the journals and then graph */}
-          <div className=" m-auto flex flex-col gap-4 w-fit shadow-lg shadow-black bg-gradient-to-l from-black p-4 rounded-xl ">
+          <div className=" m-auto flex flex-col gap-4 w-fit shadow-lg shadow-black bg-linear-to-l from-black p-4 rounded-xl ">
             <div className="text-white border-b-2">Journals :</div>
             {journals &&
               journals.length > 0 &&

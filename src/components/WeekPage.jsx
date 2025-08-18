@@ -110,7 +110,7 @@ const WeekPage = () => {
             <div className="w-3/5 flex flex-col  rounded-3xl border-r-2 border-black px-2">
               {weekJournal_Arr && weekJournal_Arr.length > 0 && (
                 <div className="flex flex-col text-center w-full bg-black p-3 rounded-3xl  ">
-                  <div className="bg-gradient-to-tr from-yellow-200 to-transparent p-10 text-8xl rounded-3xl text-black mx-4">
+                  <div className="bg-linear-to-tr from-yellow-200 to-transparent p-10 text-8xl rounded-3xl text-black mx-4">
                     {weekJournal_Arr[0].title}
                   </div>
                   <br />
@@ -164,7 +164,7 @@ const WeekPage = () => {
                     {parsed_summary.emotional_status}
                   </div>
 
-                  <div className="w-[50%] bg-gradient-to-br from-red-400 to-stone-600 p-3 rounded-2xl">
+                  <div className="w-[50%] bg-linear-to-br from-red-400 to-stone-600 p-3 rounded-2xl">
                     <span className="text-slate-200 text-xl mr-3">
                       Tips and improvements:
                     </span>

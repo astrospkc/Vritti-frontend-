@@ -1,4 +1,4 @@
-"use client";
+
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 export const ClickContext = createContext();

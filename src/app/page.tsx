@@ -62,24 +62,7 @@ const Homepage = () => {
                 }}
                 className='flex flex-col w-full overflow-x-hidden '>
                 <div className='relative w-full h-screen flex flex-col'>
-                    {/* <div
 
-                        style={{
-                            backgroundImage: `url("/images/crushedpaper4.jpg")`,
-                            // height: 500,
-                            backgroundSize: "cover",
-                            backgroundRepeat: "no-repeat, repeat",
-                            backgroundBlendMode: "luminosity",
-                            opacity: 0.1
-                            ,
-                            // clipPath: "polygon(0% 0%, 100% 0%, 82% 100%, 18% 100%, 0% 38%)",
-                            zIndex: 0,
-                            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.45)", // Deep realistic shadow
-                            filter: "contrast(1.2) brightness(0.9)",
-
-                        }}
-                        className='absolute inset-0 shadow-lg shadow-[#E0E0E0]'
-                    ></div> */}
                     <div
                         className='relative    m-4   rounded-2xl   p-2  flex flex-row justify-between  '>
 
@@ -111,7 +94,7 @@ const Homepage = () => {
 
                         <div className='flex flex-row justify-center items-center  w-2/5 '>
                             <span className='text-white w-fit h-fit  bg-emerald-900 p-2 rounded-lg'><AlarmClock /></span>
-                            <span className='text-xs rounded-lg  bg-yellow-200  font-semibold tracking-wider px-2'>Created for the people who are looking out for change and for the people who wants to share their stories.</span>
+                            <span className='text-xs rounded-lg  bg-yellow-200  font-semibold tracking-wider p-2'>Created for  the change and  to share  stories.</span>
 
                         </div>
 
@@ -119,197 +102,250 @@ const Homepage = () => {
                     </div>
 
                     {/* ------------------------------------------------------------------------------------------ */}
+                    {/* Hero Section */}
                     <div className='flex flex-col w-full m-auto justify-center items-center'>
-                        <span
-                            className="text-orange-500 text-8xl font-extrabold knewave-regular"
-                        // style={{ backgroundImage: 'url("/images/forest.jpg")' }}
+                        <div className='text-8xl bigshot-one-regular w-[60%] text-[#2f5637] text-center tracking-tighter'>
+                            Your emotions deserve a safe space.
+                        </div>
+                        <p className='text-center text-3xl w-[60%] oregano-regular '>
+                            Vritti helps you reflect on your day, connect with others, and grow emotionally—one journal entry at a time.
+                        </p>
+                    </div>
+
+                    {/* ------------------------------------------------------------------------------------------- */}
+                    {/* CTA Section */}
+                    <div className='flex flex-col justify-center items-center  gap-4 mt-10 roboto-regular text-xl mx-10'>
+                        <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 '>
+                            Start Journaling for Free
+                        </div>
+                        <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold text-center '>
+                            See How It Works
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                {/* illustration  */}
+                <div className='w-full py-[10%] relative flex justify-center items-center'>
+                    <div className="relative w-[540px] h-[570px]">
+                        {/* <!-- Background paper --> */}
+                        <div className="absolute inset-0  rounded-lg shadow-md bg-[repeating-linear-gradient(to_bottom,transparent,transparent_23px,rgba(0,0,0,0.2)_24px)] bg-[length:100%_24px]"
                         >
-                            VRiTTi
-                        </span>
-                        <div className='flex flex-row justify-center items-center m-auto mx-10 mt-10 '>
-                            <div className='flex-1 flex flex-col justify-center items-center shadow-lg p-4 rounded-3xl' >
-                                <div className='w-1/2 flex flex-col items-center justify-center gap-6'>
-                                    <span
-                                        className="text-orange-500 text-2xl font-extrabold knewave-regular"
-                                    // style={{ backgroundImage: 'url("/images/forest.jpg")' }}
-                                    >
-                                        VRiTTi
-                                    </span>
-                                    <div className='text-gray-400 w-3/4'> A Sanskrit term that captures the essence of conscious thought, fluctuations of the mind, and emotional tides..</div>
-                                </div>
-
-                                <ul className='  md:text-3xl gap-4 font-serif text-start text-orange-900 marck-script-regular '>
-                                    <li className='  text-4xl font-thin font '><span className='text-7xl'>C</span>apture feelings.</li>
-                                    <li className='  text-4xl text-extrabold'><span className='text-7xl'>D</span>iscover patterns</li>
-                                    <li className='  text-4xl text-extrabold'><span className='text-7xl'>S</span>hare support.</li>
-
-
-                                </ul>
-                                <div className='text-2xl text- font-sans text-gray-500 my-10 text-start marck-script-regular'>
-                                    Journaling that leads to insight, not isolation.
-                                </div>
+                            <div className="p-4 font-mono text-[#2f5637]">
+                                <p className="font-bold">Day1: Cluttered Ideas</p>
+                                <p>Today, I had a lot of ideas swirling around in my head. I was feeling overwhelmed and couldn't seem to focus on anything.</p>
+                                <p>But then I decided to write them down and see what I could do with them..</p>
                             </div>
-                            {/* ///// */}
-                            <div className='flex-1  justify-center items-center  m-auto '>
-                                <div className='flex text-xl text-center mt-4 px-4 md:px-20 font-serif text-[#8dbaa8] rounded-full p-4 font-semibold border-r-2 '>
-                                    A personal, anonymous journaling app that lets you reflect, grow, and connect. Let AI help you understand yourself better — and let community support you ethically.
-                                </div>
-                                <div className=' flex flex-row gap-3 '>
+                        </div>
 
-                                    <div
-                                        onClick={() => handleButtons('journaling')}
-                                        className='buttons font-semibold text-xl my-4 p-2 z-10 text-orange-400 bg-black shadow-md shadow-[#2B2B2B] rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-orange-300 hover:scale-95 '>
-                                        Start Journaling
-                                    </div>
+                        {/* Girl's illustration (example placeholder) */}
 
-                                    <div
-                                        onClick={() => handleButtons('dashboard')}
-                                        className=' buttons font-semibold text-xl z-10 my-4 p-2 bg-gradient-to-l  shadow-md shadow-[#2B2B2B] rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg hover:shadow-orange-300 hover:scale-95 text-orange-600 '>
-                                        Dashboard
-                                    </div>
+                    </div>
+                    <div className="absolute -bottom-1/3 left-1/4  z-10  w-full h-full">
+                        <img src="images/Webinar-cuate.svg" alt="girl" className="w-[60%] h-[60%]" />
+                    </div>
+                    <div className="absolute flex flex-row justify-between -bottom-1/3  z-10  w-full h-full">
+                        <div className="flex flex-row w-full justify-between">
+                            <div className='flex flex-row -space-x-28 '>
+                                <img src="images/Depression-rafiki.svg" alt="girl" className="w-[50%] h-[50%]" />
+                                <img src="images/Anxiety-bro.svg" alt="girl" className="w-[50%] h-[50%]" />
+                            </div>
 
-                                </div>
+                            <div className='flex flex-row -space-x-28'>
+                                <img src="images/Psychologist-rafiki.svg" alt="girl" className="w-[50%] h-[50%]" />
+                                <img src="images/Shrug-bro.svg" alt="girl" className="w-[50%] h-[50%]" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                {/* video section */}
+                <div className='flex w-full h-full  bg-[#F97A00] '>
+                    <div className='flex flex-col bg-[#142517] w-full h-full mt-10 p-[5%] '>
+                        <div className='flex flex-row  justify-center items-center text-white text-2xl font-bold bg-orange-800 rounded-2xl p-[5%] h-[500px]'>
+                            Video
+                        </div>
+                        <div className='flex flex-row justify-center items-center gap-4 my-10'>
+                            <div className='flex flex-col gap-2 text-xs text-white' >
+                                <span className='text-[#F97A00] font-bold'>
+                                    Reflections & Insights
+                                </span>
+                                Write or voice your emotions and see them transformed into meaningful reflections you can revisit anytime.
+                            </div>
+                            <div className='flex flex-col gap-2 text-xs text-white' >
+                                <span className='text-[#F97A00] font-bold'>
+                                    Shared Stories
+                                </span>
+                                Choose to share your journals anonymously and connect with others who understand your journey.
+                            </div>
+                            <div className='flex flex-col gap-2 text-xs text-white' >
+                                <span className='text-[#F97A00] font-bold'>
+                                    Personal Space
+                                </span>
+                                A safe space dedicated to all your entries—organized, private, and always accessible to you.
+                            </div>
+                            <div className='flex flex-col gap-2 text-xs text-white' >
+                                <span className='text-[#F97A00] font-bold'>
+                                    Community Support
+                                </span>
+                                Engage with a kind, non-judgmental community where encouragement and empathy matter most.
+                            </div>
+                            <div className='flex flex-col gap-2 text-xs text-white' >
+                                <span className='text-[#F97A00] font-bold'>
+                                    Emotional Journey Tracker
+                                </span>
+                                Visualize your moods and experiences over time with simple, gentle charts and insights.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/* The journal app people stick iwith */}
+                <div className='my-[10%] flex flex-col justify-center items-center text-[#2f5637]'>
+                    {/* badge */}
+                    <span className='text-xs p-2 bg-yellow-300 rounded-xl '>
+                        a kinder place to journal
+                    </span>
+                    <div className='text-4xl md:text-7xl font-bold bigshot-one-regular w-1/3'>
+                        Your stories, your space—grow with others
+
+                    </div>
+                    {/* Flow captions */}
+                    <div className='flex flex-row justify-between items-center gap-10 mt-[10%]'>
+                        <div className='flex flex-col gap-2 text-sm'>
+                            <span className='text-xl font-bold' >Capture</span>
+                            thoughts, moods and moments
+                        </div>
+                        <div className='flex flex-col gap-2 text-sm'>
+                            <span className='text-xl font-bold' >Reflect</span>
+                            organize by tags and feelings
+                        </div>
+                        <div className='flex flex-col gap-2 text-sm'>
+                            <span className='text-xl font-bold' >Connect</span>
+                            share anonymously to get supportive ideas
+                        </div>
+                    </div>
+                    <div className='text-4xl text-center mt-[2%] w-3/4 oregano-regular'>
+                        Private journaling meets optional anonymous sharing. Learn from real lived experiences and offer help back when you can.
+                    </div>
+
+                </div>
+
+                {/* private cloud sync */}
+                <div className='w-full my-[10%] flex flex-col justify-center items-center'>
+                    {/* badge */}
+                    <span className='text-xs p-2 bg-yellow-300 rounded-xl '>
+                        mood tracking, daily prompts, and private cloud sync.
+                    </span>
+                    <div className='flex flex-row items-stretch mx-10'>
+                        <div className='flex flex-col justify-center p-10 items-start gap-4 mt-[10%] w-1/3 bg-yellow-200'>
+                            <div className='text-4xl md:text-5xl font-bold bigshot-one-regular w-2/3'>
+                                Journaling that feels like talking to a friend.
+                            </div>
+                            <div>
+                                No pressure, no rules—just open Vritti, jot down your thoughts, and watch your story come to life with mood charts, AI summaries, and gentle nudges to keep going.
+                            </div>
+                        </div>
+                        <div className='bigshot-one-regular text-7xl flex justify-center items-center'>
+                            Video
+                        </div>
+                    </div>
+
+
+                </div>
+
+                {/* single space / calendar */}
+                <div className='flex flex-col justify-center items-center '>
+                    <div className='text-4xl md:text-7xl font-bold bigshot-one-regular w-2/3 text-[#2f5637] text-center '>
+                        A single space to manage every emotion.
+                    </div>
+                    <div className='text-center text-2xl oregano-regular w-2/3 my-10'>
+                        Capture your feelings, track your moods, and reflect on your journey—all in one simple flow.
+                        No matter when or where, Vritti keeps your emotions organized.
+                    </div>
+                    <div className='w-full px-[5%] flex flex-row'>
+                        <div className='flex flex-col gap-2'>
+                            <div className='flex flex-col gap-2 p-5'>
+                                <span className='text-2xl font-bold border-4 border-black'>
+                                    Collect all your reflections
+                                </span>
+                                Write, record, or note down your emotions effortlessly—everything syncs into your private emotional journal without worry.
 
                             </div>
+                            <div className='flex flex-col gap-2 p-5'>
+                                <span className='text-2xl font-bold'>
+
+                                    Share when you’re ready
+                                </span>
+                                Choose to share reflections with the community at your pace, or keep them safe and private—your story, your control.
+
+
+                            </div>
+                            <div className='flex flex-col gap-2 p-5'>
+                                <span className='text-2xl font-bold'>
+                                    See your journey clearly
+                                </span>
+                                Visualize your emotional growth with gentle charts and mood insights, helping you recognize patterns and celebrate progress.
+
+                            </div>
+                        </div>
+                        <div className='text-5xl bigshot-one-regular'>
+                            Calendar
                         </div>
 
                     </div>
 
-                    {/* ------------------------------------------------------------------------------------------- */}
-
 
                 </div>
 
+                {/* book  */}
+                <div className='my-[10%] flex flex-col justify-center items-center '>
+                    <div className='relative'>
+                        <img src="images/book.svg" alt="book" />
+                        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white'>
+                            <span className='text-3xl md:text-7xl font-bold bigshot-one-regular text-[#2f5637]'>Your pocket-sized emotional diary.</span>
+                            <div className='text-2xl text-[#386641] font-semibold my-10'>Write, reflect, and track how you feel each day. With Vritti, you have a trusted space to clear your mind and understand yourself better.</div>
+                        </div>
+                    </div>
 
-                <div ref={ref} className='flex flex-col min-h-screen w-full p-4 justify-center items-center mt-10   '>
+                    <div className='justify-center  flex flex-row items-center my-[5%]'>
+                        <span className='text-3xl md:text-7xl font-bold  text-[#2f5637] w-1/3'>Your Workspace</span>
+                        <img src="images/workplace.jpeg" alt="" />
 
-                    {/* Hero Section  text-[#F29C50]*/}
-                    <span className='flex items-start font-serif font-bold text-7xl mb-10 p-2  border-b-2 text-gray-500 '>FEATURES</span>
+                    </div>
+                </div>
 
-                    {/* Feature Cards */}
-                    <div className='grid grid-cols-3 gap-2 w-full md:w-4/5 '>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
+                <div className='w-full flex flex-col h-full' style={{
+                    backgroundImage: "url('images/OffsetBlobs.svg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    height: "100vh",
+                    width: "100vw",
 
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
-                            {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>FE</h1> */}
-                            <FeatureCard
-                                image={writeJournal}
-                                title="Daily Journaling"
-                                desc="Capture your thoughts and moods every day in a safe, private space."
-                            /></motion.div>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
-                            {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>A</h1> */}
-                            <FeatureCard
-                                image={readJournal}
-                                title="AI-Powered Summaries"
-                                desc="Generate meaningful summaries and highlights from your journal entries."
-                            /></motion.div>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
-
-                            {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>T</h1> */}
-                            <FeatureCard
-                                image={graph}
-                                title="Mood Analytics"
-                                desc="Track your emotions and growth visually over time with charts."
-                            />
-                        </motion.div>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-16 border-t-2 border-yellow-400 '>
-
-                            {/* <h1 className='hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>UR</h1> */}
-                            <FeatureCard
-                                image={anonymous}
-                                title="Anonymous Sharing"
-                                desc="Share your insights anonymously and discover others' journeys."
-                            />
-                        </motion.div>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-10 border-t-2 border-yellow-400 '>
-
-                            {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>E</h1> */}
-                            <FeatureCard
-                                image={reply}
-                                title="Community Feedback"
-                                desc="Receive kind, constructive advice and support from like-minded individuals."
-                            />
-                        </motion.div>
-                        <motion.div
-                            initial={{ y: -100, opacity: 0 }} // Start above and hidden
-                            animate={isInView ? { y: 0, opacity: 1, scale: 1 } : {}} // Slide down and fade in
-                            transition={{
-                                duration: 1,
-                                ease: "easeOut",
-
-                            }}
-                            className='bg-transparent p-4 rounded-3xl shadow-lg shadow-[#A6D8C5] my-3 border-t-2 border-yellow-400 '>
-
-                            {/* <h1 className=' hidden md:block text-emerald-600 text-8xl text-center font-serif font-bold '>S</h1> */}
-                            <FeatureCard
-                                image={community}
-                                title="Uplifting Stories"
-                                desc="Get inspired by trending experiences and emotional breakthroughs."
-                            /></motion.div>
-
+                }}>
+                    <div className='text-4xl md:text-7xl font-bold bigshot-one-regular text-white p-10 w-1/2'>No more bottled emotions.
+                        No more silent struggles.</div>
+                    <div className='flex flex-col oregano-regular text-[#fcfbfb] text-4xl w-1/2 p-10 font-semibold'>
+                        <span>Feel lighter every day.
+                        </span>
+                        Write your thoughts, track your moods, and grow with the support of a caring community.
+                        Your safe space to heal, share, and thrive.
+                    </div>
+                    <div className='text-2xl text-white font-semibold bg-[#567a56]  w-fit p-2 m-10'>
+                        It's free, it's private, and it's yours.
                     </div>
 
 
                 </div>
+
                 {/* CTA Section */}
-                <div className='mt-20 text-center  m-auto justify-center items-center w-3/4 bg-[#E0E0E0] p-4 rounded-4xl shadow-lg shadow-[#2B2B2B]'>
-                    <span className='text-orange-600 text-4xl mb-4'>Start Your  Journey Today</span>
-                    <p className='text-stone-900 mb-6 px-6 '>
-                        Whether you’re seeking clarity, growth, or connection — LightMind provides powerful tools to guide your mental and emotional wellness. Unlock voice journaling, personalized analytics, and AI-guided prompts with our premium plan.
-                    </p>
-
-                    <div
-                        onClick={() => handleButtons('begin')}
-                        className='text-xl my-4 p-2 bg-gradient-to-l  bg-black shadow-md shadow-black rounded-2xl w-fit mx-auto hover:cursor-pointer hover:shadow-lg text-orange-400 hover:shadow-orange-300 hover:scale-95'>
-                        ✨ Begin Now
-                    </div>
-
-                </div>
-
-                {/* Footer */}
-                <div className='mt-20 text-stone-600 text-sm text-center'>
-                    © <span>{year}</span> Vritti · Empowering Growth Through Reflection
-                </div>
 
 
             </motion.div>
