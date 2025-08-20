@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 import { AlarmClock, NotebookPen } from 'lucide-react'
+import Footer from '@/components/Footer'
 
 
 
@@ -74,7 +75,7 @@ const Homepage = () => {
                             {isAuthenticated ?
                                 <li
                                     onClick={handleLogout}
-                                    className='bg-[#A6D8C5] rounded-xl p-2 text-lg text-center hover:cursor-pointer font-bold'>Logout</li>
+                                    className='rounded-xl  text-lg text-center hover:cursor-pointer font-bold'>Logout</li>
                                 :
                                 <>
                                     <Link href="/auth/login">
@@ -115,9 +116,17 @@ const Homepage = () => {
                     {/* ------------------------------------------------------------------------------------------- */}
                     {/* CTA Section */}
                     <div className='flex flex-col justify-center items-center  gap-4 mt-10 roboto-regular text-xl mx-10'>
-                        <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 '>
-                            Start Journaling for Free
-                        </div>
+                        {isAuthenticated ? <Link href="/dashboard">
+                            <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 hover:bg-transparent '>
+                                Start Journaling for Free
+                            </div>
+                        </Link> : <Link href="/auth/signin">
+                            <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 '>
+                                Start Journaling for Free
+                            </div>
+                        </Link>}
+
+
                         <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold text-center '>
                             See How It Works
                         </div>
@@ -332,27 +341,29 @@ const Homepage = () => {
                 }}>
                     <div className='text-4xl md:text-7xl font-bold bigshot-one-regular text-white p-10 w-1/2'>No more bottled emotions.
                         No more silent struggles.</div>
-                    <div className='flex flex-col oregano-regular text-[#fcfbfb] text-4xl w-1/2 p-10 font-semibold'>
+                    <div className='flex flex-col oregano-regular text-[#fcfbfb] text-xl w-1/2 p-10 font-semibold bg-black rounded-2xl mx-4'>
                         <span>Feel lighter every day.
                         </span>
                         Write your thoughts, track your moods, and grow with the support of a caring community.
                         Your safe space to heal, share, and thrive.
                     </div>
-                    <div className='text-2xl text-white font-semibold bg-[#567a56]  w-fit p-2 m-10'>
-                        It's free, it's private, and it's yours.
+                    <div className='text-2xl text-white font-semibold bg-[#567a56] shadow-md shadow-black cursor-pointer w-fit p-2 m-10 hover:bg-black rounded-xl'>
+                        It's free, it's private, and it's yours - Try Now.
                     </div>
 
 
                 </div>
+                {/* testimonials and social proof */}
 
-                {/* CTA Section */}
 
+                <div className='text-6xl text-center bigshot-one-regular py-[10%]'>
 
+                    <span className='text-9xl'>VRiTTi</span>
+
+                </div>
+                {/* footer section */}
+                <Footer />
             </motion.div>
-
-
-
-
         </div>
 
     )

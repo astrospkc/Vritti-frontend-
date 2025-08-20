@@ -7,7 +7,7 @@ const Button = ({ children, onclick }: any) => {
     return (
         <div
             onClick={onclick}
-            className='text-md text-yellow-100 my-2 p-2 bg-linear-to-l bg-black shadow-md shadow-black rounded-lg w-fit  hover:cursor-pointer hover:shadow-lg hover:shadow-yellow-300 hover:scale-95'>
+            className='text-md text-yellow-100 my-2 p-2 bg-linear-to-l bg-black  rounded-lg w-fit  hover:cursor-pointer hover:shadow-sm hover:shadow-gray-500 hover:scale-95'>
             {children}
         </div>
 

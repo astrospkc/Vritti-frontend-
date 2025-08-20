@@ -20,10 +20,10 @@ const Sidebar = () => {
         { name: 'Dashboard', path: '/dashboard' },
 
         { name: 'CommunityPage', path: '/community' },
-        { name: 'Journals', path: '/journals' },
+        { name: 'Journals', path: '/dashboard/journals' },
         { name: 'New Journal Entry', path: '/dashboard/newJournalEntry' },
-        { name: 'Analytics', path: '/analytics' },
-        { name: 'User Settings', path: '/settings' },
+        { name: 'Analytics', path: '/dashboard/analytics' },
+        { name: 'User Settings', path: '/dashboard/settings' },
         { name: 'API', path: '/api' },
         { name: 'Usage', path: '/usage' },
         { name: 'Billing', path: '/billing' },
@@ -38,13 +38,13 @@ const Sidebar = () => {
     return (
         <>
             {
-                !openSidebar ? <div className=' flex flex-row gap-2 bg-transparent text-yellow-50 h-fit p-6 '>
+                !openSidebar ? <div className=' fixed top-0 flex flex-row gap-2 bg-transparent text-yellow-50 h-fit p-6 overflow-hidden '>
                     <BsArrowRightCircleFill
                         onClick={handleOpenSidebar}
                         className='hover:cursor-pointer text-orange-900 text-2xl' />
-                    <span className='font-bold text-orange-900 text-2xl knewave-regular'>
+                    {/* <span className='font-bold text-orange-900 text-2xl knewave-regular'>
                         VRiTTi
-                    </span>
+                    </span> */}
 
 
                 </div>
@@ -55,9 +55,9 @@ const Sidebar = () => {
                             <BsArrowLeftCircleFill
                                 onClick={handleOpenSidebar}
                                 className='hover:cursor-pointer text-2xl text-orange-900' />
-                            <span className='font-bold text-orange-900 text-2xl knewave-regular'>
+                            {/* <span className='font-bold text-orange-900 text-2xl knewave-regular'>
                                 VRiTTi
-                            </span>
+                            </span> */}
 
                         </div>
 

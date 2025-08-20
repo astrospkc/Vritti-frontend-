@@ -7,6 +7,11 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "module": "ESNext",
     "esModuleInterop": true,
     "skipLibCheck": true,
