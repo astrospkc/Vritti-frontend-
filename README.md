@@ -10,6 +10,15 @@ This app helps you journal your daily experiences and visualize your emotional j
 - [ ] notification setup
 - [ ] chart
 - [ ] summarized journal for each content along with weekly basis.
+- [X] speak journa feature
+- [ ] the generated content of month should not change-> first check cache if its there then no use the stored one and if no cache is there then generate
+- [ ] write up text-> in canvas
+- [ ] Photo upload features -> thumbnail as well as images upload inside the blogs
+- [ ] make some ui changes , make it more interactive and also attractive
+- [ ] Privacy conceerns
+- [ ] like comment feature
+- [ ]  study about the database and how to optimize it
+- [ ] make ui run smoothly
 ---
 
 
