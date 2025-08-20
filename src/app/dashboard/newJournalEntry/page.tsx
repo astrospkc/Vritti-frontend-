@@ -6,12 +6,14 @@ import axios from 'axios'
 import Button from '../../../UIComponent/Button'
 import Image from 'next/image'
 import { Laptop, Mic, Pen } from 'lucide-react'
+import useSpeechToText from '@/customHooks/useSpeechToText'
 
 
 
 const NewJournalEntry = () => {
     const { journals, setJournals, fetchJournals } = useContext(journalContext)
-
+    const { isListening, transcript, startListening, stopListening } = useSpeechToText({ continuous: true })
+    const [textInput, setTextInput] = useState("")
     const [title, setTitle] = useState("")
     const [subtitle, setSubtitle] = useState("")
     const [body, setBody] = useState("")
@@ -47,6 +49,15 @@ const NewJournalEntry = () => {
         }
     }
     console.log("journals: ", journals)
+
+    const toggleListening = () => {
+        isListening ? stopVoiceInput() : startListening()
+    }
+
+    const stopVoiceInput = () => {
+        setBody(prev => prev + (transcript.length ? (prev.length ? " " : "") + transcript : ""))
+        stopListening()
+    }
 
 
 
@@ -104,9 +115,10 @@ const NewJournalEntry = () => {
                     </span>
 
                     {/* Audio Space */}
+
                     <span
                         onClick={() => setActive("audio")}
-                        className={`flex flex-row gap-2 p-2 rounded-xl cursor-pointer     ${active === "audio"
+                        className={`flex flex-row gap-2 p-2 rounded-xl cursor-pointer ${active === "audio"
                             ? "bg-[#b75d08] "
                             : "bg-[#8aad91] text-black"
                             }`}
@@ -115,8 +127,23 @@ const NewJournalEntry = () => {
                             <Mic />
                         </span>
                         Record your voice - Audio Space
+
+
                     </span>
+
                 </div>
+                <div className={`flex justify-center items-center   rounded-2xl p-2 w-fit ${isListening ? "bg-red-700" : "bg-green-700 text-white"} `}>
+                    {
+                        active === "audio" &&
+                        <button
+                            className={`flex flex-row justify-center items-center gap-2 p-2 rounded-xl cursor-pointer `}
+                            onClick={toggleListening}> <span className='rounded-full p-1 '>
+                                <Mic />
+                            </span>{isListening ? "Stop Speaking..." : "Start Speaking..."}</button>
+                    }
+                </div>
+
+
             </div>
 
             <div className='flex flex-row gap-4 w-full'>
@@ -134,16 +161,44 @@ const NewJournalEntry = () => {
                         type="text"
                         placeholder='sub-title'
                         className='p-4 rounded-3xl bg-white w-full my-3' />
-                    <textarea id="body"
-                        rows={20}
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        className='my-3 rounded-2xl bg-white p-4'
-                        placeholder='body' style={{
-                            width: '100%',
-                            height: '100%',
-                            resize: 'none'
-                        }}></textarea>
+                    {
+                        active === "type" ? <textarea id="body"
+                            rows={20}
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            className='my-3 rounded-2xl bg-white p-4'
+                            placeholder='body' style={{
+                                width: '100%',
+                                height: '100%',
+                                resize: 'none'
+                            }}></textarea>
+                            :
+                            active === "canvas" ?
+                                <textarea id="body"
+                                    rows={20}
+                                    value={body}
+                                    onChange={(e) => setBody(e.target.value)}
+                                    className='my-3 rounded-2xl bg-white p-4'
+                                    placeholder='body' style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        resize: 'none'
+                                    }}></textarea>
+                                : active === "audio" &&
+                                <textarea id="body"
+                                    rows={20}
+                                    disabled={isListening}
+                                    value={isListening ? body + (transcript.length ? (body.length ? " " : "") + transcript : "") : body}
+                                    onChange={(e) => setBody(e.target.value)}
+                                    className='my-3 rounded-2xl bg-white p-4'
+                                    placeholder='body' style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        resize: 'none'
+                                    }}></textarea>
+
+                    }
+
                     <div className='flex flex-row gap-2 '>
                         <Button onclick={handleAddJournal}>Save</Button>
                         <Button>Discard</Button>
