@@ -1,11 +1,13 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import MonthlyJournals from './MonthlyJournals'
 import Image from 'next/image'
 import { CardBody, CardContainer, CardItem } from './ui/3d-card'
-import Footer from './Footer'
+import { journalContext } from '@/context/JournalContext'
+
+
 
 
 
@@ -19,6 +21,7 @@ const DashboardPage = () => {
     const month = date.toLocaleString("default", { month: "long" });
     const monthNumber = date.getMonth() + 1
     const year = date.getFullYear()
+
     // console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
@@ -26,7 +29,8 @@ const DashboardPage = () => {
     const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
 
 
-    // const { journals } = useContext(journalContext)
+    const { journals } = useContext(journalContext)
+    console.log("journals: ", journals)
 
     const query = useQuery({
         queryKey: ['quote'],
@@ -78,7 +82,7 @@ const DashboardPage = () => {
             {/* Your recent saved articles */}
             <div className='my-10 flex flex-col justify-center items-center'>
                 <div className='flex flex-row justify-center items-center'>
-                    <div className='flex flex-col gap-2 w-[60%] '>
+                    <div className='flex flex-col  w-[60%] '>
                         <div className='text-md text-start font-semibold tracking-tighter text-[#0e3b29]'>
                             {content}
                         </div>
@@ -86,32 +90,93 @@ const DashboardPage = () => {
                         {/* One Card will reside here */}
                     </div>
                     <div className='w-full'>
-                        <ThreeDCardDemo />
+                        <ThreeDCardDemo
+                            title="xyz"
+                            subtitle="abc"
+                            body="def"
+                            link=""
+                        />
                     </div>
                 </div>
-                <div className='grid grid-cols-2 gap-3'>
-                    <ThreeDCardDemo />
-                    <ThreeDCardDemo />
-                    <ThreeDCardDemo />
-                    <ThreeDCardDemo />
+                <div className='grid grid-cols-3 gap-3'>
+                    <ThreeDCardDemo
+                        title="xyz"
+                        subtitle="abc"
+                        body="def"
+                        date=""
+                        updatedAt=""
+                    />
+                    <ThreeDCardDemo
+                        title="xyz"
+                        subtitle="abc"
+                        body="def"
+                        date=""
+                        updatedAt=""
+                    />
+                    <ThreeDCardDemo
+                        title="xyz"
+                        subtitle="abc"
+                        body="def"
+                        date=""
+                        updatedAt=""
+                    />
+                    <ThreeDCardDemo
+                        title="xyz"
+                        subtitle="abc"
+                        body="def"
+                        date=""
+                        updatedAt=""
+                    />
                     {/* <ThreeDCardDemo /> */}
-                    <span className='text-xl font-bold cursor-pointer hover:bg-[#ef9f8f] bg-black p-2 w-fit  hover:scale-95 translate-1 duration-100 rounded-xl  text-white'>+ Load More</span>
                 </div>
+                <span className='text-xl font-bold cursor-pointer hover:bg-[#ef9f8f] bg-black p-2 w-fit  hover:scale-95 translate-1 duration-100 rounded-xl  text-white'>+ Load More</span>
 
 
             </div>
             {/* Your recent journals */}
             <div className=' flex flex-col justify-center items-center my-10'>
-                <div>
-                    <span className='text-2xl md:text-7xl underline  p-2 rounded-xl  boldonse-regular tracking-tighter text-[#0e3b29]'>Recent Journals</span>
-                </div>
-                <div className='grid grid-cols-2 gap-3 '>
-                    <ThreeDCardDemo />
-                    <ThreeDCardDemo />
+                <div className='flex flex-row justify-between items-center'>
+                    <span className='text-2xl md:text-7xl flex flex-col gap-2   p-2 rounded-xl  boldonse-regular tracking-tighter text-[#0e3b29]'>
+                        <span>
+                            Recent
+                        </span>
+                        <span>
+                            Journals
+                        </span>
+                    </span>
+                    {
+                        journals &&
+                        <ThreeDCardDemo
+                            title={journals[0].title}
+                            subtitle={journals[0].subtitle}
+                            body={journals[0].body}
+                            date={journals[0].date}
+                            updatedAt={journals[0].updatedAt}
+                        // link={journals[0].link}
+                        />
+                    }
 
-                    {/* <ThreeDCardDemo /> */}
-                    <span className='text-xl font-bold cursor-pointer hover:bg-[#ef9f8f] bg-black p-2 w-fit  hover:scale-95 translate-1 duration-100 rounded-xl  text-white'>+ Load More</span>
+
                 </div>
+                <div className='grid grid-cols-2 gap-3 items-center '>
+                    {
+                        journals && journals.filter((_, i) => i > 0).map((item, i) => {
+                            return (
+                                <ThreeDCardDemo
+                                    key={i}
+                                    title={item.title}
+                                    subtitle={item.subtitle}
+                                    body={item.body}
+                                    date={item.date}
+                                    updatedAt={item.updatedAt}
+                                />
+                            )
+                        })
+                    }
+                    {/* <ThreeDCardDemo /> */}
+                </div>
+                <span className='text-xl font-bold cursor-pointer hover:bg-[#ef9f8f] bg-black p-2 w-fit  hover:scale-95 translate-1 duration-100 rounded-xl  h-fit  text-white'>+ Load More</span>
+
             </div>
             {/* Analytics */}
             <div className='my-10'>
@@ -150,22 +215,22 @@ export default DashboardPage
 
 
 
-export function ThreeDCardDemo() {
+export function ThreeDCardDemo({ title, subtitle, body, date, updatedAt }: any) {
     return (
-        <CardContainer className="inter-var shadow-lg shadow-[#ece3db] rounded-2xl ">
+        <CardContainer className="inter-var shadow-lg shadow-[#ece3db] rounded-2xl mx-2 ">
             <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
                 <CardItem
                     translateZ="50"
                     className="text-xl font-bold text-neutral-600 dark:text-white"
                 >
-                    Make things float in air
+                    {title}
                 </CardItem>
                 <CardItem
                     as="p"
                     translateZ="60"
                     className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
                 >
-                    Hover over this card to unleash the power of CSS perspective
+                    {subtitle}
                 </CardItem>
                 <CardItem
                     translateZ="100"
@@ -182,14 +247,7 @@ export function ThreeDCardDemo() {
                     />
                 </CardItem>
                 <div className="flex justify-between items-center mt-20">
-                    <CardItem
-                        translateZ={20}
-                        translateX={-40}
-                        as="button"
-                        className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
-                    >
-                        Try now →
-                    </CardItem>
+
                     <CardItem
                         translateZ={20}
                         translateX={40}
@@ -198,6 +256,8 @@ export function ThreeDCardDemo() {
                     >
                         Open
                     </CardItem>
+
+
                 </div>
             </CardBody>
         </CardContainer>

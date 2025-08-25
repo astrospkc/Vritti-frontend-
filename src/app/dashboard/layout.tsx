@@ -32,12 +32,13 @@ export default function DashboardLayout({
                 </div>
 
                 {/* Body */}
-                <div className="flex flex-row w-full">
+                <div className="flex relative flex-row ">
+                    <div className=" absolute left-0 top-4 z-10   rounded-3xl ">
+                        <Sidebar />
+                    </div>
 
-                    <Sidebar />
 
-
-                    <div className="h-full  w-full overflow-auto">{children}</div>
+                    <div className="h-full  mx-[5%]  flex-1 overflow-auto">{children}</div>
                 </div>
             </div>
         </div>

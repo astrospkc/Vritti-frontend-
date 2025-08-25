@@ -38,7 +38,7 @@ const Sidebar = () => {
     return (
         <>
             {
-                !openSidebar ? <div className=' fixed top-0 flex flex-row gap-2 bg-transparent text-yellow-50 h-fit p-6 overflow-hidden '>
+                !openSidebar ? <div className=' fixed top-10 flex flex-row gap-2 bg-transparent text-yellow-50 h-fit p-6 overflow-hidden '>
                     <BsArrowRightCircleFill
                         onClick={handleOpenSidebar}
                         className='hover:cursor-pointer text-orange-900 text-2xl' />
@@ -49,9 +49,9 @@ const Sidebar = () => {
 
                 </div>
                     :
-                    <div className="w-[20%]   text-white p-6 z-10 my-4 rounded-3xl shadow-lg  shadow-gray-500 mx-4">
+                    <div className=" fixed top-10 text-white p-6 z-10 my-4 rounded-3xl shadow-lg  shadow-gray-500 bg-[#99b09e] ">
 
-                        <div className='flex flex-row gap-2 '>
+                        <div className='flex flex-row gap-2 my-4 '>
                             <BsArrowLeftCircleFill
                                 onClick={handleOpenSidebar}
                                 className='hover:cursor-pointer text-2xl text-orange-900' />
@@ -68,23 +68,20 @@ const Sidebar = () => {
                                         key={i}
                                         href={`${item.path}`}
                                     >
-                                        <ul>
-                                            <li
-                                                className={`px-3 py-2  hover:bg-[#F6C08E] hover:shadow-sm hover:shadow-orange-500 font-semibold hover:text-orange-900 transition  ${i < 6 ? 'text-[#c86f20] rounded-xl ' : 'hover:rounded-xl border-t-2 border-gray-600 text-gray-500'}`}
+                                        <span
+                                            className={`px-3 py-2  hover:bg-[#c8e6d1] hover:shadow-sm font-semibold hover:text-black transition  ${i < 6 ? 'text-black rounded-xl ' : 'hover:rounded-xl border-t-2 border-gray-600 text-[#fff4a4]'}`}
 
-                                            >
-                                                {item.name}
+                                        >
+                                            {item.name}
 
-                                            </li>
-                                        </ul>
-
+                                        </span>
                                     </Link>
                                 ))
                             }
 
                             <h1
                                 onClick={handleLogout}
-                                className="px-3 py-2 bg-[#F6C08E] shadow-sm shadow-orange-500 transition  rounded-xl hover:rounded-xl border-t-2 border-gray-600 text-orange-900 font-bold cursor-pointer hover:text-orange-500">
+                                className="px-3 py-2 bg-black shadow-sm transition  rounded-xl hover:rounded-xl border-t-2 border-gray-600 text-orange-900 font-bold cursor-pointer hover:text-orange-500">
                                 Logout
                             </h1>
 

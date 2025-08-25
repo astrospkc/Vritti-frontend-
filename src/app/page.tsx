@@ -261,7 +261,7 @@ const Homepage = () => {
                                 No pressure, no rules—just open Vritti, jot down your thoughts, and watch your story come to life with mood charts, AI summaries, and gentle nudges to keep going.
                             </div>
                         </div>
-                        <div className='bigshot-one-regular text-7xl flex justify-center items-center'>
+                        <div className='bg-black w-full  mt-5 bigshot-one-regular text-7xl flex justify-center items-center'>
                             Video
                         </div>
                     </div>
