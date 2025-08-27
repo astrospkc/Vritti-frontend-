@@ -9,6 +9,7 @@ import usePostStore from '@/store/store'
 import { UserContext } from '@/context/UserContext'
 import { StatementSync } from 'node:sqlite'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { m } from 'framer-motion'
 // import { useQuery } from '@tanstack/react-query'
 
 
@@ -242,46 +243,52 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
     }
     useEffect(() => {
         setPostWithNullCommunityId(data)
-        setVotersList(data?.voters)
+
     }, [data])
 
     console.log("voters list: ", votersList)
     console.log("post with null community id: ", postWithNullCommunityId)
 
-    useEffect(() => {
-        if (votersList && votersList.length > 0 || votersList && votersList.includes(localStorage.getItem("userId"))) {
-            setLike(true)
-        } else {
-            setLike(false)
-        }
-    }, [votersList])
+    // useEffect(() => {
+    //     if (votersList && votersList.length > 0 || votersList && votersList.includes(localStorage.getItem("userId"))) {
+    //         console.log("user id is present in voter list or not: ", votersList.includes(localStorage.getItem("userId")))
+    //         setLike(true)
+    //     } else {
+    //         console.log("hey there")
+    //         setLike(false)
+    //     }
 
+    // }, [votersList])
 
+    const likeClick = async (targetId: string, targetType: string) => {
+        const token = localStorage.getItem("token")
+        const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/upVote/${targetType}/${targetId}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        console.log("data: ", data)
+    }
+    const dislikeClick = async (targetId: string, targetType: string) => {
+        const token = localStorage.getItem("token")
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/downVote/${targetType}/${targetId}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+    }
 
-    const handleLike = async (targetId: string, targetType: string) => {
+    const handleClick = async (targetId: string, targetType: string, type: string) => {
         console.log("like button")
-        const token = localStorage.getItem("token")
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/upVote${targetType}/${targetId}`, {
-            method: "PUT",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-        setLike(true)
-    }
+        if (type == "like") {
+            await likeClick(targetId, targetType)
+        } else if (type == "dislike") {
+            await dislikeClick(targetId, targetType)
+        }
 
-    const handleDislike = async (targetId: string, targetType: string) => {
-        console.log("dislike button")
-        const token = localStorage.getItem("token")
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/downVote${targetType}/${targetId}`, {
-            method: "PUT",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-        setLike(false)
     }
-
 
     const handleAddBookmark = async (id: string) => {
         const token = localStorage.getItem("token")
@@ -347,7 +354,18 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
                                 const getHour = dateobj.getUTCHours()
                                 const getMinute = dateobj.getUTCMinutes()
                                 formattedDate = `${getHour}:${getMinute}  ${d}-${month}-${year}`
-
+                            }
+                            let voter_list = post?.voters
+                            console.log("voter list: ", voter_list)
+                            let voteLike = false
+                            if (voter_list.length > 0 && voter_list.includes(localStorage.getItem("userId"))) {
+                                console.log("user id is present in voter list or not: ", voter_list.includes(localStorage.getItem("userId")))
+                                // setLike(true)
+                                voteLike = true
+                            } else {
+                                console.log("hey there")
+                                // setLike(false)
+                                voteLike = false
                             }
 
                             return (
@@ -368,10 +386,10 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
                                     {/*  */}
                                     <div className="flex space-x-4 text-sm text-gray-300">
                                         {
-                                            like ?
-                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleDislike(post._id, "posts")}><HeartMinus /> {post?.voteScore}</span>
+                                            voteLike ?
+                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleClick(post._id, "posts", "dislike")}><HeartMinus /> {post?.voteScore}</span>
                                                 :
-                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleLike(post._id, "posts")}><HeartPlus /> {post?.voteScore}</span>
+                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleClick(post._id, "posts", "like")}><HeartPlus /> {post?.voteScore}</span>
 
                                         }
 
