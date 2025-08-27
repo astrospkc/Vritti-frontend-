@@ -6,6 +6,7 @@ import MonthlyJournals from './MonthlyJournals'
 import Image from 'next/image'
 import { CardBody, CardContainer, CardItem } from './ui/3d-card'
 import { journalContext } from '@/context/JournalContext'
+import { UserContext } from '@/context/UserContext'
 
 
 
@@ -22,11 +23,13 @@ const DashboardPage = () => {
     const monthNumber = date.getMonth() + 1
     const year = date.getFullYear()
 
+
     // console.log("date: ", date.toDateString().split(" ")[1])
     const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
     const [selectedYear, setSelectedYear] = useState("")
     const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
+
 
 
     const { journals } = useContext(journalContext)

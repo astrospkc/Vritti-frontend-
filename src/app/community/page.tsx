@@ -1,11 +1,14 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
 import TopicCards from '../../components/TopicCards'
-import { Bookmark, BookmarkCheck, Image } from 'lucide-react'
+import { Bookmark, BookmarkCheck, HeartMinus, HeartPlus, Image, Target } from 'lucide-react'
 import { PostInteractionContext } from '../../context/PostInteractionProvider'
 import Link from 'next/link'
 import { createPostponedAbortSignal } from 'next/dist/server/app-render/dynamic-rendering'
 import usePostStore from '@/store/store'
+import { UserContext } from '@/context/UserContext'
+import { StatementSync } from 'node:sqlite'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 // import { useQuery } from '@tanstack/react-query'
 
 
@@ -47,6 +50,8 @@ function HeroContent({ createPost }: { createPost: any }) {
         communityId: ""
     })
 
+    const queryClient = useQueryClient()
+
 
     useEffect(() => {
         const t = localStorage.getItem("token")
@@ -58,14 +63,25 @@ function HeroContent({ createPost }: { createPost: any }) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const mutation = useMutation({
+        mutationFn: createPost,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["posts"] })
+        }
+    })
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        console.log("form data: ", formData)
-        const createdPost = await createPost(formData)
-        console.log("post here ", createdPost)
+        mutation.mutate(formData)
         // console.log("posts : ", posts)
         setShowModal(false)
+        setFormData({
+            title: "",
+            body: "",
+            imageUrl: "",
+            communityId: ""
+        })
     }
     return (
         <>
@@ -84,8 +100,10 @@ function HeroContent({ createPost }: { createPost: any }) {
                         {/* on clicking this , a modal would open to create a post */}
                         <span
                             onClick={() => setShowModal(true)}
-                            className=' cursor-pointer hover:scale-90 hover:bg-[#F6C08E] font-sans text-black font-bold mb-4 rounded-2xl shadow-sm shadow-[#c6c5c5] p-2 transition-colors duration-500 ease-out'>Create Post</span>
+                            // disabled={mutation.isPending}
+                            className=' cursor-pointer hover:scale-90 hover:bg-[#F6C08E] font-sans text-black font-bold mb-4 rounded-2xl shadow-sm shadow-[#c6c5c5] p-2 transition-colors duration-500 ease-out'> {mutation.isPending ? "Creating..." : "Create Post"}</span>
                         <span className=' cursor-pointer hover:scale-90 hover:bg-[#F6C08E] font-sans text-black font-bold mb-4 rounded-2xl shadow-sm shadow-[#c6c5c5] p-2 transition-colors duration-500 ease-out'>Create Community</span>
+                        {/* {mutation.isError && <p className="text-red-500">Error: {mutation.error.message}</p>} */}
 
                     </div>
                     {/* Modal */}
@@ -202,25 +220,46 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
     const [imageOpen, setImageOpen] = useState(false)
     const [postWithNullCommunityId, setPostWithNullCommunityId] = useState<any[]>([])
     const { bookmark_arr, setBookmark_arr } = useContext(PostInteractionContext)
+    const [like, setLike] = useState(false)
+    const [votersList, setVotersList] = useState<any[]>([])
     const [bookmarked, setBookmarked] = useState(false)
+    const { user } = useContext(UserContext)
     const handleClickImage = () => {
         setImageOpen(prev => !prev)
     }
 
+    console.log("user in community page: ", user)
+    const { data, isLoading, error } = useQuery({
+        queryKey: ["posts"],
+        queryFn: fetchAllPosts
+    })
+
+    if (isLoading) {
+        console.log("data is loading")
+    }
+    if (error) {
+        console.log("some error occurred while fetching posts")
+    }
+    useEffect(() => {
+        setPostWithNullCommunityId(data)
+        setVotersList(data?.voters)
+    }, [data])
+
+    console.log("voters list: ", votersList)
+    console.log("post with null community id: ", postWithNullCommunityId)
 
     useEffect(() => {
-        const fetchPost = async () => {
-            await fetchAllPosts()
-            const data = usePostStore.getState().posts
-            console.log("data: ", data)
-            setPostWithNullCommunityId(data)
+        if (votersList && votersList.length > 0 || votersList && votersList.includes(localStorage.getItem("userId"))) {
+            setLike(true)
+        } else {
+            setLike(false)
         }
-        fetchPost()
-    }, [])
-    console.log("post with null community id: ", postWithNullCommunityId)
+    }, [votersList])
+
 
 
     const handleLike = async (targetId: string, targetType: string) => {
+        console.log("like button")
         const token = localStorage.getItem("token")
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/upVote${targetType}/${targetId}`, {
             method: "PUT",
@@ -228,6 +267,19 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
                 "Authorization": `Bearer ${token}`
             }
         })
+        setLike(true)
+    }
+
+    const handleDislike = async (targetId: string, targetType: string) => {
+        console.log("dislike button")
+        const token = localStorage.getItem("token")
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote/downVote${targetType}/${targetId}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        setLike(false)
     }
 
 
@@ -286,8 +338,6 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
                         //     : error ? <div>An error has occurred .. ${error.message}</div>
                         //         :
                         postWithNullCommunityId && postWithNullCommunityId.map((post, idx) => {
-                            // console.log("post: ", post)
-                            // console.log()
                             let formattedDate = "0"
                             if (post?.createdAt) {
                                 const dateobj = new Date(post?.createdAt)
@@ -315,8 +365,17 @@ function PostContent({ fetchAllPosts }: { fetchAllPosts: any }) {
                                                         <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
                                                         <div className="bg-gray-500 w-20 h-20 rounded-lg"></div>
                                                     </div> */}
+                                    {/*  */}
                                     <div className="flex space-x-4 text-sm text-gray-300">
-                                        <span className='cursor-pointer' onClick={() => handleLike(post._id, "posts")}>❤ {post?.voteScore}</span>
+                                        {
+                                            like ?
+                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleDislike(post._id, "posts")}><HeartMinus /> {post?.voteScore}</span>
+                                                :
+                                                <span className='cursor-pointer flex flex-row items-center' onClick={() => handleLike(post._id, "posts")}><HeartPlus /> {post?.voteScore}</span>
+
+                                        }
+
+
                                         <span className='cursor-pointer'>💬 { }</span>
                                         {
                                             bookmarked ?

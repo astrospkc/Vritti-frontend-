@@ -21,6 +21,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       console.log("response: ", response);
+      localStorage.setItem("userId", response.data._id)
       setUser(response.data);
     } catch (error) {
       console.log(error.response);

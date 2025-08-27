@@ -22,6 +22,8 @@ import Footer from '@/components/Footer'
 const Homepage = () => {
     const [date, setDate] = useState<string | null>(null);
     const [year, setYear] = useState()
+
+
     useEffect(() => {
         const now = new Date();
         setDate(now.toString());
@@ -117,7 +119,8 @@ const Homepage = () => {
                     {/* CTA Section */}
                     <div className='flex flex-col justify-center items-center  gap-4 mt-10 roboto-regular text-xl mx-10'>
                         {isAuthenticated ? <Link href="/dashboard">
-                            <div className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 hover:bg-transparent '>
+                            <div
+                                className='w-full p-2 rounded-xl underline cursor-pointer font-bold bg-[#2f5637] text-center text-[#F97A00] px-10 hover:bg-transparent '>
                                 Start Journaling for Free
                             </div>
                         </Link> : <Link href="/auth/signin">
