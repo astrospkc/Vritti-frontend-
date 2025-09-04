@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useContext } from 'react'
 import { useEffect } from 'react'
-import { useRef } from 'react'
+
 import { useState } from 'react'
 // import "../globals.css"
 
@@ -21,7 +21,7 @@ const CommunityLayout = ({
             {/* Top Navbar */}
             <Navbar />
 
-            <div>
+            <div className='bg-gradient-to-bl from-[#f0d7c0] to-transparent'>
                 {children}
             </div>
         </div>

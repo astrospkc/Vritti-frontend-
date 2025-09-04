@@ -1,57 +1,19 @@
 "use client"
 
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import { useContext } from 'react'
 import "./globals.css"
-import writeJournal from "../images/writeJournal.jpg"
-import readJournal from "../images/readJournal.jpg"
-import graph from "../images/graphAnalysis.jpg"
-import anonymous from "../images/crushedpaper5.jpg"
-import reply from "../images/crushedpaper4.jpg"
-import community from "../images/crushedpaper3.jpg"
-import { motion, useInView } from "motion/react"
-import Link from 'next/link'
-import { UserContext } from '../context/UserContext'
-import { useRouter } from 'next/navigation'
-
-import Image from 'next/image'
-import { AlarmClock, NotebookPen } from 'lucide-react'
-import Footer from '@/components/Footer'
-
-
+import { UserContext } from '@/context/UserContext';
+import { AlarmClock, NotebookPen } from 'lucide-react';
+import Link from 'next/link';
 
 const Homepage = () => {
-    const [date, setDate] = useState<string | null>(null);
-    const [year, setYear] = useState()
-
-
-    useEffect(() => {
-        const now = new Date();
-        setDate(now.toString());
-        setYear(now.getFullYear())
-    }, []);
     // const year = date.getFullYear()
     const { isAuthenticated, setIsAuthenticated } = useContext(UserContext)
+
     const handleLogout = () => {
-        localStorage.removeItem('token')
-        setIsAuthenticated(prev => !prev)
+        setIsAuthenticated(false)
+        localStorage.removeItem("token")
     }
-
-    const router = useRouter()
-
-    const handleButtons = (type: string) => {
-        if (!isAuthenticated) {
-            router.push("/error")
-        } else {
-            if (type == 'journaling') {
-                router.push("/newJournalEntry")
-            } else if (type == 'dashboard' || type == 'begin') {
-                router.push("/dashboard")
-            }
-        }
-    }
-
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: "-100px" })
 
     return (
         <div>
@@ -372,20 +334,5 @@ const Homepage = () => {
     )
 }
 
-const FeatureCard = ({ image, title, desc }) => (
-
-    <div className='bg-[#E0E0E0] p-5 rounded-2xl shadow-lg hover:shadow-[#2B2B2B] text-center'>
-        <Image
-            src={image}
-            alt={title}
-            className='w-full h-48 object-cover rounded-xl mb-4'
-            width={400}
-            height={200}
-        />
-        <span className='text-orange-700 text-2xl font-semibold'>{title}</span>
-        <p className='text-stone-800 mt-2'>{desc}</p>
-    </div>
-
-)
 
 export default Homepage

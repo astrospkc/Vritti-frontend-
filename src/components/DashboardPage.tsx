@@ -1,40 +1,18 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import Link from 'next/link'
-import MonthlyJournals from './MonthlyJournals'
-import Image from 'next/image'
 import { CardBody, CardContainer, CardItem } from './ui/3d-card'
 import { journalContext } from '@/context/JournalContext'
-import { UserContext } from '@/context/UserContext'
-
-
-
-
-
-const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December', 'None'
-]
 const DashboardPage = () => {
 
     const date = new Date()
     const month = date.toLocaleString("default", { month: "long" });
-    const monthNumber = date.getMonth() + 1
+
     const year = date.getFullYear()
-
-
-    // console.log("date: ", date.toDateString().split(" ")[1])
-    const [selectedMonth, setSelectedMonth] = useState('None')
     const [content, setContent] = useState("")
-    const [selectedYear, setSelectedYear] = useState("")
-    const years = Array.from({ length: 51 }, (_, i) => 2024 + i)
-
-
 
     const { journals } = useContext(journalContext)
     console.log("journals: ", journals)
-
     const query = useQuery({
         queryKey: ['quote'],
         queryFn: async () => {
@@ -73,12 +51,6 @@ const DashboardPage = () => {
         const data = await res.json()
 
         console.log("week clicked: ", week, data)
-    }
-
-    const dataToPass = {
-        year: year,
-        month: month,
-        monthNumber: monthNumber
     }
     return (
         <div>
@@ -150,11 +122,11 @@ const DashboardPage = () => {
                     {
                         journals &&
                         <ThreeDCardDemo
-                            title={journals[0].title}
-                            subtitle={journals[0].subtitle}
-                            body={journals[0].body}
-                            date={journals[0].date}
-                            updatedAt={journals[0].updatedAt}
+                            title={journals[0]?.title}
+                            subtitle={journals[0]?.subtitle}
+                            body={journals[0]?.body}
+                            date={journals[0]?.date}
+                            updatedAt={journals[0]?.updatedAt}
                         // link={journals[0].link}
                         />
                     }
